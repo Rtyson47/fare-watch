@@ -56,8 +56,13 @@
   </div>
 
 <script>
-const fmt = n => (n == null ? "—" : Number(n).toLocaleString(undefined, {maximumFractionDigits:0}));
+const fmt = n => (n == null ? "—" : "$" + Number(n).toLocaleString(undefined, {maximumFractionDigits:0}));
 const esc = s => String(s ?? "").replace(/[&<>"']/g, ch => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[ch]));
+const fmtDate = s => {
+  if (!s) return "";
+  const m = /^(\d{4})-(\d{2})-(\d{2})/.exec(s);
+  return m ? `${m[3]}-${m[2]}-${m[1].slice(2)}` : s;
+};
 
 fetch("data.json").then(r => r.json()).then(d => {
   document.getElementById("base").textContent = d.base || "";
@@ -70,7 +75,7 @@ fetch("data.json").then(r => r.json()).then(d => {
     wrap.style.marginBottom = "1.2rem";
     wrap.innerHTML = `<div class="muted">${esc(c.route)}</div><canvas id="c${i}" height="90"></canvas>`;
     charts.appendChild(wrap);
-    const labels = (c.history || []).map(h => h.date);
+    const labels = (c.history || []).map(h => fmtDate(h.date));
     const prices = (c.history || []).map(h => h.min_price);
     const thr = c.threshold;
     new Chart(document.getElementById("c"+i), {
@@ -93,7 +98,7 @@ fetch("data.json").then(r => r.json()).then(d => {
     const link = ch.deep_link ? `<a href="${esc(ch.deep_link)}" target="_blank" rel="noopener">book ↗</a>` : "";
     cb.insertAdjacentHTML("beforeend",
       `<tr><td>${esc(c.route)}</td><td>${fmt(ch.price)}</td><td>${esc(ch.carrier)||"—"}</td>
-       <td>${esc(ch.depart_date)||"—"}</td><td>${fmt(c.threshold)}</td><td>${link}</td></tr>`);
+       <td>${fmtDate(ch.depart_date)||"—"}</td><td>${fmt(c.threshold)}</td><td>${link}</td></tr>`);
   });
 
   // inspiration table
@@ -102,7 +107,7 @@ fetch("data.json").then(r => r.json()).then(d => {
     const link = i.deep_link ? `<a href="${esc(i.deep_link)}" target="_blank" rel="noopener">book ↗</a>` : "";
     ib.insertAdjacentHTML("beforeend",
       `<tr><td>${esc(i.origin)}-${esc(i.destination)}</td><td>${fmt(i.price)}</td>
-       <td>${esc(i.depart_date)||"—"}</td><td>${link}</td></tr>`);
+       <td>${fmtDate(i.depart_date)||"—"}</td><td>${link}</td></tr>`);
   });
 
   // spend
