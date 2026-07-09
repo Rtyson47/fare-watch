@@ -1,0 +1,15 @@
+{
+  "success": true,
+  "data": [
+    {"show_to_affiliates": true, "trip_class": 0, "origin": "MEX", "destination": "LHR",
+     "depart_date": "2026-09-01", "return_date": "", "number_of_changes": 1,
+     "value": 640, "found_at": "2026-07-08T00:06:12", "distance": 8900, "actual": true},
+    {"show_to_affiliates": true, "trip_class": 0, "origin": "MEX", "destination": "LHR",
+     "depart_date": "2026-09-11", "return_date": "", "number_of_changes": 1,
+     "value": 588, "found_at": "2026-07-08T00:06:12", "distance": 8900, "actual": true},
+    {"show_to_affiliates": true, "trip_class": 0, "origin": "MEX", "destination": "LHR",
+     "depart_date": "2026-09-12", "return_date": "", "number_of_changes": 0,
+     "value": 690, "found_at": "2026-07-08T00:06:12", "distance": 8900, "actual": true}
+  ],
+  "currency": "usd"
+}

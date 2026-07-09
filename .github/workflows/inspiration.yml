@@ -1,0 +1,39 @@
+name: inspiration
+
+# Tier 1 discovery scan — once per day. Free (Travelpayouts cached prices).
+on:
+  schedule:
+    - cron: "0 9 * * *"        # 09:00 UTC daily
+  workflow_dispatch:
+
+permissions:
+  contents: write               # needed to commit fare_watch.db + docs/data.json back
+
+concurrency:
+  group: fare-watch-data
+  cancel-in-progress: false
+
+jobs:
+  scan:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - run: pip install pyyaml
+      - name: Run Tier 1 inspiration + corridor pricing
+        env:
+          TP_TOKEN: ${{ secrets.TP_TOKEN }}
+          TP_MARKER: ${{ secrets.TP_MARKER }}
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+        run: python monitor.py run --tier1-only
+      - name: Commit data back
+        run: |
+          git config user.name "fare-watch-bot"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add fare_watch.db docs/data.json
+          git diff --staged --quiet || git commit -m "chore: inspiration run $(date -u +%FT%TZ)"
+          git pull --rebase
+          git push

@@ -1,0 +1,21 @@
+{
+  "MEX": "MX", "GDL": "MX", "CUN": "MX", "MTY": "MX", "TIJ": "MX",
+  "LHR": "GB", "LGW": "GB", "LON": "GB", "MAN": "GB", "EDI": "GB", "BHX": "GB",
+  "DUB": "IE", "AMS": "NL", "CDG": "FR", "ORY": "FR", "PAR": "FR", "NCE": "FR",
+  "MAD": "ES", "BCN": "ES", "AGP": "ES", "PMI": "ES", "LIS": "PT", "OPO": "PT",
+  "FCO": "IT", "MXP": "IT", "VCE": "IT", "MUC": "DE", "FRA": "DE", "BER": "DE",
+  "ZRH": "CH", "GVA": "CH", "VIE": "AT", "BRU": "BE", "CPH": "DK", "ARN": "SE",
+  "OSL": "NO", "HEL": "FI", "WAW": "PL", "PRG": "CZ", "BUD": "HU", "ATH": "GR",
+  "IST": "TR", "SAW": "TR", "KEF": "IS", "EDI": "GB",
+  "JFK": "US", "NYC": "US", "EWR": "US", "LGA": "US", "LAX": "US", "SFO": "US",
+  "ORD": "US", "MIA": "US", "BOS": "US", "IAD": "US", "DFW": "US", "SEA": "US",
+  "DEN": "US", "ATL": "US", "LAS": "US", "PHX": "US", "IAH": "US", "MCO": "US",
+  "YYZ": "CA", "YVR": "CA", "YUL": "CA", "YYC": "CA",
+  "BKK": "TH", "HKT": "TH", "SIN": "SG", "KUL": "MY", "HKG": "HK", "TPE": "TW",
+  "NRT": "JP", "HND": "JP", "KIX": "JP", "ICN": "KR", "PEK": "CN", "PVG": "CN",
+  "DXB": "AE", "AUH": "AE", "DOH": "QA", "DEL": "IN", "BOM": "IN", "TLV": "IL",
+  "GRU": "BR", "GIG": "BR", "EZE": "AR", "SCL": "CL", "BOG": "CO", "LIM": "PE",
+  "PTY": "PA", "SJO": "CR", "HAV": "CU", "PUJ": "DO", "SJU": "US", "MBJ": "JM",
+  "SYD": "AU", "MEL": "AU", "BNE": "AU", "AKL": "NZ", "CPT": "ZA", "JNB": "ZA",
+  "NBO": "KE", "CAI": "EG", "CMN": "MA", "RAK": "MA"
+}

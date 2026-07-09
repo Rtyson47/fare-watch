@@ -1,0 +1,8 @@
+# fare-watch — note: fare_watch.db is intentionally NOT ignored (committed back per spec)
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+.env
+*.log
+docs/data.local.json

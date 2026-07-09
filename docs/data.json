@@ -1,0 +1,44 @@
+{
+  "generated_at": "2026-07-09T16:24:03.578312+00:00",
+  "base": "MEX",
+  "corridors": [
+    {
+      "route": "MEX-LHR",
+      "threshold": 600,
+      "max_price": 650,
+      "history": [
+        {
+          "date": "2026-07-09",
+          "min_price": 588.0
+        }
+      ],
+      "current_cheapest": {
+        "price": 588.0,
+        "carrier": null,
+        "deep_link": "https://www.aviasales.com/search/MEX1109LHR1",
+        "depart_date": "2026-09-11",
+        "return_date": null
+      }
+    }
+  ],
+  "inspiration": [
+    {
+      "destination": "NYC",
+      "origin": "MEX",
+      "price": 210.0,
+      "deep_link": "https://www.aviasales.com/search/MEX0308NYC10081",
+      "depart_date": "2026-08-03"
+    },
+    {
+      "destination": "BKK",
+      "origin": "MEX",
+      "price": 388.0,
+      "deep_link": "https://www.aviasales.com/search/MEX2508BKK05091",
+      "depart_date": "2026-08-25"
+    }
+  ],
+  "spend_this_month": {
+    "searches": 0,
+    "est_cost_usd": 0.0
+  }
+}
