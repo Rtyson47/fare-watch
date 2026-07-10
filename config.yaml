@@ -6,17 +6,6 @@ defaults:
 
 corridors:
   - origin: "{BASE}"
-    destination: LHR
-    origin_variants: [DUB, AMS]        # also price UK-bound legs from these
-    date_windows: ["any Fri-Mon in 2026-09"]
-    trip_type: return                  # one_way | return
-    cabin: economy
-    max_price: 650
-    currency: usd
-    alert_threshold: 600
-    flex_days: 3                       # ±N days around each anchor date
-
-  - origin: "{BASE}"
     destination: YYZ
     date_windows: ["2026-09-01:2026-09-30"]   # any day in the month, one-way
     trip_type: one_way
@@ -37,6 +26,12 @@ corridors:
     flex_days: 3
 
 deadline_watches:
+  - destination: LHR                   # one-way, back in London on or before the date
+    origin: "{BASE}"                   # optional; defaults to current_base
+    must_arrive_by: "2026-07-27"
+    max_price: 650
+    currency: usd
+
   - destination: MAN                   # "get me home to Manchester by X, under Y"
     origin: "{BASE}"                   # optional; defaults to current_base
     must_arrive_by: "2026-12-24"
