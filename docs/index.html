@@ -42,6 +42,13 @@
     </div>
 
     <div class="card">
+      <h2>Deadline watches (one-way)</h2>
+      <div class="overflow"><table id="deadlines">
+        <thead><tr><th>Route</th><th>Cheapest</th><th>Depart</th><th>Arrive by</th><th>Max price</th><th></th></tr></thead>
+        <tbody></tbody></table></div>
+    </div>
+
+    <div class="card">
       <h2>Inspiration shortlist</h2>
       <div class="overflow"><table id="inspiration">
         <thead><tr><th>Route</th><th>Price</th><th>Depart</th><th></th></tr></thead>
@@ -100,6 +107,19 @@ fetch("data.json").then(r => r.json()).then(d => {
       `<tr><td>${esc(c.route)}</td><td>${fmt(ch.price)}</td><td>${esc(ch.carrier)||"—"}</td>
        <td>${fmtDate(ch.depart_date)||"—"}</td><td>${fmt(c.threshold)}</td><td>${link}</td></tr>`);
   });
+
+  // deadline watches table
+  const db_ = document.querySelector("#deadlines tbody");
+  (d.deadline_watches || []).forEach(w => {
+    const ch = w.current_cheapest || {};
+    const link = ch.deep_link ? `<a href="${esc(ch.deep_link)}" target="_blank" rel="noopener">book ↗</a>` : "";
+    db_.insertAdjacentHTML("beforeend",
+      `<tr><td>${esc(w.route)}</td><td>${fmt(ch.price)}</td>
+       <td>${fmtDate(ch.depart_date)||"—"}</td><td>${fmtDate(w.must_arrive_by)||"—"}</td>
+       <td>${fmt(w.max_price)}</td><td>${link}</td></tr>`);
+  });
+  if (!(d.deadline_watches || []).length)
+    db_.innerHTML = '<tr><td colspan="6" class="muted">No deadline watches configured.</td></tr>';
 
   // inspiration table
   const ib = document.querySelector("#inspiration tbody");

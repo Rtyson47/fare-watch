@@ -117,6 +117,7 @@ def run(cfg, conn, today, *, tp_client, tier1_only=False, dry_run=False,
                                       beginning_of_period=m + "-01", one_way=False,
                                       ctx=f"prices_latest {origin}-{dest} {m}"):
                         if (fare.depart_date, fare.return_date) in allowed_pairs:
+                            fare.origin, fare.destination = origin, dest
                             kept.append(fare)
 
             oneway_specs = [s for s in origin_specs if s.one_way]
@@ -127,6 +128,7 @@ def run(cfg, conn, today, *, tp_client, tier1_only=False, dry_run=False,
                     for fare in fetch(tp_client.month_matrix, origin, dest, m + "-01",
                                       ctx=f"month_matrix {origin}-{dest} {m}"):
                         if fare.depart_date in allowed_departs and fare.return_date is None:
+                            fare.origin, fare.destination = origin, dest
                             kept.append(fare)
 
             for fare in kept:
@@ -153,6 +155,7 @@ def run(cfg, conn, today, *, tp_client, tier1_only=False, dry_run=False,
                               beginning_of_period=m + "-01", one_way=True,
                               ctx=f"prices_latest {origin}-{dest} {m}"):
                 if fare.depart_date in allowed:
+                    fare.origin, fare.destination = origin, dest
                     kept.append(fare)
         for fare in kept:
             store(1, fare)

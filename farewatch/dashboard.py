@@ -51,11 +51,25 @@ def build_data(conn, cfg, today):
             "history": history_for_route(conn, route),
             "current_cheapest": cheapest_for_route(conn, origin, dest),
         })
+    base = cfg.get("current_base")
+    deadline_watches = []
+    for w in cfg.get("deadline_watches", []) or []:
+        origin = w.get("origin") or base
+        dest = w["destination"]
+        route = f"{origin}-{dest}"
+        deadline_watches.append({
+            "route": route,
+            "must_arrive_by": w.get("must_arrive_by"),
+            "max_price": w.get("max_price"),
+            "history": history_for_route(conn, route),
+            "current_cheapest": cheapest_for_route(conn, origin, dest),
+        })
     top_n = (cfg.get("inspiration", {}) or {}).get("top_n_to_verify", 10)
     return {
         "generated_at": db.now_iso(),
-        "base": cfg.get("current_base"),
+        "base": base,
         "corridors": corridors,
+        "deadline_watches": deadline_watches,
         "inspiration": inspiration_shortlist(conn, top_n),
         "spend_this_month": spend.spend_this_month(conn, "duffel", today.strftime("%Y-%m")),
     }
