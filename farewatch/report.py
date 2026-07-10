@@ -1,32 +1,44 @@
-"""Terminal summary: per-corridor cheapest, inspiration shortlist, alerts, spend."""
-from . import dashboard, spend
+"""Terminal summary: per-corridor cheapest, deadline watches, inspiration, alerts, spend."""
+from . import dashboard
 
 
 def build_report(conn, cfg, today):
-    lines = [f"fare-watch — base {cfg.get('current_base')} — {today.isoformat()}", ""]
+    data = dashboard.build_data(conn, cfg, today)
+    lines = [f"fare-watch — base {data.get('base')} — {today.isoformat()}", ""]
 
     lines.append("Corridors:")
-    for c in cfg.get("corridors", []) or []:
-        route = f"{c['origin']}-{c['destination']}"
-        ch = dashboard.cheapest_for_route(conn, c["origin"], c["destination"])
-        threshold = c.get("alert_threshold") or c.get("max_price")
+    if not data["corridors"]:
+        lines.append("  (none configured)")
+    for c in data["corridors"]:
+        ch = c.get("current_cheapest")
         if ch:
-            lines.append(f"  {route}: cheapest {ch['price']:.0f} {c.get('currency', '')}"
-                         f" (dep {ch['depart_date']})  threshold {threshold}")
+            lines.append(f"  {c['route']}: cheapest {ch['price']:.0f}"
+                         f" (dep {ch['depart_date']})  threshold {c['threshold']}")
         else:
-            lines.append(f"  {route}: no fares recorded yet  threshold {threshold}")
+            lines.append(f"  {c['route']}: no fares recorded yet  threshold {c['threshold']}")
+
+    lines += ["", "Deadline watches:"]
+    if not data["deadline_watches"]:
+        lines.append("  (none configured)")
+    for w in data["deadline_watches"]:
+        ch = w.get("current_cheapest")
+        if ch:
+            lines.append(f"  {w['route']}: cheapest {ch['price']:.0f}"
+                         f" (dep {ch['depart_date']})  must arrive by {w['must_arrive_by']}"
+                         f"  max price {w['max_price']}")
+        else:
+            lines.append(f"  {w['route']}: no fares recorded yet  must arrive by"
+                         f" {w['must_arrive_by']}  max price {w['max_price']}")
 
     lines += ["", "Inspiration shortlist:"]
-    top_n = (cfg.get("inspiration", {}) or {}).get("top_n_to_verify", 10)
-    shortlist = dashboard.inspiration_shortlist(conn, top_n)
-    if not shortlist:
+    if not data["inspiration"]:
         lines.append("  (none)")
-    for i in shortlist:
+    for i in data["inspiration"]:
         lines.append(f"  {i['origin']}-{i['destination']}: {i['price']:.0f} (dep {i['depart_date']})")
 
     n_alerts = conn.execute("SELECT COUNT(*) AS c FROM alerts WHERE ts>=?",
                             (today.isoformat(),)).fetchone()["c"]
-    sp = spend.spend_this_month(conn, "duffel", today.strftime("%Y-%m"))
+    sp = data["spend_this_month"]
     lines += ["",
               f"Alerts today: {n_alerts}",
               f"Duffel spend this month: {sp['searches']} searches (~${sp['est_cost_usd']:.2f})"]

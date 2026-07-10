@@ -36,9 +36,14 @@ class FixtureTP:
     def prices_latest(self, origin, destination=None, beginning_of_period=None,
                       period_type="month", one_way=False, limit=30):
         self.calls += 1
-        return [self._for_route(models.from_tp_v2_row(r, self.currency, "tp:prices_latest"),
-                                origin, destination)
-                for r in self._load("tp_prices_latest.json")["data"]]
+        out = []
+        for r in self._load("tp_prices_latest.json")["data"]:
+            fare = models.from_tp_v2_row(r, self.currency, "tp:prices_latest")
+            fare.origin, fare.destination = origin, destination
+            if one_way:                        # real API returns one-ways for one_way=true
+                fare.return_date, fare.one_way = None, True
+            out.append(self._link(fare))
+        return out
 
     def month_matrix(self, origin, destination, month):
         self.calls += 1

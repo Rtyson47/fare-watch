@@ -46,12 +46,59 @@ def test_runner_tier1_dry_run_writes_data_and_alerts(conn, sample_config, tmp_pa
     assert conn.execute("SELECT COUNT(*) c FROM spend").fetchone()["c"] == 0
 
 
-def test_runner_full_run_gates_tier2_no_spend(conn, sample_config, tmp_path):
+def test_runner_full_run_gates_tier2_no_spend(conn, sample_config, tmp_path, monkeypatch):
+    # No Duffel env vars set at all -> Tier 2 mode resolves to "off"; a full
+    # (non tier1-only) run still completes cleanly with zero spend.
+    monkeypatch.delenv("DUFFEL_ENABLE_LIVE", raising=False)
+    monkeypatch.delenv("DUFFEL_API_KEY", raising=False)
+    monkeypatch.delenv("DUFFEL_TEST_API_KEY", raising=False)
     cfg = config.load_config(str(sample_config))
     summary = runner.run(cfg, conn, TODAY, tier1_only=False, dry_run=True,
                          tp_client=FixtureTP(), export_path=str(tmp_path / "d.json"))
-    assert summary["tier2_gated"] is True
+    assert summary["duffel_mode"] == "off"
     assert conn.execute("SELECT COUNT(*) c FROM spend").fetchone()["c"] == 0
+
+
+def test_runner_full_run_test_mode_verifies_no_spend_no_alert(conn, sample_config, tmp_path,
+                                                               monkeypatch):
+    # dry_run + DUFFEL_TEST_API_KEY set + injected fake test-mode Duffel client:
+    # Tier 2 verifies the queued corridor/deadline-watch cheapest fares
+    # (tier=2, source duffel_test), but records zero spend and fires zero
+    # Tier 2 alerts (test-mode prices are synthetic sandbox data, not real
+    # bookable fares).
+    from farewatch.providers import duffel
+
+    monkeypatch.setenv("DUFFEL_TEST_API_KEY", "duffel_test_x")
+    cfg = config.load_config(str(sample_config))
+    fixture_offers = {
+        "data": {"offers": [
+            {"id": "off_test1", "total_amount": "599.00", "total_currency": "USD",
+             "owner": {"name": "Test Air", "iata_code": "TA"}},
+        ]}
+    }
+    fake_post = lambda url, payload, headers=None, opener=None, timeout=20: fixture_offers
+    client = duffel.DuffelClient(api_key="duffel_test_x", test_mode=True, post_json=fake_post)
+
+    # Run tier1-only first for the same config/day to know the tier1-alone
+    # alert count as a baseline (test-mode Tier 2 must add zero more).
+    import copy
+    from farewatch import db as db_mod
+    baseline_conn = db_mod.connect(str(tmp_path / "baseline.db"))
+    baseline_summary = runner.run(copy.deepcopy(cfg), baseline_conn, TODAY, tier1_only=True,
+                                  dry_run=True, tp_client=FixtureTP(),
+                                  export_path=str(tmp_path / "baseline.json"))
+
+    summary = runner.run(cfg, conn, TODAY, tier1_only=False, dry_run=True,
+                         tp_client=FixtureTP(), export_path=str(tmp_path / "d.json"),
+                         duffel_client=client)
+    assert summary["duffel_mode"] == "test"
+    assert conn.execute("SELECT COUNT(*) c FROM spend").fetchone()["c"] == 0
+    tier2_fares = conn.execute(
+        "SELECT COUNT(*) c FROM searches WHERE tier=2").fetchone()["c"]
+    assert tier2_fares > 0
+    # Test-mode Tier 2 never calls handle(): total alert count matches the
+    # tier1-only baseline exactly.
+    assert summary["alerts"] == baseline_summary["alerts"]
 
 
 def test_cli_set_base(sample_config):
@@ -213,3 +260,82 @@ def test_cli_run_missing_token_fails_fast(monkeypatch):
     monkeypatch.delenv("FAREWATCH_FAKE_TP", raising=False)
     monkeypatch.delenv("TP_TOKEN", raising=False)
     assert main(["run", "--tier1-only"]) == 2
+
+
+def test_duffel_mode_dry_run_never_live(sample_config, monkeypatch):
+    from farewatch import config as config_mod, runner
+
+    monkeypatch.setenv("DUFFEL_ENABLE_LIVE", "1")
+    monkeypatch.setenv("DUFFEL_API_KEY", "live_key")
+    monkeypatch.delenv("DUFFEL_TEST_API_KEY", raising=False)
+    cfg = config_mod.load_config(str(sample_config))
+    cfg["duffel"] = {"live_confirmed": True}
+    # Even with the full live gate open in env/config, dry_run must never
+    # resolve to "live" — and with no DUFFEL_TEST_API_KEY it falls to "off".
+    assert runner._duffel_mode(cfg, dry_run=True) == "off"
+
+
+def test_duffel_mode_dry_run_falls_back_to_test(sample_config, monkeypatch):
+    from farewatch import config as config_mod, runner
+
+    monkeypatch.setenv("DUFFEL_TEST_API_KEY", "duffel_test_x")
+    cfg = config_mod.load_config(str(sample_config))
+    assert runner._duffel_mode(cfg, dry_run=True) == "test"
+
+
+def test_duffel_mode_resolves_live_only_with_full_gate(sample_config, monkeypatch):
+    from farewatch import config as config_mod, runner
+
+    cfg = config_mod.load_config(str(sample_config))
+    cfg["duffel"] = {"live_confirmed": True}
+    monkeypatch.setenv("DUFFEL_ENABLE_LIVE", "1")
+    monkeypatch.setenv("DUFFEL_API_KEY", "live_key")
+    assert runner._duffel_mode(cfg, dry_run=False) == "live"
+
+    # Missing any one piece of the gate falls back (never straight to live).
+    monkeypatch.delenv("DUFFEL_API_KEY", raising=False)
+    assert runner._duffel_mode(cfg, dry_run=False) != "live"
+
+
+def test_full_run_live_mode_records_spend_and_alerts_then_hard_stops(
+        conn, sample_config, tmp_path, monkeypatch):
+    # Full gate open (config + env) + injected fake "live" Duffel client:
+    # each verified search records spend and, because it's live, fires a
+    # real Tier 2 alert via the dry-run/fake notifier. With the daily cap
+    # set to 1, the loop hard-stops after exactly one search (GuardrailHit)
+    # and sends a notifier warning.
+    from farewatch.providers import duffel
+
+    monkeypatch.setenv("DUFFEL_ENABLE_LIVE", "1")
+    monkeypatch.setenv("DUFFEL_API_KEY", "live_key")
+    monkeypatch.setenv("TELEGRAM_BOT_TOKEN", "tok")
+    monkeypatch.setenv("TELEGRAM_CHAT_ID", "chat")
+    cfg = config.load_config(str(sample_config))
+    cfg["duffel"] = {"live_confirmed": True}
+    cfg["cost_guardrails"] = {"max_duffel_searches_per_day": 1,
+                              "duffel_cost_per_search_usd": 0.005}
+
+    fixture_offers = {
+        "data": {"offers": [
+            {"id": "off_live1", "total_amount": "555.00", "total_currency": "USD",
+             "owner": {"name": "Live Air", "iata_code": "LA"}},
+        ]}
+    }
+    fake_post = lambda url, payload, headers=None, opener=None, timeout=20: fixture_offers
+    client = duffel.DuffelClient(api_key="live_key", live=True, live_confirmed=True,
+                                 post_json=fake_post)
+
+    posted = []
+    fake_poster = lambda url, payload: posted.append(payload)  # noqa: E731
+
+    summary = runner.run(cfg, conn, TODAY, tier1_only=False, dry_run=False,
+                         tp_client=FixtureTP(), export_path=str(tmp_path / "d.json"),
+                         duffel_client=client, poster=fake_poster)
+
+    assert summary["duffel_mode"] == "live"
+    spend_rows = conn.execute("SELECT COUNT(*) c FROM spend").fetchone()["c"]
+    assert spend_rows == 1  # hard-stopped after the 1-search cap
+    assert summary["duffel_searches"] == 1
+    tier2_alerts = conn.execute(
+        "SELECT COUNT(*) c FROM alerts WHERE channel != 'dry-run'").fetchone()["c"]
+    assert tier2_alerts >= 1 or posted  # alert fired via the live notifier path

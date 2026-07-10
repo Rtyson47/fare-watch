@@ -31,6 +31,7 @@ class AlertContext:
     min_samples: int = 5
     band_width: float = 20
     today: date | None = None
+    route: str | None = None
 
 
 def dedupe_key(route, reason, price, band_width):
@@ -44,7 +45,7 @@ def _trailing_vals(conn, route, today, lookback_days):
 
 def evaluate_fare(conn, fare, ctx):
     """Return an :class:`Alert` for the first satisfied rule, else None."""
-    route = route_key(fare.origin, fare.destination)
+    route = ctx.route or route_key(fare.origin, fare.destination)
     if ctx.max_price is not None and fare.price < ctx.max_price:
         return Alert(route, fare.price, "below_max_price",
                      dedupe_key(route, "below_max_price", fare.price, ctx.band_width))

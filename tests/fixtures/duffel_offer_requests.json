@@ -1,0 +1,25 @@
+{
+  "data": {
+    "id": "orq_0000AduffeltestRequest",
+    "offers": [
+      {
+        "id": "off_0000Aduffeltest1cheapest",
+        "total_amount": "588.40",
+        "total_currency": "USD",
+        "owner": {"name": "British Airways", "iata_code": "BA"}
+      },
+      {
+        "id": "off_0000Bduffeltest2middle",
+        "total_amount": "612.00",
+        "total_currency": "USD",
+        "owner": {"name": "Aeromexico", "iata_code": "AM"}
+      },
+      {
+        "id": "off_0000Cduffeltest3priciest",
+        "total_amount": "705.50",
+        "total_currency": "USD",
+        "owner": {"name": "Virgin Atlantic", "iata_code": "VS"}
+      }
+    ]
+  }
+}

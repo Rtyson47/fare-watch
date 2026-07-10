@@ -9,11 +9,12 @@ TODAY = date(2026, 7, 9)
 
 
 def _seed(conn):
-    # a corridor observation (month-matrix) + its daily_min point
-    sid = db.record_search(conn, 1, "MEX", "LHR", "2026-09-11", None, "tp:month_matrix")
+    # a corridor observation (return trip, matching the example corridor's
+    # trip_type: return) + its daily_min point
+    sid = db.record_search(conn, 1, "MEX", "LHR", "2026-09-11", "2026-09-14", "tp:prices_latest")
     db.record_fare(conn, sid, FareRecord("MEX", "LHR", 588.0, "usd",
-                   depart_date="2026-09-11", carrier="BA", deep_link="http://d",
-                   source="tp:month_matrix"))
+                   depart_date="2026-09-11", return_date="2026-09-14", carrier="BA",
+                   deep_link="http://d", source="tp:prices_latest"))
     db.upsert_daily_min(conn, "MEX+2-LHR", "2026-07-09", 588.0)  # config.example.yaml has origin_variants [DUB, AMS]
     # an inspiration find
     sid2 = db.record_search(conn, 1, "MEX", "NYC", "2026-08-03", None, "tp:city_directions")
@@ -33,6 +34,51 @@ def test_build_data_shape(conn, sample_config):
     assert corr["current_cheapest"]["price"] == 588.0
     assert any(i["destination"] == "NYC" for i in data["inspiration"]["international"])
     assert "spend_this_month" in data and "est_cost_usd" in data["spend_this_month"]
+    assert "options" in corr and corr["options"][0]["price"] == 588.0
+    assert corr["best_seen"] == {"date": "2026-07-09", "min_price": 588.0}
+    dw = data["deadline_watches"][0]
+    assert "options" in dw and "best_seen" in dw
+
+
+def test_top_options_one_row_per_distinct_date_pair(conn):
+    sid1 = db.record_search(conn, 1, "MEX", "LHR", "2026-09-11", "2026-09-14", "tp:prices_latest",
+                            ts="2026-07-09T00:00:00+00:00")
+    db.record_fare(conn, sid1, FareRecord("MEX", "LHR", 700.0, "usd",
+                   depart_date="2026-09-11", return_date="2026-09-14", carrier="BA",
+                   deep_link="http://expensive", source="tp:prices_latest"))
+    sid2 = db.record_search(conn, 1, "MEX", "LHR", "2026-09-11", "2026-09-14", "tp:prices_latest",
+                            ts="2026-07-09T00:05:00+00:00")
+    db.record_fare(conn, sid2, FareRecord("MEX", "LHR", 588.0, "usd",
+                   depart_date="2026-09-11", return_date="2026-09-14", carrier="BA",
+                   deep_link="http://cheap", source="tp:prices_latest"))
+    sid3 = db.record_search(conn, 1, "MEX", "LHR", "2026-09-18", "2026-09-21", "tp:prices_latest",
+                            ts="2026-07-09T00:00:00+00:00")
+    db.record_fare(conn, sid3, FareRecord("MEX", "LHR", 610.0, "usd",
+                   depart_date="2026-09-18", return_date="2026-09-21", carrier="BA",
+                   deep_link="http://other", source="tp:prices_latest"))
+    options = dashboard.top_options(conn, ["MEX"], "LHR")
+    assert len(options) == 2
+    pair1 = next(o for o in options if o["depart_date"] == "2026-09-11")
+    assert pair1["price"] == 588.0
+    assert pair1["deep_link"] == "http://cheap"
+
+
+def test_top_options_scoped_to_origins_and_latest_day(conn):
+    sid_old = db.record_search(conn, 1, "MEX", "LHR", "2026-09-11", None, "tp:month_matrix",
+                               ts="2026-07-08T00:00:00+00:00")
+    db.record_fare(conn, sid_old, FareRecord("MEX", "LHR", 400.0, "usd",
+                   depart_date="2026-09-11", carrier="BA", source="tp:month_matrix"))
+    sid_other_origin = db.record_search(conn, 1, "GDL", "LHR", "2026-09-11", None, "tp:month_matrix",
+                                        ts="2026-07-09T00:00:00+00:00")
+    db.record_fare(conn, sid_other_origin, FareRecord("GDL", "LHR", 300.0, "usd",
+                   depart_date="2026-09-11", carrier="BA", source="tp:month_matrix"))
+    sid_new = db.record_search(conn, 1, "MEX", "LHR", "2026-09-11", None, "tp:month_matrix",
+                               ts="2026-07-09T00:00:00+00:00")
+    db.record_fare(conn, sid_new, FareRecord("MEX", "LHR", 588.0, "usd",
+                   depart_date="2026-09-11", carrier="BA", source="tp:month_matrix"))
+    options = dashboard.top_options(conn, ["MEX"], "LHR")
+    assert len(options) == 1
+    assert options[0]["price"] == 588.0
 
 
 def test_export_writes_json(conn, sample_config, tmp_path):
@@ -135,3 +181,41 @@ def test_cheapest_for_route_unaffected_by_other_routes_fresher_data(conn):
     assert result is not None
     assert result["price"] == 588.0
     assert result["deep_link"] == "http://yesterday"
+
+
+def test_duffel_test_fares_excluded_from_cheapest_and_options(conn):
+    # Sandbox (duffel_test) prices are synthetic and must never surface on the
+    # dashboard; real live-verified duffel fares are allowed.
+    ts = "2026-07-09T12:00:00+00:00"
+    sid_tp = db.record_search(conn, 1, "MEX", "LHR", "2026-09-11", None, "tp:month_matrix", ts=ts)
+    db.record_fare(conn, sid_tp, FareRecord("MEX", "LHR", 588.0, "usd",
+                   depart_date="2026-09-11", source="tp:month_matrix"))
+    sid_sandbox = db.record_search(conn, 2, "MEX", "LHR", "2026-09-11", None, "duffel_test", ts=ts)
+    db.record_fare(conn, sid_sandbox, FareRecord("MEX", "LHR", 42.0, "usd",
+                   depart_date="2026-09-11", source="duffel_test"))
+    sid_live = db.record_search(conn, 2, "MEX", "LHR", "2026-09-12", None, "duffel", ts=ts)
+    db.record_fare(conn, sid_live, FareRecord("MEX", "LHR", 501.0, "usd",
+                   depart_date="2026-09-12", source="duffel"))
+
+    assert dashboard.cheapest_for_route(conn, "MEX", "LHR")["price"] == 501.0
+    prices = [o["price"] for o in dashboard.top_options(conn, "MEX", "LHR")]
+    assert 42.0 not in prices and set(prices) == {501.0, 588.0}
+
+
+def test_trip_shape_filter_separates_shared_route_corridors(conn):
+    # A one-way and a return corridor on the same origin/dest must not surface
+    # each other's fares as "current cheapest".
+    ts = "2026-07-09T12:00:00+00:00"
+    sid_ow = db.record_search(conn, 1, "YVR", "LON", "2026-09-11", None, "tp:month_matrix", ts=ts)
+    db.record_fare(conn, sid_ow, FareRecord("YVR", "LON", 588.0, "usd",
+                   depart_date="2026-09-11", one_way=True, source="tp:month_matrix"))
+    sid_rt = db.record_search(conn, 1, "YVR", "LON", "2026-09-11", "2026-09-14",
+                              "tp:prices_latest", ts=ts)
+    db.record_fare(conn, sid_rt, FareRecord("YVR", "LON", 612.0, "usd",
+                   depart_date="2026-09-11", return_date="2026-09-14",
+                   source="tp:prices_latest"))
+
+    assert dashboard.cheapest_for_route(conn, "YVR", "LON", one_way=True)["price"] == 588.0
+    assert dashboard.cheapest_for_route(conn, "YVR", "LON", one_way=False)["price"] == 612.0
+    assert dashboard.cheapest_for_route(conn, "YVR", "LON")["price"] == 588.0
+    assert [o["price"] for o in dashboard.top_options(conn, "YVR", "LON", one_way=False)] == [612.0]

@@ -1,9 +1,20 @@
 name: corridors
 
 # Corridor watchlist + deadline watches — twice per day.
-# NOTE: runs Tier 1 only until Duffel is enabled. To turn on paid Tier 2
-# verification, remove `--tier1-only` below AND set config `duffel.live_confirmed: true`
-# AND add `DUFFEL_ENABLE_LIVE: "1"` to the env. (Duffel live mode is billed.)
+# NOTE: runs Tier 1 only until Duffel is enabled. Tier 2 verifies only the
+# cheapest fare already found per corridor/deadline-watch, plus the top-N
+# inspiration candidates (~10-15 searches/run, well under the 100/day cap;
+# ~<$5/month at 2 runs/day). To turn on Duffel, in order:
+#   1. Add repo secret DUFFEL_TEST_API_KEY (free duffel_test_* key) and wire
+#      it into the `env:` block below as DUFFEL_TEST_API_KEY — this alone
+#      enables Tier 2 in free/sandbox test mode (verified fares recorded,
+#      never alerted, since sandbox prices aren't real).
+#   2. Remove `--tier1-only` from the run command below.
+#   3. Only once you're ready for real (billed) verification: add repo
+#      secret DUFFEL_API_KEY, uncomment `DUFFEL_ENABLE_LIVE: "1"` below, and
+#      set config `duffel.live_confirmed: true`. All three must be present
+#      together or the run stays in test/off mode — see README "The Duffel
+#      gate".
 on:
   schedule:
     - cron: "0 6,18 * * *"     # 06:00 and 18:00 UTC
@@ -29,6 +40,7 @@ jobs:
         env:
           TP_TOKEN: ${{ secrets.TP_TOKEN }}
           TP_MARKER: ${{ secrets.TP_MARKER }}
+          # DUFFEL_TEST_API_KEY: ${{ secrets.DUFFEL_TEST_API_KEY }}   # <-- uncomment for test-mode Tier 2
           DUFFEL_API_KEY: ${{ secrets.DUFFEL_API_KEY }}
           # DUFFEL_ENABLE_LIVE: "1"   # <-- uncomment ONLY after confirming billing
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}

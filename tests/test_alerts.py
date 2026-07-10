@@ -38,6 +38,35 @@ def test_below_median_rule(conn):
     assert alerts.evaluate_fare(conn, _fare(500), ctx) is None                   # >= 480
 
 
+def test_below_median_rule_uses_ctx_route_for_labeled_watch(conn):
+    # History seeded under the watch's label, not the bare route_key.
+    d = TODAY
+    for p in [600, 600, 600, 600, 600, 600]:
+        db.upsert_daily_min(conn, "YVR-LON return", d.isoformat(), p)
+        d -= timedelta(days=1)
+    ctx = alerts.AlertContext(max_price=None, median_ratio=0.80, min_samples=5, today=TODAY,
+                              route="YVR-LON return")
+    fare = FareRecord(origin="YVR", destination="LON", price=470, currency="usd",
+                      depart_date="2026-09-11", source="tp:prices_latest")
+    alert = alerts.evaluate_fare(conn, fare, ctx)
+    assert alert is not None and alert.reason == "below_median"
+    assert alert.route == "YVR-LON return"
+
+
+def test_below_median_rule_no_alert_when_history_only_under_bare_route_key(conn):
+    # History seeded under the bare "ORI-DST" key, NOT the label; lookup must
+    # use ctx.route (the label), so no median alert should fire.
+    d = TODAY
+    for p in [600, 600, 600, 600, 600, 600]:
+        db.upsert_daily_min(conn, "YVR-LON", d.isoformat(), p)
+        d -= timedelta(days=1)
+    ctx = alerts.AlertContext(max_price=None, median_ratio=0.80, min_samples=5, today=TODAY,
+                              route="YVR-LON return")
+    fare = FareRecord(origin="YVR", destination="LON", price=470, currency="usd",
+                      depart_date="2026-09-11", source="tp:prices_latest")
+    assert alerts.evaluate_fare(conn, fare, ctx) is None
+
+
 def test_median_needs_min_samples(conn):
     _seed_daily_min(conn, [600, 600, 600, 600])            # only 4 samples
     ctx = alerts.AlertContext(max_price=None, min_samples=5, today=TODAY)

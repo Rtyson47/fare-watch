@@ -18,3 +18,14 @@ def get_json(url, params, headers=None, opener=None, timeout=DEFAULT_TIMEOUT):
     _open = opener.open if opener is not None else urllib.request.urlopen
     with _open(req, timeout=timeout) as resp:
         return json.loads(resp.read().decode("utf-8"))
+
+
+def post_json(url, payload, headers=None, opener=None, timeout=DEFAULT_TIMEOUT):
+    """POST a JSON-encoded ``payload`` to ``url`` and parse the JSON response body."""
+    body = json.dumps(payload).encode("utf-8")
+    hdrs = dict(headers or {})
+    hdrs.setdefault("Content-Type", "application/json")
+    req = urllib.request.Request(url, data=body, headers=hdrs, method="POST")
+    _open = opener.open if opener is not None else urllib.request.urlopen
+    with _open(req, timeout=timeout) as resp:
+        return json.loads(resp.read().decode("utf-8"))

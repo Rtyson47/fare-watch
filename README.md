@@ -82,15 +82,29 @@ Set `TELEGRAM_BOT_TOKEN` and `TELEGRAM_CHAT_ID` in the environment (never hardco
 
 ## The Duffel gate (why you won't get surprise charges)
 
-Tier 2 is **off** in this build. A full `run` (without `--tier1-only`) executes Tier 1,
-logs what it *would* verify, and stops before any billed call. Turning Duffel on requires
-**both**:
+Tier 2 verifies fares via Duffel's `/air/offer_requests` in real-money **live** mode
+or a free **test** (sandbox) mode — never more than the cheapest fare already found
+per corridor/deadline-watch by Tier 1, plus the top-N inspiration candidates: roughly
+**10–15 searches per run**, well under the 100/day hard cap (~$5/month at 2 runs/day,
+$0.005/search).
 
-1. config `duffel.live_confirmed: true`, and
-2. env `DUFFEL_ENABLE_LIVE=1`.
+Mode resolves each run (`runner._duffel_mode`), test-mode-first:
 
-Even with the gate open, the live request is a Phase-2 `NotImplementedError` until
-implemented — so no accidental charge is possible today. `test_gates.py` locks this in.
+- **live** — only when *all three* are set: config `duffel.live_confirmed: true`,
+  env `DUFFEL_ENABLE_LIVE=1`, and env `DUFFEL_API_KEY`. `--dry-run` **never**
+  resolves to live, no matter what's set.
+- **test** — env `DUFFEL_TEST_API_KEY` is set (a free `duffel_test_*` key); verified
+  fares are recorded (tier 2, source `duffel_test`) but never alerted — sandbox
+  prices are synthetic — just logged (`[duffel-test] ROUTE verified at PRICE`).
+- **off** — neither is set (or `--tier1-only`): Tier 2 is skipped with a log line
+  naming why.
+
+In live mode every search passes `spend.guard` first (hard-stops the whole Tier 2
+loop with one notifier warning on `GuardrailHit`) and is recorded via
+`spend.record_duffel_search`; only live-mode verified fares trigger real alerts
+(`handle(..., route=...)`), so alerts reflect actual bookable prices. `test_gates.py`
+and `tests/test_cli.py` lock in: no live call without the full env+config gate,
+`--dry-run` never yields live, and the guardrail hard-stop actually stops the loop.
 
 ## Scheduling (GitHub Actions)
 
@@ -124,7 +138,7 @@ pytest -q          # Tier 1 is fully tested against recorded fixtures; no networ
 monitor.py            CLI shim -> farewatch.cli
 farewatch/            config, models, db, corridors, inspiration, alerts, spend,
                       report, dashboard, runner, notify/, providers/
-  providers/          travelpayouts (Tier 1), duffel (Tier 2, gated stub), http
+  providers/          travelpayouts (Tier 1), duffel (Tier 2, gated), http
 docs/                 index.html + data.json (GitHub Pages)
 tests/                pytest suite + recorded fixtures
 .github/workflows/    inspiration.yml, corridors.yml
@@ -135,8 +149,12 @@ docs/superpowers/plans/2026-07-09-fare-watch.md   full implementation plan
 
 - **Done (Phase 1):** Tier 1 end-to-end, storage, alerting, dashboard, CLI, scheduling,
   gated stubs — all tested against fixtures.
-- **Phase 2 (gated, needs your go-ahead on Duffel billing):** live Duffel verification,
-  flip `corridors.yml` off `--tier1-only`, optional seats.aero award module.
+- **Done (Phase 2):** Duffel Tier 2 verification (test-mode-first, narrowed
+  verify-the-cheapest semantics — see "The Duffel gate" above).
+- **Remaining to flip on:** add `DUFFEL_TEST_API_KEY` (and later `DUFFEL_API_KEY`)
+  secrets, remove `--tier1-only` from `corridors.yml`, and — only after confirming
+  billing — uncomment `DUFFEL_ENABLE_LIVE` and set `duffel.live_confirmed: true`.
+  Optional seats.aero award module remains a later phase.
 
 ## Data notes
 

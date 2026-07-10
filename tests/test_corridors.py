@@ -55,3 +55,27 @@ def test_expand_deadline_oneway_up_to_arrival():
     assert all(s.one_way and s.origin == "LHR" and s.destination == "MEX" for s in specs)
     assert all(s.depart_date <= "2026-07-14" for s in specs)
     assert specs[0].depart_date >= "2026-07-09"
+
+
+def test_expand_deadline_earliest_depart_floors_window():
+    watch = {"destination": "MEX", "must_arrive_by": "2026-07-20",
+             "earliest_depart": "2026-07-15", "max_price": 600, "currency": "usd"}
+    specs = corridors.expand_deadline(watch, base="LHR", today=TODAY)
+    depart_dates = sorted({s.depart_date for s in specs})
+    assert depart_dates[0] == "2026-07-15"
+    assert all(d >= "2026-07-15" for d in depart_dates)
+
+
+def test_expand_deadline_earliest_depart_after_arrival_yields_nothing():
+    watch = {"destination": "MEX", "must_arrive_by": "2026-07-14",
+             "earliest_depart": "2026-07-20", "max_price": 600, "currency": "usd"}
+    specs = corridors.expand_deadline(watch, base="LHR", today=TODAY)
+    assert specs == []
+
+
+def test_expand_deadline_origin_variants_yield_specs_for_every_origin():
+    watch = {"destination": "MEX", "must_arrive_by": "2026-07-10",
+             "origin_variants": ["MAN", "BHX"], "max_price": 600, "currency": "usd"}
+    specs = corridors.expand_deadline(watch, base="LHR", today=TODAY)
+    origins = {s.origin for s in specs}
+    assert origins == {"LHR", "MAN", "BHX"}

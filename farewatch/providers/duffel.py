@@ -1,20 +1,24 @@
-"""Tier 2 (paid) Duffel client — GATED STUB.
+"""Tier 2 (paid) Duffel client — real offer-request search, gate preserved.
 
-Duffel live mode is billed. This build never makes a live call: ``search``
-raises :class:`DuffelGateError` unless the *double gate* is satisfied
-(config ``duffel.live_confirmed: true`` AND env ``DUFFEL_ENABLE_LIVE=1``), and
-even then the live request itself is a Phase-2 ``NotImplementedError`` — so no
-accidental charge is possible from this code.
+Duffel live mode is billed. ``search`` raises :class:`DuffelGateError` unless
+the *double gate* is satisfied: config ``duffel.live_confirmed: true`` AND env
+``DUFFEL_ENABLE_LIVE=1`` (checked at construction time via ``live=True,
+live_confirmed=True``) — or the client is built with ``test_mode=True`` for
+the free/sandbox ``duffel_test_*`` key, which never charges.
 
-PHASE 2 TODO (only after the user confirms billing):
-  * POST /air/offer_requests (slices, passengers, cabin_class) using the live
-    or test key; read offers; map to FareRecord via ``from_duffel_offer``.
-  * Wrap every search in ``spend.guard(conn, guardrails, day)`` and
-    ``spend.record_duffel_search`` — hard-stop on GuardrailHit.
-  * Verify only (a) corridor watchlist specs and (b) top-N inspiration
-    candidates. Never open-ended discovery.
+Only the runner may build a *live* client, and only after passing every
+search through ``spend.guard``/``spend.record_duffel_search`` first. This
+module has no knowledge of guardrails — it just makes (or refuses to make)
+the HTTP call.
 """
 import os
+
+from . import http
+from ..models import FareRecord
+
+API_URL = "https://api.duffel.com/air/offer_requests?return_offers=true"
+DUFFEL_VERSION = "v2"
+MAX_OFFERS_KEPT = 3
 
 
 class DuffelGateError(RuntimeError):
@@ -22,9 +26,11 @@ class DuffelGateError(RuntimeError):
 
 
 class DuffelClient:
-    def __init__(self, api_key=None, live=False, live_confirmed=False, test_mode=False):
+    def __init__(self, api_key=None, live=False, live_confirmed=False, test_mode=False,
+                 post_json=http.post_json):
         self.api_key = api_key
         self.test_mode = test_mode
+        self._post_json = post_json
         # test_mode uses a duffel_test_* key (no charge). Live requires the double gate.
         self.enabled = test_mode or (
             live and live_confirmed and os.environ.get("DUFFEL_ENABLE_LIVE") == "1")
@@ -35,10 +41,56 @@ class DuffelClient:
                 "Duffel is gated — no charge made. To enable live verification set "
                 "config duffel.live_confirmed: true AND env DUFFEL_ENABLE_LIVE=1 "
                 "(or construct with test_mode=True for the sandbox).")
-        raise NotImplementedError(
-            "Duffel offer search is Phase 2 — implement /air/offer_requests here.")
+
+        slices = [{"origin": origin, "destination": dest, "departure_date": depart_date}]
+        if return_date:
+            slices.append({"origin": dest, "destination": origin, "departure_date": return_date})
+        payload = {
+            "data": {
+                "slices": slices,
+                "passengers": [{"type": "adult"}],
+                "cabin_class": cabin,
+            }
+        }
+        headers = {
+            "Authorization": f"Bearer {self.api_key}",
+            "Duffel-Version": DUFFEL_VERSION,
+            "Content-Type": "application/json",
+            "Accept": "application/json",
+        }
+        resp = self._post_json(API_URL, payload, headers=headers)
+        offers = (resp.get("data") or {}).get("offers") or []
+        offers = sorted(offers, key=lambda o: float(o["total_amount"]))[:MAX_OFFERS_KEPT]
+        source = "duffel_test" if self.test_mode else "duffel"
+        return [from_duffel_offer(o, origin, dest, depart_date, return_date, source)
+                for o in offers]
 
 
-def from_duffel_offer(offer, currency):
-    """PHASE 2 TODO: map a Duffel offer dict to a FareRecord (real deep link / offer id)."""
-    raise NotImplementedError("Phase 2: map Duffel offer -> FareRecord.")
+def from_duffel_offer(offer, origin, dest, depart_date, return_date, source):
+    """Map a Duffel offer dict to a :class:`FareRecord`.
+
+    Duffel has no public booking deep link — the offer id is the actionable
+    handle for a follow-up booking flow, so ``deep_link`` stays ``None``.
+    Offers are large; only a trimmed subset is retained in ``raw``.
+    """
+    owner = offer.get("owner") or {}
+    carrier = owner.get("iata_code") or owner.get("name")
+    trimmed = {
+        "id": offer.get("id"),
+        "total_amount": offer.get("total_amount"),
+        "total_currency": offer.get("total_currency"),
+        "owner_name": owner.get("name"),
+    }
+    return FareRecord(
+        origin=origin,
+        destination=dest,
+        price=float(offer["total_amount"]),
+        currency=(offer.get("total_currency") or "").lower(),
+        depart_date=depart_date,
+        return_date=return_date,
+        carrier=carrier,
+        one_way=return_date is None,
+        source=source,
+        deep_link=None,
+        raw=trimmed,
+    )

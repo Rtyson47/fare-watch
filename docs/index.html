@@ -108,6 +108,23 @@ fetch("data.json").then(r => r.json()).then(d => {
   if (!(d.corridors || []).length) charts.innerHTML = '<div class="muted">No corridor history yet.</div>';
 
   // cheapest table
+  const optionsRow = (colspan, route, options, bestSeen) => {
+    if (!options || !options.length) return "";
+    const rows = options.map(o => {
+      const l = o.deep_link ? `<a href="${esc(o.deep_link)}" target="_blank" rel="noopener">book ↗</a>` : "";
+      return `<tr><td>${esc(o.origin)}</td><td>${fmtDate(o.depart_date)||"—"}</td>
+        <td>${fmtDate(o.return_date)||"—"}</td><td>${fmt(o.price)}</td><td>${l}</td></tr>`;
+    }).join("");
+    const best = bestSeen
+      ? `<span class="muted">best seen ${fmt(bestSeen.min_price)} on ${esc(bestSeen.date)}</span>`
+      : "";
+    return `<tr><td colspan="${colspan}">
+      <details><summary class="muted">${options.length} option${options.length===1?"":"s"}</summary>
+      <table style="margin-top:.4rem"><thead><tr><th>Origin</th><th>Depart</th><th>Return</th><th>Price</th><th></th></tr></thead>
+      <tbody>${rows}</tbody></table>
+      </details>${best}</td></tr>`;
+  };
+
   const cb = document.querySelector("#cheapest tbody");
   (d.corridors || []).forEach(c => {
     const ch = c.current_cheapest || {};
@@ -115,6 +132,7 @@ fetch("data.json").then(r => r.json()).then(d => {
     cb.insertAdjacentHTML("beforeend",
       `<tr><td>${esc(c.route)}</td><td>${fmt(ch.price)}</td><td>${esc(ch.carrier)||"—"}</td>
        <td>${fmtDate(ch.depart_date)||"—"}</td><td>${fmt(c.threshold)}</td><td>${link}</td></tr>`);
+    cb.insertAdjacentHTML("beforeend", optionsRow(6, c.route, c.options, c.best_seen));
   });
 
   // deadline watches table
@@ -126,6 +144,7 @@ fetch("data.json").then(r => r.json()).then(d => {
       `<tr><td>${esc(w.route)}</td><td>${fmt(ch.price)}</td>
        <td>${fmtDate(ch.depart_date)||"—"}</td><td>${fmtDate(w.must_arrive_by)||"—"}</td>
        <td>${fmt(w.max_price)}</td><td>${link}</td></tr>`);
+    db_.insertAdjacentHTML("beforeend", optionsRow(6, w.route, w.options, w.best_seen));
   });
   if (!(d.deadline_watches || []).length)
     db_.innerHTML = '<tr><td colspan="6" class="muted">No deadline watches configured.</td></tr>';

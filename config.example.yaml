@@ -15,11 +15,21 @@ corridors:
     currency: usd
     alert_threshold: 600
     flex_days: 3                       # ±N days around each anchor date
+    # label: "MEX+2-LON"               # optional: override the auto-generated
+                                        # route key (used for daily_min/alert
+                                        # dedupe/dashboard); default is
+                                        # "{origin}-{destination}" or
+                                        # "{origin}+N-{destination}" for
+                                        # multi-origin corridors
 
 deadline_watches:
   - destination: MAN                   # "get me home to Manchester by X, under Y"
     origin: "{BASE}"                   # optional; defaults to current_base
+    # origin_variants: [MAN, BHX]      # optional: also price from these origins
     must_arrive_by: "2026-12-24"
+    # earliest_depart: "2026-12-18"    # optional: floor the search window so
+                                        # dates you don't actually want to
+                                        # travel aren't searched
     max_price: 650
     currency: usd
 
@@ -47,6 +57,10 @@ alerting:
   dedupe_band_width: 20                 # currency-unit width of a dedupe price band
 
 # Tier 2 (Duffel) live-mode double gate. Leave false until you confirm billing.
+# Test mode (free duffel_test_* key, env DUFFEL_TEST_API_KEY) needs no config
+# change here — it verifies as soon as the env var is set and --tier1-only is
+# dropped. Live mode additionally requires ALL of: live_confirmed: true here,
+# env DUFFEL_ENABLE_LIVE=1, and env DUFFEL_API_KEY (see README "The Duffel gate").
 duffel:
   live_confirmed: false
 

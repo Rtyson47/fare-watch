@@ -32,6 +32,14 @@ def test_route_key():
     assert models.route_key("MEX", "LHR") == "MEX-LHR"
 
 
+def test_route_label_single_origin():
+    assert models.route_label(["MEX"], "LON") == "MEX-LON"
+
+
+def test_route_label_multi_origin():
+    assert models.route_label(["MEX", "GDL", "CUN"], "LON") == "MEX+2-LON"
+
+
 def test_deep_link_encodes_ddmm_and_marker():
     url = models.aviasales_deep_link("MEX", "LHR", "2026-09-11", "2026-09-14", marker="123")
     assert "MEX1109LHR1409" in url     # depart 11 Sep, return 14 Sep

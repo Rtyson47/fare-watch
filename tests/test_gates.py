@@ -19,11 +19,22 @@ def test_duffel_gated_without_config_confirm(monkeypatch):
         client.search("MEX", "LHR", "2026-09-11")
 
 
-def test_duffel_test_mode_is_not_live_charge(monkeypatch):
-    # test_mode is allowed past the gate but the live request is still Phase 2
-    client = duffel.DuffelClient(api_key="duffel_test_x", test_mode=True)
-    with pytest.raises(NotImplementedError):
-        client.search("MEX", "LHR", "2026-09-11")
+def test_duffel_test_mode_searches_via_injected_post_json(load_fixture):
+    calls = {}
+
+    def fake_post_json(url, payload, headers=None, opener=None, timeout=20):
+        calls["url"] = url
+        calls["headers"] = headers
+        calls["payload"] = payload
+        return load_fixture("duffel_offer_requests.json")
+
+    client = duffel.DuffelClient(api_key="duffel_test_x", test_mode=True,
+                                 post_json=fake_post_json)
+    fares = client.search("MEX", "LHR", "2026-09-11")
+    assert fares
+    assert all(f.price > 0 for f in fares)
+    assert calls["url"] == "https://api.duffel.com/air/offer_requests?return_offers=true"
+    assert calls["headers"]["Authorization"] == "Bearer duffel_test_x"
 
 
 def test_seats_aero_disabled_returns_empty():

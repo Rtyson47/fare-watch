@@ -6,12 +6,28 @@ Tier 2 (Duffel, paid) is *gated* in this build — a full ``run`` logs what it
 would verify and stops before any billed call. See the Phase 2 plan.
 """
 import logging
+import os
 from datetime import datetime, timedelta, timezone
 
-from . import alerts, corridors, dashboard, db, inspiration, notify
+from . import alerts, corridors, dashboard, db, inspiration, notify, spend
 from .models import route_key, route_label
+from .providers.duffel import DuffelClient
 
 log = logging.getLogger("farewatch.runner")
+
+
+def _duffel_mode(cfg, dry_run):
+    """Resolve Tier 2 mode: "live" | "test" | "off". ``dry_run`` never yields live."""
+    if dry_run:
+        return "test" if os.environ.get("DUFFEL_TEST_API_KEY") else "off"
+    duffel_cfg = cfg.get("duffel", {}) or {}
+    live_confirmed = bool(duffel_cfg.get("live_confirmed"))
+    if (live_confirmed and os.environ.get("DUFFEL_ENABLE_LIVE") == "1"
+            and os.environ.get("DUFFEL_API_KEY")):
+        return "live"
+    if os.environ.get("DUFFEL_TEST_API_KEY"):
+        return "test"
+    return "off"
 
 
 # -- Travelpayouts call guard -------------------------------------------------
@@ -49,7 +65,8 @@ def _months_ahead(today, n):
 
 # -- run ---------------------------------------------------------------------
 def run(cfg, conn, today, *, tp_client, tier1_only=False, dry_run=False,
-        poster=None, export_path="docs/data.json", include_inspiration=True):
+        poster=None, export_path="docs/data.json", include_inspiration=True,
+        duffel_client=None):
     al = cfg.get("alerting", {}) or {}
     ratio = al.get("median_alert_ratio", 0.80)
     lookback = al.get("median_lookback_days", 30)
@@ -62,16 +79,17 @@ def run(cfg, conn, today, *, tp_client, tier1_only=False, dry_run=False,
     now = datetime.now(timezone.utc)
     fired, collected = [], []
     errors = [0]
+    verify_queue = []  # Tier 2 candidates: dicts with route/threshold/cabin/origin/dest/dates
 
     def fetch(fn, *args, ctx="", **kwargs):
         def note(exc):
             errors[0] += 1
         return _fetch(fn, *args, ctx=ctx, on_error=note, **kwargs)
 
-    def handle(fare, max_price):
+    def handle(fare, max_price, route=None):
         ctx = alerts.AlertContext(max_price=max_price, median_ratio=ratio,
                                   lookback_days=lookback, min_samples=min_samples,
-                                  band_width=band, today=today)
+                                  band_width=band, today=today, route=route)
         alert = alerts.process_fare(conn, fare, ctx, send, label, window_hours, now, digest)
         if alert is not None:
             fired.append(alert)
@@ -97,6 +115,12 @@ def run(cfg, conn, today, *, tp_client, tier1_only=False, dry_run=False,
         db.upsert_daily_min(conn, route_key(fare.origin, fare.destination),
                             today.isoformat(), fare.price)
     candidates = inspiration.top_candidates(shortlist, insp.get("top_n_to_verify", 10))
+    for fare in candidates:
+        verify_queue.append({
+            "route": route_key(fare.origin, fare.destination), "threshold": None,
+            "cabin": "economy", "origin": fare.origin, "dest": fare.destination,
+            "depart_date": fare.depart_date, "return_date": fare.return_date,
+        })
 
     # -- Tier 1: corridor pricing (date-window aware) ------------------------
     for c in cfg.get("corridors", []) or []:
@@ -135,8 +159,13 @@ def run(cfg, conn, today, *, tp_client, tier1_only=False, dry_run=False,
         if all_kept:
             cheapest = min(all_kept, key=lambda x: x.price)
             threshold = c.get("alert_threshold") or c.get("max_price")
-            handle(cheapest, threshold)
+            handle(cheapest, threshold, route=route)
             db.upsert_daily_min(conn, route, today.isoformat(), cheapest.price)
+            verify_queue.append({
+                "route": route, "threshold": threshold, "cabin": c.get("cabin", "economy"),
+                "origin": cheapest.origin, "dest": cheapest.destination,
+                "depart_date": cheapest.depart_date, "return_date": cheapest.return_date,
+            })
         else:
             log.warning("corridor %s: no fares matched today's window -> no daily_min "
                         "point recorded for %s", route, today.isoformat())
@@ -169,21 +198,74 @@ def run(cfg, conn, today, *, tp_client, tier1_only=False, dry_run=False,
         route = route_label(by_origin.keys(), dest)
         if all_kept:
             cheapest = min(all_kept, key=lambda x: x.price)
-            handle(cheapest, w.get("max_price"))
+            handle(cheapest, w.get("max_price"), route=route)
             db.upsert_daily_min(conn, route, today.isoformat(), cheapest.price)
+            verify_queue.append({
+                "route": route, "threshold": w.get("max_price"), "cabin": w.get("cabin", "economy"),
+                "origin": cheapest.origin, "dest": cheapest.destination,
+                "depart_date": cheapest.depart_date, "return_date": cheapest.return_date,
+            })
         else:
             log.warning("deadline watch %s: no fares matched today's window -> no daily_min "
                         "point recorded for %s", route, today.isoformat())
 
-    # -- Tier 2 gate --------------------------------------------------------
-    tier2_gated = not tier1_only
-    if tier2_gated:
-        log.warning(
-            "Tier 2 (Duffel) is gated in this build: would verify %d inspiration "
-            "candidate(s) + %d corridor(s) + %d deadline watch(es). No live call made. "
-            "Enable per the Phase 2 plan.",
-            len(candidates), len(cfg.get("corridors", []) or []),
-            len(cfg.get("deadline_watches", []) or []))
+    # -- Tier 2: Duffel verification -----------------------------------------
+    duffel_mode = _duffel_mode(cfg, dry_run)
+    duffel_searches = 0
+    day = today.isoformat()
+    guardrails = cfg.get("cost_guardrails", {}) or {}
+
+    if tier1_only:
+        log.info("Tier 2 skipped: --tier1-only.")
+    elif duffel_mode == "off":
+        log.info("Tier 2 skipped: Duffel mode is off (no DUFFEL_TEST_API_KEY, and live "
+                 "requires duffel.live_confirmed + DUFFEL_ENABLE_LIVE=1 + DUFFEL_API_KEY).")
+    elif not verify_queue:
+        log.info("Tier 2 skipped: nothing queued to verify this run.")
+    else:
+        client = duffel_client
+        if client is None:
+            if duffel_mode == "live":
+                duffel_cfg = cfg.get("duffel", {}) or {}
+                client = DuffelClient(api_key=os.environ.get("DUFFEL_API_KEY"), live=True,
+                                      live_confirmed=bool(duffel_cfg.get("live_confirmed")))
+            else:
+                client = DuffelClient(api_key=os.environ.get("DUFFEL_TEST_API_KEY"),
+                                      test_mode=True)
+
+        for item in verify_queue:
+            if duffel_mode == "live":
+                try:
+                    spend.guard(conn, guardrails, day)
+                except spend.GuardrailHit as exc:
+                    log.warning("Duffel guardrail hit, stopping Tier 2: %s", exc)
+                    send(f"Duffel guardrail hit, Tier 2 stopped early: {exc}")
+                    break
+
+            try:
+                verified = client.search(item["origin"], item["dest"], item["depart_date"],
+                                         return_date=item["return_date"], cabin=item["cabin"])
+            except (OSError, ValueError) as exc:
+                log.warning("Duffel search failed (%s): %s", item["route"], exc)
+                errors[0] += 1
+                continue
+
+            for fare in verified:
+                store(2, fare)
+
+            if duffel_mode == "live":
+                duffel_searches += 1
+                spend.record_duffel_search(conn, guardrails, day)
+
+            if not verified:
+                continue
+            verified_cheapest = min(verified, key=lambda x: x.price)
+
+            if duffel_mode == "live":
+                handle(verified_cheapest, item["threshold"], route=item["route"])
+            else:
+                log.info("[duffel-test] %s verified at %s %s", item["route"],
+                         verified_cheapest.price, verified_cheapest.currency)
 
     # -- digest + export ----------------------------------------------------
     if digest and collected:
@@ -191,8 +273,8 @@ def run(cfg, conn, today, *, tp_client, tier1_only=False, dry_run=False,
     dashboard.export(conn, cfg, today, export_path)
 
     return {"tier1_only": tier1_only, "dry_run": dry_run, "shortlist": len(shortlist),
-            "candidates": len(candidates), "alerts": len(fired), "tier2_gated": tier2_gated,
-            "errors": errors[0]}
+            "candidates": len(candidates), "alerts": len(fired), "duffel_mode": duffel_mode,
+            "duffel_searches": duffel_searches, "errors": errors[0]}
 
 
 def backfill(cfg, conn, today, route, tp_client, months: int = 3):
