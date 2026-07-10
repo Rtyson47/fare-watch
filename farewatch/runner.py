@@ -9,7 +9,7 @@ import logging
 from datetime import datetime, timedelta, timezone
 
 from . import alerts, corridors, dashboard, db, inspiration, notify
-from .models import route_key
+from .models import route_key, route_label
 
 log = logging.getLogger("farewatch.runner")
 
@@ -104,10 +104,8 @@ def run(cfg, conn, today, *, tp_client, tier1_only=False, dry_run=False,
         by_origin = {}
         for s in corridors.expand_corridor(c, today):
             by_origin.setdefault(s.origin, []).append(s)
+        all_kept = []
         for origin, origin_specs in by_origin.items():
-            route = route_key(origin, dest)
-            kept = []
-
             return_specs = [s for s in origin_specs if not s.one_way]
             if return_specs:
                 allowed_pairs = {(s.depart_date, s.return_date) for s in return_specs}
@@ -118,7 +116,7 @@ def run(cfg, conn, today, *, tp_client, tier1_only=False, dry_run=False,
                                       ctx=f"prices_latest {origin}-{dest} {m}"):
                         if (fare.depart_date, fare.return_date) in allowed_pairs:
                             fare.origin, fare.destination = origin, dest
-                            kept.append(fare)
+                            all_kept.append(fare)
 
             oneway_specs = [s for s in origin_specs if s.one_way]
             if oneway_specs:
@@ -129,38 +127,42 @@ def run(cfg, conn, today, *, tp_client, tier1_only=False, dry_run=False,
                                       ctx=f"month_matrix {origin}-{dest} {m}"):
                         if fare.depart_date in allowed_departs and fare.return_date is None:
                             fare.origin, fare.destination = origin, dest
-                            kept.append(fare)
+                            all_kept.append(fare)
 
-            for fare in kept:
-                store(1, fare)
-            if kept:
-                cheapest = min(kept, key=lambda x: x.price)
-                threshold = c.get("alert_threshold") or c.get("max_price")
-                handle(cheapest, threshold)
-                db.upsert_daily_min(conn, route, today.isoformat(), cheapest.price)
+        for fare in all_kept:
+            store(1, fare)
+        if all_kept:
+            route = c.get("label") or route_label(by_origin.keys(), dest)
+            cheapest = min(all_kept, key=lambda x: x.price)
+            threshold = c.get("alert_threshold") or c.get("max_price")
+            handle(cheapest, threshold)
+            db.upsert_daily_min(conn, route, today.isoformat(), cheapest.price)
 
     # -- Tier 1: deadline watches ------------------------------------------
     base = cfg.get("current_base")
     for w in cfg.get("deadline_watches", []) or []:
-        origin = w.get("origin") or base
         dest = w["destination"]
-        route = route_key(origin, dest)
-        allowed = {s.depart_date for s in corridors.expand_deadline(w, base, today)}
-        if not allowed:
+        by_origin = {}
+        for s in corridors.expand_deadline(w, base, today):
+            by_origin.setdefault(s.origin, []).append(s)
+        if not by_origin:
             continue                       # deadline already passed
-        months = sorted({d[:7] for d in allowed})
-        kept = []
-        for m in months:
-            for fare in fetch(tp_client.prices_latest, origin, destination=dest,
-                              beginning_of_period=m + "-01", one_way=True,
-                              ctx=f"prices_latest {origin}-{dest} {m}"):
-                if fare.depart_date in allowed:
-                    fare.origin, fare.destination = origin, dest
-                    kept.append(fare)
-        for fare in kept:
+        all_kept = []
+        for origin, origin_specs in by_origin.items():
+            allowed = {s.depart_date for s in origin_specs}
+            months = sorted({d[:7] for d in allowed})
+            for m in months:
+                for fare in fetch(tp_client.prices_latest, origin, destination=dest,
+                                  beginning_of_period=m + "-01", one_way=True,
+                                  ctx=f"prices_latest {origin}-{dest} {m}"):
+                    if fare.depart_date in allowed:
+                        fare.origin, fare.destination = origin, dest
+                        all_kept.append(fare)
+        for fare in all_kept:
             store(1, fare)
-        if kept:
-            cheapest = min(kept, key=lambda x: x.price)
+        if all_kept:
+            route = route_label(by_origin.keys(), dest)
+            cheapest = min(all_kept, key=lambda x: x.price)
             handle(cheapest, w.get("max_price"))
             db.upsert_daily_min(conn, route, today.isoformat(), cheapest.price)
 

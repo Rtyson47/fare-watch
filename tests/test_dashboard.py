@@ -14,7 +14,7 @@ def _seed(conn):
     db.record_fare(conn, sid, FareRecord("MEX", "LHR", 588.0, "usd",
                    depart_date="2026-09-11", carrier="BA", deep_link="http://d",
                    source="tp:month_matrix"))
-    db.upsert_daily_min(conn, "MEX-LHR", "2026-07-09", 588.0)
+    db.upsert_daily_min(conn, "MEX+2-LHR", "2026-07-09", 588.0)  # config.example.yaml has origin_variants [DUB, AMS]
     # an inspiration find
     sid2 = db.record_search(conn, 1, "MEX", "NYC", "2026-08-03", None, "tp:city_directions")
     db.record_fare(conn, sid2, FareRecord("MEX", "NYC", 210.0, "usd",
@@ -27,7 +27,7 @@ def test_build_data_shape(conn, sample_config):
     cfg = config.load_config(str(sample_config))
     data = dashboard.build_data(conn, cfg, TODAY)
     assert data["base"] == "MEX"
-    corr = next(c for c in data["corridors"] if c["route"] == "MEX-LHR")
+    corr = next(c for c in data["corridors"] if c["route"] == "MEX+2-LHR")
     assert corr["threshold"] == 600                      # alert_threshold from example
     assert {"date": "2026-07-09", "min_price": 588.0} in corr["history"]
     assert corr["current_cheapest"]["price"] == 588.0

@@ -54,7 +54,13 @@ commented file):
 - **corridors** — `origin`/`destination`, `date_windows` (explicit `A:B` ranges or
   `"any Fri-Mon in 2026-09"`), `trip_type`, `cabin`, `max_price`, `alert_threshold`,
   `flex_days` (±N around anchors), and `origin_variants` (e.g. UK legs also check DUB, AMS).
-- **deadline_watches** — `destination`, `must_arrive_by`, `max_price` ("get me home by X under Y").
+  Multi-origin corridors are combined into one dashboard row/alert series (e.g.
+  `MEX+2-LHR`); set `label` to override the auto-generated name, e.g. to keep a
+  one-way and a return corridor on the same route from colliding.
+- **deadline_watches** — `destination`, `must_arrive_by`, `max_price` ("get me home by X
+  under Y"); optional `earliest_depart` floors the search window (e.g. "the 24th to the
+  27th", not "any day up to the 27th"), and `origin_variants` checks fares from multiple
+  origin airports (e.g. MEX + GDL/CUN/MTY), combined into one row.
 - **inspiration** — `origins: ["{BASE}"]`, `horizon_weeks`, `price_ceiling`,
   optional `region_whitelist` (country codes like `US`/`GB` or explicit IATA), `top_n_to_verify`.
 - **cost_guardrails** — `max_duffel_searches_per_day` (default 100) with hard stop +

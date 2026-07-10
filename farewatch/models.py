@@ -30,6 +30,14 @@ def route_key(origin, destination):
     return f"{origin}-{destination}"
 
 
+def route_label(origins, destination):
+    """Label for a (possibly multi-origin) watch: ``MEX-LON`` or ``MEX+3-LON``."""
+    origins = list(origins)
+    if len(origins) == 1:
+        return route_key(origins[0], destination)
+    return f"{origins[0]}+{len(origins) - 1}-{destination}"
+
+
 def _date_only(s):
     return s[:10] if s else None
 

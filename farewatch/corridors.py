@@ -101,13 +101,14 @@ def expand_corridor(corridor, today):
 
 
 def expand_deadline(watch, base, today, horizon_days=120):
-    """One-way ``base -> destination`` for each day up to ``must_arrive_by``.
+    """One-way ``base(+variants) -> destination`` for each day up to ``must_arrive_by``.
 
     ``earliest_depart``, if set, floors the window so departures before it
     (e.g. dates you don't actually want to travel) aren't searched.
+    ``origin_variants`` (like corridors) also checks fares from those origins.
     """
     arrive_by = date.fromisoformat(watch["must_arrive_by"])
-    origin = watch.get("origin") or base
+    origins = [watch.get("origin") or base] + list(watch.get("origin_variants", []) or [])
     floor = today
     if watch.get("earliest_depart"):
         floor = max(floor, date.fromisoformat(watch["earliest_depart"]))
@@ -115,10 +116,11 @@ def expand_deadline(watch, base, today, horizon_days=120):
     specs = []
     d = start
     while d <= arrive_by:
-        specs.append(SearchSpec(
-            origin=origin, destination=watch["destination"],
-            depart_date=_iso(d), return_date=None, one_way=True,
-            max_price=watch.get("max_price"), currency=watch.get("currency"),
-            alert_threshold=watch.get("max_price"), tier_hint=2))
+        for origin in origins:
+            specs.append(SearchSpec(
+                origin=origin, destination=watch["destination"],
+                depart_date=_iso(d), return_date=None, one_way=True,
+                max_price=watch.get("max_price"), currency=watch.get("currency"),
+                alert_threshold=watch.get("max_price"), tier_hint=2))
         d += timedelta(days=1)
     return specs

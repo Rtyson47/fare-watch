@@ -2,17 +2,22 @@
 import json
 
 from . import db, spend
+from .models import route_label
 
 
-def cheapest_for_route(conn, origin, dest):
+def cheapest_for_route(conn, origins, dest):
+    """Cheapest fare for ``dest`` from any of ``origins`` (a list, or a single code)."""
+    if isinstance(origins, str):
+        origins = [origins]
+    placeholders = ",".join("?" for _ in origins)
     row = conn.execute(
-        "SELECT f.price, f.carrier, f.deep_link, s.depart_date, s.return_date"
-        " FROM fares f JOIN searches s ON f.search_id = s.id"
-        " WHERE s.origin=? AND s.dest=?"
-        " AND substr(s.ts, 1, 10) = (SELECT substr(MAX(ts), 1, 10) FROM searches"
-        " WHERE origin=? AND dest=?)"
-        " ORDER BY f.price ASC LIMIT 1",
-        (origin, dest, origin, dest),
+        f"SELECT f.price, f.carrier, f.deep_link, s.origin, s.depart_date, s.return_date"
+        f" FROM fares f JOIN searches s ON f.search_id = s.id"
+        f" WHERE s.origin IN ({placeholders}) AND s.dest=?"
+        f" AND substr(s.ts, 1, 10) = (SELECT substr(MAX(ts), 1, 10) FROM searches"
+        f" WHERE origin IN ({placeholders}) AND dest=?)"
+        f" ORDER BY f.price ASC LIMIT 1",
+        (*origins, dest, *origins, dest),
     ).fetchone()
     return dict(row) if row else None
 
@@ -42,27 +47,28 @@ def inspiration_shortlist(conn, limit):
 def build_data(conn, cfg, today):
     corridors = []
     for c in cfg.get("corridors", []) or []:
-        origin, dest = c["origin"], c["destination"]
-        route = f"{origin}-{dest}"
+        origins = [c["origin"]] + list(c.get("origin_variants", []) or [])
+        dest = c["destination"]
+        route = c.get("label") or route_label(origins, dest)
         corridors.append({
             "route": route,
             "threshold": c.get("alert_threshold") or c.get("max_price"),
             "max_price": c.get("max_price"),
             "history": history_for_route(conn, route),
-            "current_cheapest": cheapest_for_route(conn, origin, dest),
+            "current_cheapest": cheapest_for_route(conn, origins, dest),
         })
     base = cfg.get("current_base")
     deadline_watches = []
     for w in cfg.get("deadline_watches", []) or []:
-        origin = w.get("origin") or base
+        origins = [w.get("origin") or base] + list(w.get("origin_variants", []) or [])
         dest = w["destination"]
-        route = f"{origin}-{dest}"
+        route = route_label(origins, dest)
         deadline_watches.append({
             "route": route,
             "must_arrive_by": w.get("must_arrive_by"),
             "max_price": w.get("max_price"),
             "history": history_for_route(conn, route),
-            "current_cheapest": cheapest_for_route(conn, origin, dest),
+            "current_cheapest": cheapest_for_route(conn, origins, dest),
         })
     top_n = (cfg.get("inspiration", {}) or {}).get("top_n_to_verify", 10)
     return {

@@ -7,7 +7,7 @@ defaults:
 corridors:
   - origin: "{BASE}"
     destination: YYZ
-    date_windows: ["2026-09-01:2026-09-30"]   # any day in the month, one-way
+    date_windows: ["2026-07-10:2026-08-31"]   # any day through end of Aug, one-way
     trip_type: one_way
     cabin: economy
     max_price: 350                     # estimate — adjust once you see real fares
@@ -15,9 +15,10 @@ corridors:
     alert_threshold: 250
     flex_days: 3
 
-  - origin: YVR
-    destination: LHR
-    date_windows: ["2026-09-01:2026-09-30"]   # any day in the month, one-way
+  - label: "YVR-LON one-way"
+    origin: YVR
+    destination: LON                   # city-level: LHR/LGW/STN/LTN/LCY all count
+    date_windows: ["2026-09-01:2026-12-31"]   # Sep onwards, any day, one-way
     trip_type: one_way
     cabin: economy
     max_price: 700                     # estimate — adjust once you see real fares
@@ -25,9 +26,22 @@ corridors:
     alert_threshold: 550
     flex_days: 3
 
+  - label: "YVR-LON return"
+    origin: YVR
+    destination: LON
+    date_windows: ["any Fri-Mon in 2026-09", "any Fri-Mon in 2026-10",
+                   "any Fri-Mon in 2026-11", "any Fri-Mon in 2026-12"]
+    trip_type: return
+    cabin: economy
+    max_price: 1200                    # estimate — adjust once you see real fares
+    currency: usd
+    alert_threshold: 950
+    flex_days: 3
+
 deadline_watches:
-  - destination: LHR                   # one-way, back in London on or before the date
+  - destination: LON                   # one-way, back in London on or before the date
     origin: "{BASE}"                   # optional; defaults to current_base
+    origin_variants: [GDL, CUN, MTY]    # also check Guadalajara, Cancún, Monterrey
     earliest_depart: "2026-07-24"       # don't search/alert on departures before this
     must_arrive_by: "2026-07-27"
     max_price: 650
