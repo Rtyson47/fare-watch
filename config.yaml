@@ -16,6 +16,26 @@ corridors:
     alert_threshold: 600
     flex_days: 3                       # ±N days around each anchor date
 
+  - origin: "{BASE}"
+    destination: YYZ
+    date_windows: ["2026-09-01:2026-09-30"]   # any day in the month, one-way
+    trip_type: one_way
+    cabin: economy
+    max_price: 350                     # estimate — adjust once you see real fares
+    currency: usd
+    alert_threshold: 250
+    flex_days: 3
+
+  - origin: YVR
+    destination: LHR
+    date_windows: ["2026-09-01:2026-09-30"]   # any day in the month, one-way
+    trip_type: one_way
+    cabin: economy
+    max_price: 700                     # estimate — adjust once you see real fares
+    currency: usd
+    alert_threshold: 550
+    flex_days: 3
+
 deadline_watches:
   - destination: MAN                   # "get me home to Manchester by X, under Y"
     origin: "{BASE}"                   # optional; defaults to current_base
