@@ -28,6 +28,7 @@ corridors:
 deadline_watches:
   - destination: LHR                   # one-way, back in London on or before the date
     origin: "{BASE}"                   # optional; defaults to current_base
+    earliest_depart: "2026-07-24"       # don't search/alert on departures before this
     must_arrive_by: "2026-07-27"
     max_price: 650
     currency: usd

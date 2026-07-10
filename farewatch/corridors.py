@@ -101,10 +101,17 @@ def expand_corridor(corridor, today):
 
 
 def expand_deadline(watch, base, today, horizon_days=120):
-    """One-way ``base -> destination`` for each day up to ``must_arrive_by``."""
+    """One-way ``base -> destination`` for each day up to ``must_arrive_by``.
+
+    ``earliest_depart``, if set, floors the window so departures before it
+    (e.g. dates you don't actually want to travel) aren't searched.
+    """
     arrive_by = date.fromisoformat(watch["must_arrive_by"])
     origin = watch.get("origin") or base
-    start = max(today, arrive_by - timedelta(days=horizon_days - 1))
+    floor = today
+    if watch.get("earliest_depart"):
+        floor = max(floor, date.fromisoformat(watch["earliest_depart"]))
+    start = max(floor, arrive_by - timedelta(days=horizon_days - 1))
     specs = []
     d = start
     while d <= arrive_by:
