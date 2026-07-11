@@ -47,19 +47,24 @@ def inspiration_shortlist(conn, limit):
     return _inspiration_rows(conn)[:limit]
 
 
-def inspiration_by_scope(conn, base, airports, limit):
+def inspiration_by_scope(conn, base, domestic_origin, airports, limit):
     """Split the shortlist into domestic (same country as ``base``) vs international.
 
     A flat cheapest-N cut is dominated by short domestic hops (which are
     structurally cheaper than long-haul), crowding out the international
-    fares that make an "inspiration" list actually inspiring.
+    fares that make an "inspiration" list actually inspiring. The domestic
+    bucket is further scoped to fares departing ``domestic_origin`` (which
+    may differ from ``base``, e.g. a separate home-region airport), while
+    the international bucket stays scoped to ``base``.
     """
     home_country = inspiration.country_of(base, airports)
     domestic, international = [], []
     for row in _inspiration_rows(conn):
-        bucket = (domestic if inspiration.country_of(row["destination"], airports) == home_country
-                  else international)
-        bucket.append(row)
+        is_home_country = inspiration.country_of(row["destination"], airports) == home_country
+        if is_home_country and row["origin"] == domestic_origin:
+            domestic.append(row)
+        elif not is_home_country and row["origin"] == base:
+            international.append(row)
     return {"domestic": domestic[:limit], "international": international[:limit]}
 
 
@@ -89,14 +94,16 @@ def build_data(conn, cfg, today):
             "history": history_for_route(conn, route),
             "current_cheapest": cheapest_for_route(conn, origins, dest),
         })
-    top_n = (cfg.get("inspiration", {}) or {}).get("top_n_to_verify", 10)
+    insp_cfg = cfg.get("inspiration", {}) or {}
+    top_n = insp_cfg.get("top_n_to_verify", 10)
+    domestic_origin = insp_cfg.get("domestic_origin") or base
     airports = inspiration.load_airports()
     return {
         "generated_at": db.now_iso(),
         "base": base,
         "corridors": corridors,
         "deadline_watches": deadline_watches,
-        "inspiration": inspiration_by_scope(conn, base, airports, top_n),
+        "inspiration": inspiration_by_scope(conn, base, domestic_origin, airports, top_n),
         "spend_this_month": spend.spend_this_month(conn, "duffel", today.strftime("%Y-%m")),
     }
 
