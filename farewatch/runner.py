@@ -131,12 +131,15 @@ def run(cfg, conn, today, *, tp_client, tier1_only=False, dry_run=False,
 
         for fare in all_kept:
             store(1, fare)
+        route = c.get("label") or route_label(by_origin.keys(), dest)
         if all_kept:
-            route = c.get("label") or route_label(by_origin.keys(), dest)
             cheapest = min(all_kept, key=lambda x: x.price)
             threshold = c.get("alert_threshold") or c.get("max_price")
             handle(cheapest, threshold)
             db.upsert_daily_min(conn, route, today.isoformat(), cheapest.price)
+        else:
+            log.warning("corridor %s: no fares matched today's window -> no daily_min "
+                        "point recorded for %s", route, today.isoformat())
 
     # -- Tier 1: deadline watches ------------------------------------------
     base = cfg.get("current_base")
@@ -152,19 +155,25 @@ def run(cfg, conn, today, *, tp_client, tier1_only=False, dry_run=False,
             allowed = {s.depart_date for s in origin_specs}
             months = sorted({d[:7] for d in allowed})
             for m in months:
-                for fare in fetch(tp_client.prices_latest, origin, destination=dest,
-                                  beginning_of_period=m + "-01", one_way=True,
-                                  ctx=f"prices_latest {origin}-{dest} {m}"):
-                    if fare.depart_date in allowed:
+                # month_matrix (one row per calendar day), not prices_latest: prices_latest
+                # is a top-N cheapest-of-month cache snapshot, so a narrow watch window (e.g.
+                # a 4-day earliest_depart floor) routinely has zero overlap with whichever
+                # dates happened to be cached, even though the API call itself succeeds.
+                for fare in fetch(tp_client.month_matrix, origin, dest, m + "-01",
+                                  ctx=f"month_matrix {origin}-{dest} {m}"):
+                    if fare.depart_date in allowed and fare.return_date is None:
                         fare.origin, fare.destination = origin, dest
                         all_kept.append(fare)
         for fare in all_kept:
             store(1, fare)
+        route = route_label(by_origin.keys(), dest)
         if all_kept:
-            route = route_label(by_origin.keys(), dest)
             cheapest = min(all_kept, key=lambda x: x.price)
             handle(cheapest, w.get("max_price"))
             db.upsert_daily_min(conn, route, today.isoformat(), cheapest.price)
+        else:
+            log.warning("deadline watch %s: no fares matched today's window -> no daily_min "
+                        "point recorded for %s", route, today.isoformat())
 
     # -- Tier 2 gate --------------------------------------------------------
     tier2_gated = not tier1_only

@@ -31,7 +31,7 @@ def test_build_data_shape(conn, sample_config):
     assert corr["threshold"] == 600                      # alert_threshold from example
     assert {"date": "2026-07-09", "min_price": 588.0} in corr["history"]
     assert corr["current_cheapest"]["price"] == 588.0
-    assert any(i["destination"] == "NYC" for i in data["inspiration"])
+    assert any(i["destination"] == "NYC" for i in data["inspiration"]["international"])
     assert "spend_this_month" in data and "est_cost_usd" in data["spend_this_month"]
 
 

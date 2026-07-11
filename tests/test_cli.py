@@ -33,9 +33,10 @@ def test_runner_tier1_dry_run_writes_data_and_alerts(conn, sample_config, tmp_pa
     # (2026-09-11->09-14 @ 612 and 2026-09-18->09-21 @ 705) both land on a
     # Fri->Mon inside the windows and are kept -> corridor cheapest = 612,
     # which is NOT below alert_threshold 600 -> no corridor alert.
-    # The MAN deadline watch (must_arrive_by 2026-12-24, max_price 650) keeps
-    # the same Sept fixture fares (depart dates fall inside the watch window)
-    # -> cheapest 612 < 650 -> a below_max_price dry-run alert still fires.
+    # The MAN deadline watch (must_arrive_by 2026-12-24, max_price 650) prices
+    # via month_matrix (one-way, per-day): the fixture's three rows all fall
+    # inside the Aug27-Dec24 watch window -> cheapest 588 < 650 -> a
+    # below_max_price dry-run alert still fires.
     channels = {r["channel"] for r in conn.execute("SELECT channel FROM alerts")}
     assert "dry-run" in channels
     assert summary["alerts"] >= 1
