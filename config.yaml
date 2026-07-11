@@ -54,7 +54,8 @@ deadline_watches:
     currency: usd
 
 inspiration:
-  origins: ["{BASE}"]
+  origins: ["{BASE}", "PVR"]
+  domestic_origin: PVR                 # domestic shortlist departs PVR; international stays {BASE}
   horizon_weeks: 8
   price_ceiling: 450
   currency: usd
