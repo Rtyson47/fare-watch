@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-11T07:58:49.020729+00:00",
+  "generated_at": "2026-07-11T10:09:11.657909+00:00",
   "base": "MEX",
   "corridors": [
     {
@@ -70,11 +70,25 @@
   ],
   "inspiration": [
     {
+      "destination": "MID",
+      "origin": "MEX",
+      "price": 84.0,
+      "deep_link": "https://www.aviasales.com/search/MEX1908MID23081",
+      "depart_date": "2026-08-19"
+    },
+    {
+      "destination": "MTY",
+      "origin": "MEX",
+      "price": 88.0,
+      "deep_link": "https://www.aviasales.com/search/MEX1507MTY22071",
+      "depart_date": "2026-07-15"
+    },
+    {
       "destination": "GDL",
       "origin": "MEX",
-      "price": 93.0,
-      "deep_link": "https://www.aviasales.com/search/MEX1607GDL19071",
-      "depart_date": "2026-07-16"
+      "price": 92.0,
+      "deep_link": "https://www.aviasales.com/search/MEX1407GDL24071",
+      "depart_date": "2026-07-14"
     },
     {
       "destination": "PVR",
@@ -86,9 +100,9 @@
     {
       "destination": "CUN",
       "origin": "MEX",
-      "price": 127.0,
-      "deep_link": "https://www.aviasales.com/search/MEX1208CUN19081",
-      "depart_date": "2026-08-12"
+      "price": 133.0,
+      "deep_link": "https://www.aviasales.com/search/MEX2408CUN30081",
+      "depart_date": "2026-08-24"
     },
     {
       "destination": "MZT",
@@ -96,13 +110,6 @@
       "price": 134.0,
       "deep_link": "https://www.aviasales.com/search/MEX2307MZT27071",
       "depart_date": "2026-07-23"
-    },
-    {
-      "destination": "MID",
-      "origin": "MEX",
-      "price": 141.0,
-      "deep_link": "https://www.aviasales.com/search/MEX1307MID25071",
-      "depart_date": "2026-07-13"
     },
     {
       "destination": "TGZ",
@@ -121,23 +128,16 @@
     {
       "destination": "TIJ",
       "origin": "MEX",
-      "price": 207.0,
-      "deep_link": "https://www.aviasales.com/search/MEX2007TIJ22071",
-      "depart_date": "2026-07-20"
+      "price": 208.0,
+      "deep_link": "https://www.aviasales.com/search/MEX2707TIJ30071",
+      "depart_date": "2026-07-27"
     },
     {
-      "destination": "GUA",
+      "destination": "LAX",
       "origin": "MEX",
-      "price": 231.0,
-      "deep_link": "https://www.aviasales.com/search/MEX1407GUA15071",
-      "depart_date": "2026-07-14"
-    },
-    {
-      "destination": "LAS",
-      "origin": "MEX",
-      "price": 288.0,
-      "deep_link": "https://www.aviasales.com/search/MEX0508LAS22081",
-      "depart_date": "2026-08-05"
+      "price": 228.0,
+      "deep_link": "https://www.aviasales.com/search/MEX1507LAX16071",
+      "depart_date": "2026-07-15"
     }
   ],
   "spend_this_month": {
