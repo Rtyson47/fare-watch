@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-11T10:09:11.657909+00:00",
+  "generated_at": "2026-07-11T17:42:20.846581+00:00",
   "base": "MEX",
   "corridors": [
     {
@@ -68,78 +68,138 @@
       "current_cheapest": null
     }
   ],
-  "inspiration": [
-    {
-      "destination": "MID",
-      "origin": "MEX",
-      "price": 84.0,
-      "deep_link": "https://www.aviasales.com/search/MEX1908MID23081",
-      "depart_date": "2026-08-19"
-    },
-    {
-      "destination": "MTY",
-      "origin": "MEX",
-      "price": 88.0,
-      "deep_link": "https://www.aviasales.com/search/MEX1507MTY22071",
-      "depart_date": "2026-07-15"
-    },
-    {
-      "destination": "GDL",
-      "origin": "MEX",
-      "price": 92.0,
-      "deep_link": "https://www.aviasales.com/search/MEX1407GDL24071",
-      "depart_date": "2026-07-14"
-    },
-    {
-      "destination": "PVR",
-      "origin": "MEX",
-      "price": 115.0,
-      "deep_link": "https://www.aviasales.com/search/MEX2607PVR27071",
-      "depart_date": "2026-07-26"
-    },
-    {
-      "destination": "CUN",
-      "origin": "MEX",
-      "price": 133.0,
-      "deep_link": "https://www.aviasales.com/search/MEX2408CUN30081",
-      "depart_date": "2026-08-24"
-    },
-    {
-      "destination": "MZT",
-      "origin": "MEX",
-      "price": 134.0,
-      "deep_link": "https://www.aviasales.com/search/MEX2307MZT27071",
-      "depart_date": "2026-07-23"
-    },
-    {
-      "destination": "TGZ",
-      "origin": "MEX",
-      "price": 143.0,
-      "deep_link": "https://www.aviasales.com/search/MEX2207TGZ01081",
-      "depart_date": "2026-07-22"
-    },
-    {
-      "destination": "LAP",
-      "origin": "MEX",
-      "price": 185.0,
-      "deep_link": "https://www.aviasales.com/search/MEX2008LAP24081",
-      "depart_date": "2026-08-20"
-    },
-    {
-      "destination": "TIJ",
-      "origin": "MEX",
-      "price": 208.0,
-      "deep_link": "https://www.aviasales.com/search/MEX2707TIJ30071",
-      "depart_date": "2026-07-27"
-    },
-    {
-      "destination": "LAX",
-      "origin": "MEX",
-      "price": 228.0,
-      "deep_link": "https://www.aviasales.com/search/MEX1507LAX16071",
-      "depart_date": "2026-07-15"
-    }
-  ],
+  "inspiration": {
+    "domestic": [
+      {
+        "destination": "MID",
+        "origin": "MEX",
+        "price": 84.0,
+        "deep_link": "https://www.aviasales.com/search/MEX1908MID23081",
+        "depart_date": "2026-08-19"
+      },
+      {
+        "destination": "MTY",
+        "origin": "MEX",
+        "price": 88.0,
+        "deep_link": "https://www.aviasales.com/search/MEX1507MTY22071",
+        "depart_date": "2026-07-15"
+      },
+      {
+        "destination": "GDL",
+        "origin": "MEX",
+        "price": 92.0,
+        "deep_link": "https://www.aviasales.com/search/MEX1407GDL24071",
+        "depart_date": "2026-07-14"
+      },
+      {
+        "destination": "PVR",
+        "origin": "MEX",
+        "price": 115.0,
+        "deep_link": "https://www.aviasales.com/search/MEX2607PVR27071",
+        "depart_date": "2026-07-26"
+      },
+      {
+        "destination": "CUN",
+        "origin": "MEX",
+        "price": 133.0,
+        "deep_link": "https://www.aviasales.com/search/MEX2408CUN30081",
+        "depart_date": "2026-08-24"
+      },
+      {
+        "destination": "MZT",
+        "origin": "MEX",
+        "price": 134.0,
+        "deep_link": "https://www.aviasales.com/search/MEX2307MZT27071",
+        "depart_date": "2026-07-23"
+      },
+      {
+        "destination": "TGZ",
+        "origin": "MEX",
+        "price": 143.0,
+        "deep_link": "https://www.aviasales.com/search/MEX2207TGZ01081",
+        "depart_date": "2026-07-22"
+      },
+      {
+        "destination": "LAP",
+        "origin": "MEX",
+        "price": 185.0,
+        "deep_link": "https://www.aviasales.com/search/MEX2008LAP24081",
+        "depart_date": "2026-08-20"
+      },
+      {
+        "destination": "TIJ",
+        "origin": "MEX",
+        "price": 208.0,
+        "deep_link": "https://www.aviasales.com/search/MEX2707TIJ30071",
+        "depart_date": "2026-07-27"
+      }
+    ],
+    "international": [
+      {
+        "destination": "LAX",
+        "origin": "MEX",
+        "price": 228.0,
+        "deep_link": "https://www.aviasales.com/search/MEX1507LAX16071",
+        "depart_date": "2026-07-15"
+      },
+      {
+        "destination": "GUA",
+        "origin": "MEX",
+        "price": 231.0,
+        "deep_link": "https://www.aviasales.com/search/MEX1407GUA15071",
+        "depart_date": "2026-07-14"
+      },
+      {
+        "destination": "LAS",
+        "origin": "MEX",
+        "price": 288.0,
+        "deep_link": "https://www.aviasales.com/search/MEX0508LAS22081",
+        "depart_date": "2026-08-05"
+      },
+      {
+        "destination": "CHI",
+        "origin": "MEX",
+        "price": 307.0,
+        "deep_link": "https://www.aviasales.com/search/MEX2107CHI12081",
+        "depart_date": "2026-07-21"
+      },
+      {
+        "destination": "NYC",
+        "origin": "MEX",
+        "price": 319.0,
+        "deep_link": "https://www.aviasales.com/search/MEX0308NYC10081",
+        "depart_date": "2026-08-03"
+      },
+      {
+        "destination": "MIA",
+        "origin": "MEX",
+        "price": 404.0,
+        "deep_link": "https://www.aviasales.com/search/MEX1607MIA20071",
+        "depart_date": "2026-07-16"
+      },
+      {
+        "destination": "PTY",
+        "origin": "MEX",
+        "price": 404.0,
+        "deep_link": "https://www.aviasales.com/search/MEX1808PTY25081",
+        "depart_date": "2026-08-18"
+      },
+      {
+        "destination": "BOG",
+        "origin": "MEX",
+        "price": 415.0,
+        "deep_link": "https://www.aviasales.com/search/MEX2007BOG27071",
+        "depart_date": "2026-07-20"
+      },
+      {
+        "destination": "LIM",
+        "origin": "MEX",
+        "price": 437.0,
+        "deep_link": "https://www.aviasales.com/search/MEX1807LIM29071",
+        "depart_date": "2026-07-18"
+      }
+    ]
+  },
   "spend_this_month": {
     "searches": 0,
     "est_cost_usd": 0.0
