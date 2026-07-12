@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-11T19:15:47.354565+00:00",
+  "generated_at": "2026-07-12T08:20:15.985144+00:00",
   "base": "MEX",
   "corridors": [
     {
@@ -13,6 +13,10 @@
         },
         {
           "date": "2026-07-11",
+          "min_price": 209.0
+        },
+        {
+          "date": "2026-07-12",
           "min_price": 209.0
         }
       ],
@@ -29,15 +33,34 @@
       "route": "YVR-LON one-way",
       "threshold": 550,
       "max_price": 700,
-      "history": [],
-      "current_cheapest": null
+      "history": [
+        {
+          "date": "2026-07-12",
+          "min_price": 413.0
+        }
+      ],
+      "current_cheapest": {
+        "price": 413.0,
+        "carrier": null,
+        "deep_link": "https://www.aviasales.com/search/YVR2908LON1",
+        "origin": "YVR",
+        "depart_date": "2026-08-29",
+        "return_date": null
+      }
     },
     {
       "route": "YVR-LON return",
       "threshold": 950,
       "max_price": 1200,
       "history": [],
-      "current_cheapest": null
+      "current_cheapest": {
+        "price": 413.0,
+        "carrier": null,
+        "deep_link": "https://www.aviasales.com/search/YVR2908LON1",
+        "origin": "YVR",
+        "depart_date": "2026-08-29",
+        "return_date": null
+      }
     }
   ],
   "deadline_watches": [
