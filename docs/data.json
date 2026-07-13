@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-13T18:00:45.938637+00:00",
+  "generated_at": "2026-07-13T18:04:30.551991+00:00",
   "base": "MEX",
   "corridors": [
     {
@@ -164,80 +164,8 @@
       "must_arrive_by": "2026-07-27",
       "max_price": 650,
       "history": [],
-      "current_cheapest": {
-        "price": 501.0,
-        "carrier": null,
-        "deep_link": "https://www.aviasales.com/search/MEX1107LON1",
-        "origin": "MEX",
-        "depart_date": "2026-07-11",
-        "return_date": null
-      },
-      "options": [
-        {
-          "price": 501.0,
-          "carrier": null,
-          "deep_link": "https://www.aviasales.com/search/MEX1107LON1",
-          "origin": "MEX",
-          "depart_date": "2026-07-11",
-          "return_date": null
-        },
-        {
-          "price": 515.0,
-          "carrier": null,
-          "deep_link": "https://www.aviasales.com/search/MEX1207LON1",
-          "origin": "MEX",
-          "depart_date": "2026-07-12",
-          "return_date": null
-        },
-        {
-          "price": 521.0,
-          "carrier": null,
-          "deep_link": "https://www.aviasales.com/search/MEX1907LON1",
-          "origin": "MEX",
-          "depart_date": "2026-07-19",
-          "return_date": null
-        },
-        {
-          "price": 568.0,
-          "carrier": null,
-          "deep_link": "https://www.aviasales.com/search/MEX1707LON1",
-          "origin": "MEX",
-          "depart_date": "2026-07-17",
-          "return_date": null
-        },
-        {
-          "price": 583.0,
-          "carrier": null,
-          "deep_link": "https://www.aviasales.com/search/MEX1407LON1",
-          "origin": "MEX",
-          "depart_date": "2026-07-14",
-          "return_date": null
-        },
-        {
-          "price": 583.0,
-          "carrier": null,
-          "deep_link": "https://www.aviasales.com/search/MEX1507LON1",
-          "origin": "MEX",
-          "depart_date": "2026-07-15",
-          "return_date": null
-        },
-        {
-          "price": 583.0,
-          "carrier": null,
-          "deep_link": "https://www.aviasales.com/search/MEX1607LON1",
-          "origin": "MEX",
-          "depart_date": "2026-07-16",
-          "return_date": null
-        },
-        {
-          "price": 598.0,
-          "carrier": null,
-          "deep_link": "https://www.aviasales.com/search/MEX1307LON1",
-          "origin": "MEX",
-          "depart_date": "2026-07-13",
-          "return_date": null
-        }
-      ],
+      "current_cheapest": null,
+      "options": [],
       "best_seen": null
     },
     {
