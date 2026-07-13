@@ -31,10 +31,13 @@ def build_report(conn, cfg, today):
                          f" {w['must_arrive_by']}  max price {w['max_price']}")
 
     lines += ["", "Inspiration shortlist:"]
-    if not data["inspiration"]:
+    insp = data["inspiration"] or {}
+    if not any(insp.values()):
         lines.append("  (none)")
-    for i in data["inspiration"]:
-        lines.append(f"  {i['origin']}-{i['destination']}: {i['price']:.0f} (dep {i['depart_date']})")
+    for scope in ("international", "domestic"):
+        for i in insp.get(scope, []):
+            lines.append(f"  [{scope}] {i['origin']}-{i['destination']}:"
+                         f" {i['price']:.0f} (dep {i['depart_date']})")
 
     n_alerts = conn.execute("SELECT COUNT(*) AS c FROM alerts WHERE ts>=?",
                             (today.isoformat(),)).fetchone()["c"]
