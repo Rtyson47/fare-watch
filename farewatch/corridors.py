@@ -52,7 +52,7 @@ def parse_date_window(entry, today):
 
     m = _RANGE_RE.match(entry)
     if m:
-        start = date.fromisoformat(m.group(1))
+        start = max(date.fromisoformat(m.group(1)), today)
         end = date.fromisoformat(m.group(2))
         out = []
         d = start
@@ -83,10 +83,16 @@ def expand_corridor(corridor, today):
     origins = [corridor["origin"]] + list(corridor.get("origin_variants", []) or [])
     flex = corridor.get("flex_days", 3)
     force_oneway = corridor.get("trip_type") == "one_way"
+    today_iso = _iso(today)
     specs = []
     for window in corridor.get("date_windows", []) or []:
+        # Explicit ranges already enumerate every day, so flex would only add
+        # days *outside* the window (e.g. "Sep onwards" searching late Aug).
+        window_flex = 0 if _RANGE_RE.match(window) else flex
         for dep, ret in parse_date_window(window, today):
-            for d, r in flex_dates(dep, ret if not force_oneway else None, flex):
+            for d, r in flex_dates(dep, ret if not force_oneway else None, window_flex):
+                if d < today_iso:
+                    continue                       # never search departed dates
                 if r is not None and r < d:
                     continue                       # never return before departure
                 for origin in origins:

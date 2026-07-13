@@ -128,6 +128,8 @@ def run(cfg, conn, today, *, tp_client, tier1_only=False, dry_run=False,
         by_origin = {}
         for s in corridors.expand_corridor(c, today):
             by_origin.setdefault(s.origin, []).append(s)
+        if not by_origin:
+            continue                       # window entirely in the past
         all_kept = []
         for origin, origin_specs in by_origin.items():
             return_specs = [s for s in origin_specs if not s.one_way]

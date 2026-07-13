@@ -79,3 +79,38 @@ def test_expand_deadline_origin_variants_yield_specs_for_every_origin():
     specs = corridors.expand_deadline(watch, base="LHR", today=TODAY)
     origins = {s.origin for s in specs}
     assert origins == {"LHR", "MAN", "BHX"}
+
+
+def test_expand_corridor_never_emits_past_departures():
+    # A range window whose start has already passed (plus flex) must not
+    # search departed dates — cached APIs can still return fares for them.
+    corridor = {
+        "origin": "MEX", "destination": "YYZ",
+        "date_windows": ["2026-07-01:2026-08-31"], "trip_type": "one_way",
+        "flex_days": 3,
+    }
+    specs = corridors.expand_corridor(corridor, TODAY)
+    assert specs
+    assert all(s.depart_date >= "2026-07-09" for s in specs)
+
+
+def test_expand_corridor_range_window_flex_does_not_bleed_outside():
+    # Explicit ranges already cover every day, so flex must not extend the
+    # window (e.g. "Sep onwards" searching late August).
+    corridor = {
+        "origin": "YVR", "destination": "LON",
+        "date_windows": ["2026-09-01:2026-09-30"], "trip_type": "one_way",
+        "flex_days": 3,
+    }
+    specs = corridors.expand_corridor(corridor, TODAY)
+    departs = {s.depart_date for s in specs}
+    assert min(departs) == "2026-09-01" and max(departs) == "2026-09-30"
+
+
+def test_expand_corridor_expired_window_yields_nothing():
+    corridor = {
+        "origin": "MEX", "destination": "YYZ",
+        "date_windows": ["2026-06-01:2026-06-30"], "trip_type": "one_way",
+        "flex_days": 3,
+    }
+    assert corridors.expand_corridor(corridor, TODAY) == []

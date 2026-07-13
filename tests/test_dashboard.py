@@ -219,3 +219,29 @@ def test_trip_shape_filter_separates_shared_route_corridors(conn):
     assert dashboard.cheapest_for_route(conn, "YVR", "LON", one_way=False)["price"] == 612.0
     assert dashboard.cheapest_for_route(conn, "YVR", "LON")["price"] == 588.0
     assert [o["price"] for o in dashboard.top_options(conn, "YVR", "LON", one_way=False)] == [612.0]
+
+
+def test_latest_day_ignores_filtered_out_searches(conn):
+    # The "latest scan day" must be computed over the same rows the outer
+    # query keeps: a later duffel_test-only (or wrong-shape-only) day must not
+    # blank out a row whose real fares are from the previous scan.
+    old = "2026-07-08T12:00:00+00:00"
+    sid_tp = db.record_search(conn, 1, "YVR", "LON", "2026-09-11", None, "tp:month_matrix", ts=old)
+    db.record_fare(conn, sid_tp, FareRecord("YVR", "LON", 588.0, "usd",
+                   depart_date="2026-09-11", source="tp:month_matrix"))
+    new = "2026-07-09T12:00:00+00:00"
+    sid_sandbox = db.record_search(conn, 2, "YVR", "LON", "2026-09-11", None, "duffel_test", ts=new)
+    db.record_fare(conn, sid_sandbox, FareRecord("YVR", "LON", 42.0, "usd",
+                   depart_date="2026-09-11", source="duffel_test"))
+    sid_rt = db.record_search(conn, 1, "YVR", "LON", "2026-09-11", "2026-09-14",
+                              "tp:prices_latest", ts=new)
+    db.record_fare(conn, sid_rt, FareRecord("YVR", "LON", 612.0, "usd",
+                   depart_date="2026-09-11", return_date="2026-09-14",
+                   source="tp:prices_latest"))
+
+    # one-way row: latest one-way scan day is Jul 8 (Jul 9 has only sandbox +
+    # return rows), so the 588 fare must still show
+    assert dashboard.cheapest_for_route(conn, "YVR", "LON", one_way=True)["price"] == 588.0
+    assert [o["price"] for o in dashboard.top_options(conn, "YVR", "LON", one_way=True)] == [588.0]
+    # return row still sees its own Jul 9 fare
+    assert dashboard.cheapest_for_route(conn, "YVR", "LON", one_way=False)["price"] == 612.0

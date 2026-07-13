@@ -5,16 +5,16 @@ from . import db, inspiration, spend
 from .models import route_label
 
 
-def _trip_clause(one_way):
+def _trip_clause(one_way, alias="s"):
     """SQL filter for trip shape: True=one-way rows, False=return rows, None=both.
 
     Needed when two watches share origin/dest (e.g. a one-way and a return
     corridor on the same route) so each row shows fares of its own shape.
     """
     if one_way is True:
-        return " AND s.return_date IS NULL"
+        return f" AND {alias}.return_date IS NULL"
     if one_way is False:
-        return " AND s.return_date IS NOT NULL"
+        return f" AND {alias}.return_date IS NOT NULL"
     return ""
 
 
@@ -29,8 +29,9 @@ def cheapest_for_route(conn, origins, dest, one_way=None):
         f" WHERE s.origin IN ({placeholders}) AND s.dest=?"
         f" AND s.source != 'duffel_test'"      # sandbox prices are synthetic
         f"{_trip_clause(one_way)}"
-        f" AND substr(s.ts, 1, 10) = (SELECT substr(MAX(ts), 1, 10) FROM searches"
-        f" WHERE origin IN ({placeholders}) AND dest=?)"
+        f" AND substr(s.ts, 1, 10) = (SELECT substr(MAX(s2.ts), 1, 10) FROM searches s2"
+        f" WHERE s2.origin IN ({placeholders}) AND s2.dest=?"
+        f" AND s2.source != 'duffel_test'{_trip_clause(one_way, 's2')})"
         f" ORDER BY f.price ASC LIMIT 1",
         (*origins, dest, *origins, dest),
     ).fetchone()
@@ -48,8 +49,9 @@ def top_options(conn, origins, dest, limit=8, one_way=None):
         f" WHERE s.origin IN ({placeholders}) AND s.dest=?"
         f" AND s.source != 'duffel_test'"      # sandbox prices are synthetic
         f"{_trip_clause(one_way)}"
-        f" AND substr(s.ts, 1, 10) = (SELECT substr(MAX(ts), 1, 10) FROM searches"
-        f" WHERE origin IN ({placeholders}) AND dest=?)"
+        f" AND substr(s.ts, 1, 10) = (SELECT substr(MAX(s2.ts), 1, 10) FROM searches s2"
+        f" WHERE s2.origin IN ({placeholders}) AND s2.dest=?"
+        f" AND s2.source != 'duffel_test'{_trip_clause(one_way, 's2')})"
         f" ORDER BY f.price ASC",
         (*origins, dest, *origins, dest),
     ).fetchall()
