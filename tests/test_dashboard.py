@@ -245,3 +245,19 @@ def test_latest_day_ignores_filtered_out_searches(conn):
     assert [o["price"] for o in dashboard.top_options(conn, "YVR", "LON", one_way=True)] == [588.0]
     # return row still sees its own Jul 9 fare
     assert dashboard.cheapest_for_route(conn, "YVR", "LON", one_way=False)["price"] == 612.0
+
+
+def test_departed_and_out_of_window_fares_never_surface(conn, sample_config):
+    # A deadline watch whose route stopped producing fares must not fall back
+    # to a stale scan day and show departed / out-of-window departures.
+    ts = "2026-07-05T12:00:00+00:00"
+    for dep in ("2026-07-06", "2026-07-08", "2026-12-30"):
+        sid = db.record_search(conn, 1, "MEX", "MAN", dep, None, "tp:prices_latest", ts=ts)
+        db.record_fare(conn, sid, FareRecord("MEX", "MAN", 300.0, "usd",
+                       depart_date=dep, source="tp:prices_latest"))
+    cfg = config.load_config(str(sample_config))
+    data = dashboard.build_data(conn, cfg, TODAY)   # TODAY = 2026-07-09
+    w = next(x for x in data["deadline_watches"] if x["route"] == "MEX-MAN")
+    # Jul 6/8 have departed; Dec 30 is after must_arrive_by (2026-12-24)
+    assert w["current_cheapest"] is None
+    assert w["options"] == []

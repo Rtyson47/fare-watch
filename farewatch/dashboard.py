@@ -18,43 +18,51 @@ def _trip_clause(one_way, alias="s"):
     return ""
 
 
-def cheapest_for_route(conn, origins, dest, one_way=None):
-    """Cheapest fare for ``dest`` from any of ``origins`` (a list, or a single code)."""
+def _watch_clauses(one_way, depart_min, depart_max, alias="s"):
+    """Shared row filters for a watch's fares: shape, date bounds, no sandbox."""
+    sql, args = f" AND {alias}.source != 'duffel_test'", []
+    sql += _trip_clause(one_way, alias)
+    if depart_min:
+        sql += f" AND {alias}.depart_date >= ?"
+        args.append(depart_min)
+    if depart_max:
+        sql += f" AND {alias}.depart_date <= ?"
+        args.append(depart_max)
+    return sql, args
+
+
+def _latest_scan_rows(conn, origins, dest, one_way, depart_min, depart_max):
+    """All fares for the watch's latest scan day, cheapest first.
+
+    Every filter is applied both to the rows and to the "latest scan day"
+    subquery, so a day whose rows are all filtered out (sandbox-only, wrong
+    shape, already departed) can't blank out a watch that has older data.
+    """
     if isinstance(origins, str):
         origins = [origins]
     placeholders = ",".join("?" for _ in origins)
-    row = conn.execute(
+    where, args = _watch_clauses(one_way, depart_min, depart_max)
+    sub_where, sub_args = _watch_clauses(one_way, depart_min, depart_max, "s2")
+    return conn.execute(
         f"SELECT f.price, f.carrier, f.deep_link, s.origin, s.depart_date, s.return_date"
         f" FROM fares f JOIN searches s ON f.search_id = s.id"
-        f" WHERE s.origin IN ({placeholders}) AND s.dest=?"
-        f" AND s.source != 'duffel_test'"      # sandbox prices are synthetic
-        f"{_trip_clause(one_way)}"
+        f" WHERE s.origin IN ({placeholders}) AND s.dest=?{where}"
         f" AND substr(s.ts, 1, 10) = (SELECT substr(MAX(s2.ts), 1, 10) FROM searches s2"
-        f" WHERE s2.origin IN ({placeholders}) AND s2.dest=?"
-        f" AND s2.source != 'duffel_test'{_trip_clause(one_way, 's2')})"
-        f" ORDER BY f.price ASC LIMIT 1",
-        (*origins, dest, *origins, dest),
-    ).fetchone()
-    return dict(row) if row else None
-
-
-def top_options(conn, origins, dest, limit=8, one_way=None):
-    """Cheapest fare per distinct (depart_date, return_date) for the watch's latest scan day."""
-    if isinstance(origins, str):
-        origins = [origins]
-    placeholders = ",".join("?" for _ in origins)
-    rows = conn.execute(
-        f"SELECT f.price, f.carrier, f.deep_link, s.origin, s.depart_date, s.return_date"
-        f" FROM fares f JOIN searches s ON f.search_id = s.id"
-        f" WHERE s.origin IN ({placeholders}) AND s.dest=?"
-        f" AND s.source != 'duffel_test'"      # sandbox prices are synthetic
-        f"{_trip_clause(one_way)}"
-        f" AND substr(s.ts, 1, 10) = (SELECT substr(MAX(s2.ts), 1, 10) FROM searches s2"
-        f" WHERE s2.origin IN ({placeholders}) AND s2.dest=?"
-        f" AND s2.source != 'duffel_test'{_trip_clause(one_way, 's2')})"
+        f" WHERE s2.origin IN ({placeholders}) AND s2.dest=?{sub_where})"
         f" ORDER BY f.price ASC",
-        (*origins, dest, *origins, dest),
+        (*origins, dest, *args, *origins, dest, *sub_args),
     ).fetchall()
+
+
+def cheapest_for_route(conn, origins, dest, one_way=None, depart_min=None, depart_max=None):
+    """Cheapest fare for ``dest`` from any of ``origins`` (a list, or a single code)."""
+    rows = _latest_scan_rows(conn, origins, dest, one_way, depart_min, depart_max)
+    return dict(rows[0]) if rows else None
+
+
+def top_options(conn, origins, dest, limit=8, one_way=None, depart_min=None, depart_max=None):
+    """Cheapest fare per distinct (depart_date, return_date) for the watch's latest scan day."""
+    rows = _latest_scan_rows(conn, origins, dest, one_way, depart_min, depart_max)
     best_by_pair = {}
     for r in rows:
         key = (r["depart_date"], r["return_date"])
@@ -119,6 +127,7 @@ def inspiration_by_scope(conn, base, domestic_origin, airports, limit):
 
 
 def build_data(conn, cfg, today):
+    today_iso = today.isoformat()
     corridors = []
     for c in cfg.get("corridors", []) or []:
         origins = [c["origin"]] + list(c.get("origin_variants", []) or [])
@@ -131,8 +140,10 @@ def build_data(conn, cfg, today):
             "threshold": c.get("alert_threshold") or c.get("max_price"),
             "max_price": c.get("max_price"),
             "history": history_for_route(conn, route),
-            "current_cheapest": cheapest_for_route(conn, origins, dest, one_way=one_way),
-            "options": top_options(conn, origins, dest, one_way=one_way),
+            "current_cheapest": cheapest_for_route(conn, origins, dest, one_way=one_way,
+                                                   depart_min=today_iso),
+            "options": top_options(conn, origins, dest, one_way=one_way,
+                                   depart_min=today_iso),
             "best_seen": best_seen(conn, route),
         })
     base = cfg.get("current_base")
@@ -141,13 +152,20 @@ def build_data(conn, cfg, today):
         origins = [w.get("origin") or base] + list(w.get("origin_variants", []) or [])
         dest = w["destination"]
         route = route_label(origins, dest)
+        # scope to the watch's actual window so stale scans of a wider (or
+        # already-departed) window never surface as "current cheapest"
+        depart_min = max(today_iso, w.get("earliest_depart") or today_iso)
         deadline_watches.append({
             "route": route,
             "must_arrive_by": w.get("must_arrive_by"),
             "max_price": w.get("max_price"),
             "history": history_for_route(conn, route),
-            "current_cheapest": cheapest_for_route(conn, origins, dest, one_way=True),
-            "options": top_options(conn, origins, dest, one_way=True),
+            "current_cheapest": cheapest_for_route(conn, origins, dest, one_way=True,
+                                                   depart_min=depart_min,
+                                                   depart_max=w.get("must_arrive_by")),
+            "options": top_options(conn, origins, dest, one_way=True,
+                                   depart_min=depart_min,
+                                   depart_max=w.get("must_arrive_by")),
             "best_seen": best_seen(conn, route),
         })
     insp_cfg = cfg.get("inspiration", {}) or {}
