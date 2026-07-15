@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-15T08:13:30.346651+00:00",
+  "generated_at": "2026-07-15T10:41:44.361687+00:00",
   "base": "MEX",
   "corridors": [
     {
@@ -197,13 +197,6 @@
   "inspiration": {
     "domestic": [
       {
-        "destination": "MEX",
-        "origin": "PVR",
-        "price": 78.0,
-        "deep_link": "https://www.aviasales.com/search/PVR0408MEX05081",
-        "depart_date": "2026-08-04"
-      },
-      {
         "destination": "GDL",
         "origin": "PVR",
         "price": 88.0,
@@ -220,13 +213,6 @@
         "depart_date": "2026-08-21"
       },
       {
-        "destination": "HUX",
-        "origin": "MEX",
-        "price": 214.0,
-        "deep_link": "https://www.aviasales.com/search/MEX2107HUX24071",
-        "depart_date": "2026-07-21"
-      },
-      {
         "destination": "LAX",
         "origin": "MEX",
         "price": 228.0,
@@ -236,9 +222,16 @@
       {
         "destination": "GUA",
         "origin": "MEX",
-        "price": 231.0,
-        "deep_link": "https://www.aviasales.com/search/MEX1407GUA15071",
-        "depart_date": "2026-07-14"
+        "price": 230.0,
+        "deep_link": "https://www.aviasales.com/search/MEX2308GUA31081",
+        "depart_date": "2026-08-23"
+      },
+      {
+        "destination": "SAT",
+        "origin": "MEX",
+        "price": 269.0,
+        "deep_link": "https://www.aviasales.com/search/MEX0508SAT08081",
+        "depart_date": "2026-08-05"
       },
       {
         "destination": "CHI",
@@ -253,6 +246,13 @@
         "price": 319.0,
         "deep_link": "https://www.aviasales.com/search/MEX0308NYC10081",
         "depart_date": "2026-08-03"
+      },
+      {
+        "destination": "BOG",
+        "origin": "MEX",
+        "price": 347.0,
+        "deep_link": "https://www.aviasales.com/search/MEX2808BOG01091",
+        "depart_date": "2026-08-28"
       },
       {
         "destination": "AUS",
@@ -274,13 +274,6 @@
         "price": 404.0,
         "deep_link": "https://www.aviasales.com/search/MEX1908PTY26081",
         "depart_date": "2026-08-19"
-      },
-      {
-        "destination": "LIM",
-        "origin": "MEX",
-        "price": 437.0,
-        "deep_link": "https://www.aviasales.com/search/MEX1807LIM29071",
-        "depart_date": "2026-07-18"
       }
     ]
   },
