@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-16T08:16:46.044310+00:00",
+  "generated_at": "2026-07-16T10:48:57.710872+00:00",
   "base": "MEX",
   "corridors": [
     {
@@ -217,11 +217,11 @@
         "depart_date": "2026-08-21"
       },
       {
-        "destination": "LAX",
+        "destination": "TQO",
         "origin": "MEX",
-        "price": 228.0,
-        "deep_link": "https://www.aviasales.com/search/MEX1507LAX16071",
-        "depart_date": "2026-07-15"
+        "price": 192.0,
+        "deep_link": "https://www.aviasales.com/search/MEX1607TQO25071",
+        "depart_date": "2026-07-16"
       },
       {
         "destination": "GUA",
@@ -231,18 +231,11 @@
         "depart_date": "2026-08-23"
       },
       {
-        "destination": "SAT",
+        "destination": "SJO",
         "origin": "MEX",
-        "price": 269.0,
-        "deep_link": "https://www.aviasales.com/search/MEX0508SAT08081",
-        "depart_date": "2026-08-05"
-      },
-      {
-        "destination": "CHI",
-        "origin": "MEX",
-        "price": 307.0,
-        "deep_link": "https://www.aviasales.com/search/MEX2107CHI12081",
-        "depart_date": "2026-07-21"
+        "price": 267.0,
+        "deep_link": "https://www.aviasales.com/search/MEX0208SJO28081",
+        "depart_date": "2026-08-02"
       },
       {
         "destination": "NYC",
@@ -259,6 +252,20 @@
         "depart_date": "2026-08-28"
       },
       {
+        "destination": "CHI",
+        "origin": "MEX",
+        "price": 349.0,
+        "deep_link": "https://www.aviasales.com/search/MEX2207CHI27071",
+        "depart_date": "2026-07-22"
+      },
+      {
+        "destination": "CZM",
+        "origin": "MEX",
+        "price": 372.0,
+        "deep_link": "https://www.aviasales.com/search/MEX1607CZM21071",
+        "depart_date": "2026-07-16"
+      },
+      {
         "destination": "AUS",
         "origin": "MEX",
         "price": 373.0,
@@ -271,13 +278,6 @@
         "price": 404.0,
         "deep_link": "https://www.aviasales.com/search/MEX1607MIA20071",
         "depart_date": "2026-07-16"
-      },
-      {
-        "destination": "PTY",
-        "origin": "MEX",
-        "price": 404.0,
-        "deep_link": "https://www.aviasales.com/search/MEX1908PTY26081",
-        "depart_date": "2026-08-19"
       }
     ]
   },
