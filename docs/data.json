@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-19T08:22:05.318018+00:00",
+  "generated_at": "2026-07-19T10:18:46.158991+00:00",
   "base": "MEX",
   "corridors": [
     {
@@ -211,14 +211,29 @@
     }
   ],
   "inspiration": {
-    "domestic": [],
+    "domestic": [
+      {
+        "destination": "MEX",
+        "origin": "PVR",
+        "price": 125.0,
+        "deep_link": "https://www.aviasales.com/search/PVR2107MEX30071",
+        "depart_date": "2026-07-21"
+      }
+    ],
     "international": [
       {
         "destination": "ACA",
         "origin": "MEX",
-        "price": 184.0,
-        "deep_link": "https://www.aviasales.com/search/MEX2307ACA24071",
-        "depart_date": "2026-07-23"
+        "price": 89.0,
+        "deep_link": "https://www.aviasales.com/search/MEX1109ACA16091",
+        "depart_date": "2026-09-11"
+      },
+      {
+        "destination": "TRC",
+        "origin": "MEX",
+        "price": 118.0,
+        "deep_link": "https://www.aviasales.com/search/MEX1308TRC25081",
+        "depart_date": "2026-08-13"
       },
       {
         "destination": "GUA",
