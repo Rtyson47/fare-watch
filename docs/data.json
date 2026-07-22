@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-21T19:25:27.357400+00:00",
+  "generated_at": "2026-07-22T08:31:28.276473+00:00",
   "base": "MEX",
   "corridors": [
     {
@@ -54,6 +54,10 @@
         {
           "date": "2026-07-21",
           "min_price": 204.0
+        },
+        {
+          "date": "2026-07-22",
+          "min_price": 204.0
         }
       ],
       "current_cheapest": {
@@ -79,54 +83,6 @@
           "deep_link": "https://www.aviasales.com/search/MEX2807YTO1",
           "origin": "MEX",
           "depart_date": "2026-07-28",
-          "return_date": null
-        },
-        {
-          "price": 276.0,
-          "carrier": null,
-          "deep_link": "https://www.aviasales.com/search/MEX2207YTO1",
-          "origin": "MEX",
-          "depart_date": "2026-07-22",
-          "return_date": null
-        },
-        {
-          "price": 276.0,
-          "carrier": null,
-          "deep_link": "https://www.aviasales.com/search/MEX2307YTO1",
-          "origin": "MEX",
-          "depart_date": "2026-07-23",
-          "return_date": null
-        },
-        {
-          "price": 276.0,
-          "carrier": null,
-          "deep_link": "https://www.aviasales.com/search/MEX2407YTO1",
-          "origin": "MEX",
-          "depart_date": "2026-07-24",
-          "return_date": null
-        },
-        {
-          "price": 276.0,
-          "carrier": null,
-          "deep_link": "https://www.aviasales.com/search/MEX2507YTO1",
-          "origin": "MEX",
-          "depart_date": "2026-07-25",
-          "return_date": null
-        },
-        {
-          "price": 276.0,
-          "carrier": null,
-          "deep_link": "https://www.aviasales.com/search/MEX2607YTO1",
-          "origin": "MEX",
-          "depart_date": "2026-07-26",
-          "return_date": null
-        },
-        {
-          "price": 276.0,
-          "carrier": null,
-          "deep_link": "https://www.aviasales.com/search/MEX2707YTO1",
-          "origin": "MEX",
-          "depart_date": "2026-07-27",
           "return_date": null
         }
       ],
