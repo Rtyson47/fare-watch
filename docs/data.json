@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-22T19:22:30.941456+00:00",
+  "generated_at": "2026-07-23T08:33:01.001754+00:00",
   "base": "MEX",
   "corridors": [
     {
@@ -58,6 +58,10 @@
         {
           "date": "2026-07-22",
           "min_price": 204.0
+        },
+        {
+          "date": "2026-07-23",
+          "min_price": 204.0
         }
       ],
       "current_cheapest": {
@@ -78,15 +82,7 @@
           "return_date": null
         },
         {
-          "price": 261.0,
-          "carrier": null,
-          "deep_link": "https://www.aviasales.com/search/MEX2807YTO1",
-          "origin": "MEX",
-          "depart_date": "2026-07-28",
-          "return_date": null
-        },
-        {
-          "price": 311.0,
+          "price": 316.0,
           "carrier": null,
           "deep_link": "https://www.aviasales.com/search/MEX0208YTO1",
           "origin": "MEX",
@@ -94,7 +90,7 @@
           "return_date": null
         },
         {
-          "price": 311.0,
+          "price": 316.0,
           "carrier": null,
           "deep_link": "https://www.aviasales.com/search/MEX0308YTO1",
           "origin": "MEX",
@@ -102,7 +98,7 @@
           "return_date": null
         },
         {
-          "price": 311.0,
+          "price": 316.0,
           "carrier": null,
           "deep_link": "https://www.aviasales.com/search/MEX0408YTO1",
           "origin": "MEX",
@@ -110,7 +106,7 @@
           "return_date": null
         },
         {
-          "price": 311.0,
+          "price": 316.0,
           "carrier": null,
           "deep_link": "https://www.aviasales.com/search/MEX0508YTO1",
           "origin": "MEX",
@@ -118,7 +114,7 @@
           "return_date": null
         },
         {
-          "price": 311.0,
+          "price": 316.0,
           "carrier": null,
           "deep_link": "https://www.aviasales.com/search/MEX0608YTO1",
           "origin": "MEX",
@@ -126,11 +122,19 @@
           "return_date": null
         },
         {
-          "price": 311.0,
+          "price": 316.0,
           "carrier": null,
           "deep_link": "https://www.aviasales.com/search/MEX0708YTO1",
           "origin": "MEX",
           "depart_date": "2026-08-07",
+          "return_date": null
+        },
+        {
+          "price": 316.0,
+          "carrier": null,
+          "deep_link": "https://www.aviasales.com/search/MEX0808YTO1",
+          "origin": "MEX",
+          "depart_date": "2026-08-08",
           "return_date": null
         }
       ],
