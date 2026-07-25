@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-24T19:26:47.143805+00:00",
+  "generated_at": "2026-07-25T08:08:13.915350+00:00",
   "base": "MEX",
   "corridors": [
     {
@@ -65,6 +65,10 @@
         },
         {
           "date": "2026-07-24",
+          "min_price": 204.0
+        },
+        {
+          "date": "2026-07-25",
           "min_price": 204.0
         }
       ],
@@ -207,10 +211,34 @@
       "route": "MEX+3-LON",
       "must_arrive_by": "2026-07-27",
       "max_price": 650,
-      "history": [],
-      "current_cheapest": null,
-      "options": [],
-      "best_seen": null
+      "history": [
+        {
+          "date": "2026-07-25",
+          "min_price": 548.0
+        }
+      ],
+      "current_cheapest": {
+        "price": 548.0,
+        "carrier": null,
+        "deep_link": "https://www.aviasales.com/search/MEX2707LON1",
+        "origin": "MEX",
+        "depart_date": "2026-07-27",
+        "return_date": null
+      },
+      "options": [
+        {
+          "price": 548.0,
+          "carrier": null,
+          "deep_link": "https://www.aviasales.com/search/MEX2707LON1",
+          "origin": "MEX",
+          "depart_date": "2026-07-27",
+          "return_date": null
+        }
+      ],
+      "best_seen": {
+        "date": "2026-07-25",
+        "min_price": 548.0
+      }
     },
     {
       "route": "MEX-MAN",
