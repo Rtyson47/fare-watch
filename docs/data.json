@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-27T09:55:00.917137+00:00",
+  "generated_at": "2026-07-27T12:10:29.002319+00:00",
   "base": "MEX",
   "corridors": [
     {
@@ -292,13 +292,6 @@
         "depart_date": "2026-07-29"
       },
       {
-        "destination": "SJO",
-        "origin": "MEX",
-        "price": 216.0,
-        "deep_link": "https://www.aviasales.com/search/MEX1708SJO20081",
-        "depart_date": "2026-08-17"
-      },
-      {
         "destination": "HOU",
         "origin": "MEX",
         "price": 289.0,
@@ -325,13 +318,6 @@
         "price": 403.0,
         "deep_link": "https://www.aviasales.com/search/MEX0408BOG10081",
         "depart_date": "2026-08-04"
-      },
-      {
-        "destination": "MIA",
-        "origin": "MEX",
-        "price": 408.0,
-        "deep_link": "https://www.aviasales.com/search/MEX1408MIA17081",
-        "depart_date": "2026-08-14"
       }
     ]
   },
