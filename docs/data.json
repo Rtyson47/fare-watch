@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-28T08:36:17.453003+00:00",
+  "generated_at": "2026-07-28T11:08:49.131168+00:00",
   "base": "MEX",
   "corridors": [
     {
@@ -273,6 +273,13 @@
         "depart_date": "2026-08-21"
       },
       {
+        "destination": "HUX",
+        "origin": "MEX",
+        "price": 198.0,
+        "deep_link": "https://www.aviasales.com/search/MEX1808HUX22081",
+        "depart_date": "2026-08-18"
+      },
+      {
         "destination": "PXM",
         "origin": "MEX",
         "price": 199.0,
@@ -294,18 +301,18 @@
         "depart_date": "2026-08-19"
       },
       {
+        "destination": "BOG",
+        "origin": "MEX",
+        "price": 373.0,
+        "deep_link": "https://www.aviasales.com/search/MEX2208BOG23081",
+        "depart_date": "2026-08-22"
+      },
+      {
         "destination": "GUA",
         "origin": "MEX",
         "price": 374.0,
         "deep_link": "https://www.aviasales.com/search/MEX3007GUA02081",
         "depart_date": "2026-07-30"
-      },
-      {
-        "destination": "BOG",
-        "origin": "MEX",
-        "price": 403.0,
-        "deep_link": "https://www.aviasales.com/search/MEX0408BOG10081",
-        "depart_date": "2026-08-04"
       }
     ]
   },
