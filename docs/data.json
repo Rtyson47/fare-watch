@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-29T08:43:03.465634+00:00",
+  "generated_at": "2026-07-29T11:13:38.765934+00:00",
   "base": "MEX",
   "corridors": [
     {
@@ -272,7 +272,7 @@
       {
         "destination": "ACA",
         "origin": "MEX",
-        "price": 136.0,
+        "price": 132.0,
         "deep_link": "https://www.aviasales.com/search/MEX2108ACA25081",
         "depart_date": "2026-08-21"
       },
@@ -296,6 +296,13 @@
         "price": 289.0,
         "deep_link": "https://www.aviasales.com/search/MEX1308HOU16081",
         "depart_date": "2026-08-13"
+      },
+      {
+        "destination": "LIM",
+        "origin": "MEX",
+        "price": 296.0,
+        "deep_link": "https://www.aviasales.com/search/MEX3108LIM14091",
+        "depart_date": "2026-08-31"
       },
       {
         "destination": "CHI",
