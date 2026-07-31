@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-31T08:51:39.244873+00:00",
+  "generated_at": "2026-07-31T11:19:41.967941+00:00",
   "base": "MEX",
   "corridors": [
     {
@@ -291,7 +291,22 @@
     }
   ],
   "inspiration": {
-    "domestic": [],
+    "domestic": [
+      {
+        "destination": "MEX",
+        "origin": "PVR",
+        "price": 79.0,
+        "deep_link": "https://www.aviasales.com/search/PVR2509MEX27091",
+        "depart_date": "2026-09-25"
+      },
+      {
+        "destination": "GDL",
+        "origin": "PVR",
+        "price": 125.0,
+        "deep_link": "https://www.aviasales.com/search/PVR0308GDL06081",
+        "depart_date": "2026-08-03"
+      }
+    ],
     "international": [
       {
         "destination": "ACA",
@@ -306,6 +321,20 @@
         "price": 198.0,
         "deep_link": "https://www.aviasales.com/search/MEX1808HUX22081",
         "depart_date": "2026-08-18"
+      },
+      {
+        "destination": "GUA",
+        "origin": "MEX",
+        "price": 241.0,
+        "deep_link": "https://www.aviasales.com/search/MEX1908GUA23081",
+        "depart_date": "2026-08-19"
+      },
+      {
+        "destination": "SJO",
+        "origin": "MEX",
+        "price": 291.0,
+        "deep_link": "https://www.aviasales.com/search/MEX1408SJO29081",
+        "depart_date": "2026-08-14"
       },
       {
         "destination": "LIM",
