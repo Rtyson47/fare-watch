@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-01T08:22:46.623377+00:00",
+  "generated_at": "2026-08-01T10:27:01.122525+00:00",
   "base": "MEX",
   "corridors": [
     {
@@ -309,34 +309,41 @@
   "inspiration": {
     "domestic": [
       {
-        "destination": "MEX",
-        "origin": "PVR",
-        "price": 79.0,
-        "deep_link": "https://www.aviasales.com/search/PVR2509MEX27091",
-        "depart_date": "2026-09-25"
-      },
-      {
         "destination": "GDL",
         "origin": "PVR",
         "price": 125.0,
         "deep_link": "https://www.aviasales.com/search/PVR0308GDL06081",
         "depart_date": "2026-08-03"
+      },
+      {
+        "destination": "MEX",
+        "origin": "PVR",
+        "price": 136.0,
+        "deep_link": "https://www.aviasales.com/search/PVR0608MEX09081",
+        "depart_date": "2026-08-06"
       }
     ],
     "international": [
       {
         "destination": "ACA",
         "origin": "MEX",
-        "price": 132.0,
+        "price": 167.0,
         "deep_link": "https://www.aviasales.com/search/MEX2108ACA25081",
         "depart_date": "2026-08-21"
       },
       {
         "destination": "HUX",
         "origin": "MEX",
-        "price": 198.0,
-        "deep_link": "https://www.aviasales.com/search/MEX1808HUX22081",
+        "price": 168.0,
+        "deep_link": "https://www.aviasales.com/search/MEX1808HUX21081",
         "depart_date": "2026-08-18"
+      },
+      {
+        "destination": "CTM",
+        "origin": "MEX",
+        "price": 229.0,
+        "deep_link": "https://www.aviasales.com/search/MEX0408CTM07081",
+        "depart_date": "2026-08-04"
       },
       {
         "destination": "GUA",
@@ -365,13 +372,6 @@
         "price": 302.0,
         "deep_link": "https://www.aviasales.com/search/MEX1908CHI25081",
         "depart_date": "2026-08-19"
-      },
-      {
-        "destination": "BOG",
-        "origin": "MEX",
-        "price": 373.0,
-        "deep_link": "https://www.aviasales.com/search/MEX2208BOG23081",
-        "depart_date": "2026-08-22"
       }
     ]
   },
