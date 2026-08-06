@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-06T08:38:04.150111+00:00",
+  "generated_at": "2026-08-06T11:11:42.679791+00:00",
   "base": "MEX",
   "corridors": [
     {
@@ -373,6 +373,13 @@
         "depart_date": "2026-09-25"
       },
       {
+        "destination": "PXM",
+        "origin": "MEX",
+        "price": 123.0,
+        "deep_link": "https://www.aviasales.com/search/MEX1108PXM15081",
+        "depart_date": "2026-08-11"
+      },
+      {
         "destination": "ACA",
         "origin": "MEX",
         "price": 167.0,
@@ -401,6 +408,13 @@
         "depart_date": "2026-09-01"
       },
       {
+        "destination": "LAX",
+        "origin": "MEX",
+        "price": 272.0,
+        "deep_link": "https://www.aviasales.com/search/MEX1009LAX15091",
+        "depart_date": "2026-09-10"
+      },
+      {
         "destination": "SJO",
         "origin": "MEX",
         "price": 291.0,
@@ -413,6 +427,13 @@
         "price": 329.0,
         "deep_link": "https://www.aviasales.com/search/MEX1408CHI18081",
         "depart_date": "2026-08-14"
+      },
+      {
+        "destination": "PTY",
+        "origin": "MEX",
+        "price": 438.0,
+        "deep_link": "https://www.aviasales.com/search/MEX0110PTY08101",
+        "depart_date": "2026-10-01"
       }
     ]
   },
