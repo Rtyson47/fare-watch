@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-05T19:36:51.113233+00:00",
+  "generated_at": "2026-08-06T08:38:04.150111+00:00",
   "base": "MEX",
   "corridors": [
     {
@@ -114,31 +114,35 @@
         {
           "date": "2026-08-05",
           "min_price": 291.0
+        },
+        {
+          "date": "2026-08-06",
+          "min_price": 266.0
         }
       ],
       "current_cheapest": {
-        "price": 291.0,
+        "price": 266.0,
         "carrier": null,
-        "deep_link": "https://www.aviasales.com/search/MEX0608YTO1",
+        "deep_link": "https://www.aviasales.com/search/MEX1308YTO1",
         "origin": "MEX",
-        "depart_date": "2026-08-06",
+        "depart_date": "2026-08-13",
         "return_date": null
       },
       "options": [
+        {
+          "price": 266.0,
+          "carrier": null,
+          "deep_link": "https://www.aviasales.com/search/MEX1308YTO1",
+          "origin": "MEX",
+          "depart_date": "2026-08-13",
+          "return_date": null
+        },
         {
           "price": 291.0,
           "carrier": null,
           "deep_link": "https://www.aviasales.com/search/MEX0608YTO1",
           "origin": "MEX",
           "depart_date": "2026-08-06",
-          "return_date": null
-        },
-        {
-          "price": 311.0,
-          "carrier": null,
-          "deep_link": "https://www.aviasales.com/search/MEX0508YTO1",
-          "origin": "MEX",
-          "depart_date": "2026-08-05",
           "return_date": null
         },
         {
@@ -234,6 +238,10 @@
         },
         {
           "date": "2026-08-05",
+          "min_price": 250.0
+        },
+        {
+          "date": "2026-08-06",
           "min_price": 250.0
         }
       ],
