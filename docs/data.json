@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-09T06:58:11.142427+00:00",
+  "generated_at": "2026-08-09T09:28:20.800040+00:00",
   "base": "MEX",
   "corridors": [
     {
@@ -461,6 +461,13 @@
         "price": 272.0,
         "deep_link": "https://www.aviasales.com/search/MEX1009LAX15091",
         "depart_date": "2026-09-10"
+      },
+      {
+        "destination": "MIA",
+        "origin": "MEX",
+        "price": 346.0,
+        "deep_link": "https://www.aviasales.com/search/MEX2108MIA31081",
+        "depart_date": "2026-08-21"
       },
       {
         "destination": "BOG",
