@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-10T18:59:04.476754+00:00",
+  "generated_at": "2026-08-11T07:09:29.805888+00:00",
   "base": "MEX",
   "corridors": [
     {
@@ -134,35 +134,23 @@
         {
           "date": "2026-08-10",
           "min_price": 271.0
+        },
+        {
+          "date": "2026-08-11",
+          "min_price": 247.0
         }
       ],
       "current_cheapest": {
-        "price": 271.0,
+        "price": 247.0,
         "carrier": null,
-        "deep_link": "https://www.aviasales.com/search/MEX1808YTO1",
+        "deep_link": "https://www.aviasales.com/search/MEX1508YTO1",
         "origin": "MEX",
-        "depart_date": "2026-08-18",
+        "depart_date": "2026-08-15",
         "return_date": null
       },
       "options": [
         {
-          "price": 271.0,
-          "carrier": null,
-          "deep_link": "https://www.aviasales.com/search/MEX1808YTO1",
-          "origin": "MEX",
-          "depart_date": "2026-08-18",
-          "return_date": null
-        },
-        {
-          "price": 277.0,
-          "carrier": null,
-          "deep_link": "https://www.aviasales.com/search/MEX1408YTO1",
-          "origin": "MEX",
-          "depart_date": "2026-08-14",
-          "return_date": null
-        },
-        {
-          "price": 277.0,
+          "price": 247.0,
           "carrier": null,
           "deep_link": "https://www.aviasales.com/search/MEX1508YTO1",
           "origin": "MEX",
@@ -170,7 +158,7 @@
           "return_date": null
         },
         {
-          "price": 277.0,
+          "price": 259.0,
           "carrier": null,
           "deep_link": "https://www.aviasales.com/search/MEX1608YTO1",
           "origin": "MEX",
@@ -178,11 +166,27 @@
           "return_date": null
         },
         {
-          "price": 277.0,
+          "price": 259.0,
           "carrier": null,
           "deep_link": "https://www.aviasales.com/search/MEX1708YTO1",
           "origin": "MEX",
           "depart_date": "2026-08-17",
+          "return_date": null
+        },
+        {
+          "price": 265.0,
+          "carrier": null,
+          "deep_link": "https://www.aviasales.com/search/MEX1408YTO1",
+          "origin": "MEX",
+          "depart_date": "2026-08-14",
+          "return_date": null
+        },
+        {
+          "price": 271.0,
+          "carrier": null,
+          "deep_link": "https://www.aviasales.com/search/MEX1808YTO1",
+          "origin": "MEX",
+          "depart_date": "2026-08-18",
           "return_date": null
         },
         {
@@ -275,79 +279,83 @@
         {
           "date": "2026-08-10",
           "min_price": 250.0
+        },
+        {
+          "date": "2026-08-11",
+          "min_price": 283.0
         }
       ],
       "current_cheapest": {
-        "price": 250.0,
+        "price": 283.0,
         "carrier": null,
-        "deep_link": "https://www.aviasales.com/search/YVR2210LON1",
+        "deep_link": "https://www.aviasales.com/search/YVR0410LON1",
         "origin": "YVR",
-        "depart_date": "2026-10-22",
+        "depart_date": "2026-10-04",
         "return_date": null
       },
       "options": [
         {
-          "price": 250.0,
+          "price": 283.0,
           "carrier": null,
-          "deep_link": "https://www.aviasales.com/search/YVR2210LON1",
+          "deep_link": "https://www.aviasales.com/search/YVR0410LON1",
           "origin": "YVR",
-          "depart_date": "2026-10-22",
+          "depart_date": "2026-10-04",
           "return_date": null
         },
         {
-          "price": 266.0,
+          "price": 295.0,
           "carrier": null,
-          "deep_link": "https://www.aviasales.com/search/YVR0510LON1",
+          "deep_link": "https://www.aviasales.com/search/YVR0310LON1",
           "origin": "YVR",
-          "depart_date": "2026-10-05",
+          "depart_date": "2026-10-03",
           "return_date": null
         },
         {
-          "price": 266.0,
+          "price": 307.0,
           "carrier": null,
-          "deep_link": "https://www.aviasales.com/search/YVR0610LON1",
+          "deep_link": "https://www.aviasales.com/search/YVR0210LON1",
           "origin": "YVR",
-          "depart_date": "2026-10-06",
+          "depart_date": "2026-10-02",
           "return_date": null
         },
         {
-          "price": 266.0,
+          "price": 308.0,
           "carrier": null,
-          "deep_link": "https://www.aviasales.com/search/YVR0710LON1",
+          "deep_link": "https://www.aviasales.com/search/YVR1309LON1",
           "origin": "YVR",
-          "depart_date": "2026-10-07",
+          "depart_date": "2026-09-13",
           "return_date": null
         },
         {
-          "price": 266.0,
+          "price": 315.0,
           "carrier": null,
-          "deep_link": "https://www.aviasales.com/search/YVR0810LON1",
+          "deep_link": "https://www.aviasales.com/search/YVR1409LON1",
           "origin": "YVR",
-          "depart_date": "2026-10-08",
+          "depart_date": "2026-09-14",
           "return_date": null
         },
         {
-          "price": 266.0,
+          "price": 318.0,
           "carrier": null,
-          "deep_link": "https://www.aviasales.com/search/YVR0910LON1",
+          "deep_link": "https://www.aviasales.com/search/YVR2609LON1",
           "origin": "YVR",
-          "depart_date": "2026-10-09",
+          "depart_date": "2026-09-26",
           "return_date": null
         },
         {
-          "price": 266.0,
+          "price": 319.0,
           "carrier": null,
-          "deep_link": "https://www.aviasales.com/search/YVR1010LON1",
+          "deep_link": "https://www.aviasales.com/search/YVR1209LON1",
           "origin": "YVR",
-          "depart_date": "2026-10-10",
+          "depart_date": "2026-09-12",
           "return_date": null
         },
         {
-          "price": 266.0,
+          "price": 319.0,
           "carrier": null,
-          "deep_link": "https://www.aviasales.com/search/YVR1110LON1",
+          "deep_link": "https://www.aviasales.com/search/YVR2509LON1",
           "origin": "YVR",
-          "depart_date": "2026-10-11",
+          "depart_date": "2026-09-25",
           "return_date": null
         }
       ],
