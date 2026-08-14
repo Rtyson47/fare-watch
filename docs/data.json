@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-13T19:03:49.105767+00:00",
+  "generated_at": "2026-08-14T07:26:06.187758+00:00",
   "base": "MEX",
   "corridors": [
     {
@@ -146,6 +146,10 @@
         {
           "date": "2026-08-13",
           "min_price": 230.0
+        },
+        {
+          "date": "2026-08-14",
+          "min_price": 230.0
         }
       ],
       "current_cheapest": {
@@ -182,27 +186,11 @@
           "return_date": null
         },
         {
-          "price": 257.0,
-          "carrier": null,
-          "deep_link": "https://www.aviasales.com/search/MEX1408YTO1",
-          "origin": "MEX",
-          "depart_date": "2026-08-14",
-          "return_date": null
-        },
-        {
           "price": 271.0,
           "carrier": null,
           "deep_link": "https://www.aviasales.com/search/MEX1808YTO1",
           "origin": "MEX",
           "depart_date": "2026-08-18",
-          "return_date": null
-        },
-        {
-          "price": 284.0,
-          "carrier": null,
-          "deep_link": "https://www.aviasales.com/search/MEX1308YTO1",
-          "origin": "MEX",
-          "depart_date": "2026-08-13",
           "return_date": null
         }
       ],
@@ -283,6 +271,10 @@
         {
           "date": "2026-08-13",
           "min_price": 283.0
+        },
+        {
+          "date": "2026-08-14",
+          "min_price": 283.0
         }
       ],
       "current_cheapest": {
@@ -343,19 +335,19 @@
           "return_date": null
         },
         {
-          "price": 319.0,
-          "carrier": null,
-          "deep_link": "https://www.aviasales.com/search/YVR2509LON1",
-          "origin": "YVR",
-          "depart_date": "2026-09-25",
-          "return_date": null
-        },
-        {
           "price": 320.0,
           "carrier": null,
           "deep_link": "https://www.aviasales.com/search/YVR2409LON1",
           "origin": "YVR",
           "depart_date": "2026-09-24",
+          "return_date": null
+        },
+        {
+          "price": 321.0,
+          "carrier": null,
+          "deep_link": "https://www.aviasales.com/search/YVR2709LON1",
+          "origin": "YVR",
+          "depart_date": "2026-09-27",
           "return_date": null
         }
       ],
@@ -380,19 +372,39 @@
         {
           "date": "2026-08-13",
           "min_price": 760.0
+        },
+        {
+          "date": "2026-08-14",
+          "min_price": 741.0
         }
       ],
       "current_cheapest": {
-        "price": 760.0,
+        "price": 741.0,
         "carrier": null,
-        "deep_link": "https://www.aviasales.com/search/YVR0809LON15091",
+        "deep_link": "https://www.aviasales.com/search/YVR2409LON30091",
         "origin": "YVR",
-        "depart_date": "2026-09-08",
-        "return_date": "2026-09-15"
+        "depart_date": "2026-09-24",
+        "return_date": "2026-09-30"
       },
       "options": [
         {
-          "price": 760.0,
+          "price": 741.0,
+          "carrier": null,
+          "deep_link": "https://www.aviasales.com/search/YVR2409LON30091",
+          "origin": "YVR",
+          "depart_date": "2026-09-24",
+          "return_date": "2026-09-30"
+        },
+        {
+          "price": 741.0,
+          "carrier": null,
+          "deep_link": "https://www.aviasales.com/search/YVR2409LON01101",
+          "origin": "YVR",
+          "depart_date": "2026-09-24",
+          "return_date": "2026-10-01"
+        },
+        {
+          "price": 757.0,
           "carrier": null,
           "deep_link": "https://www.aviasales.com/search/YVR0809LON15091",
           "origin": "YVR",
@@ -400,7 +412,7 @@
           "return_date": "2026-09-15"
         },
         {
-          "price": 761.0,
+          "price": 758.0,
           "carrier": null,
           "deep_link": "https://www.aviasales.com/search/YVR2409LON29091",
           "origin": "YVR",
@@ -409,8 +421,8 @@
         }
       ],
       "best_seen": {
-        "date": "2026-08-12",
-        "min_price": 754.0
+        "date": "2026-08-14",
+        "min_price": 741.0
       }
     }
   ],
