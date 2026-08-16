@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-16T06:41:17.665705+00:00",
+  "generated_at": "2026-08-16T09:17:21.679372+00:00",
   "base": "MEX",
   "corridors": [
     {
@@ -531,6 +531,13 @@
         "price": 233.0,
         "deep_link": "https://www.aviasales.com/search/MEX1609GUA21091",
         "depart_date": "2026-09-16"
+      },
+      {
+        "destination": "HOU",
+        "origin": "MEX",
+        "price": 249.0,
+        "deep_link": "https://www.aviasales.com/search/MEX0809HOU13101",
+        "depart_date": "2026-09-08"
       },
       {
         "destination": "CHI",
