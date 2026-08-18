@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-18T06:44:29.622880+00:00",
+  "generated_at": "2026-08-18T09:21:49.532950+00:00",
   "base": "MEX",
   "corridors": [
     {
@@ -495,7 +495,15 @@
     }
   ],
   "inspiration": {
-    "domestic": [],
+    "domestic": [
+      {
+        "destination": "MEX",
+        "origin": "PVR",
+        "price": 198.0,
+        "deep_link": "https://www.aviasales.com/search/PVR2308MEX25081",
+        "depart_date": "2026-08-23"
+      }
+    ],
     "international": [
       {
         "destination": "PXM",
@@ -512,11 +520,11 @@
         "depart_date": "2026-09-28"
       },
       {
-        "destination": "CTM",
+        "destination": "ZIH",
         "origin": "MEX",
-        "price": 106.0,
-        "deep_link": "https://www.aviasales.com/search/MEX2308CTM30081",
-        "depart_date": "2026-08-23"
+        "price": 125.0,
+        "deep_link": "https://www.aviasales.com/search/MEX2208ZIH27081",
+        "depart_date": "2026-08-22"
       },
       {
         "destination": "HUX",
@@ -524,6 +532,13 @@
         "price": 164.0,
         "deep_link": "https://www.aviasales.com/search/MEX3108HUX04091",
         "depart_date": "2026-08-31"
+      },
+      {
+        "destination": "MXL",
+        "origin": "MEX",
+        "price": 177.0,
+        "deep_link": "https://www.aviasales.com/search/MEX0809MXL17091",
+        "depart_date": "2026-09-08"
       },
       {
         "destination": "GUA",
@@ -538,13 +553,6 @@
         "price": 249.0,
         "deep_link": "https://www.aviasales.com/search/MEX0809HOU13101",
         "depart_date": "2026-09-08"
-      },
-      {
-        "destination": "ZIH",
-        "origin": "MEX",
-        "price": 263.0,
-        "deep_link": "https://www.aviasales.com/search/MEX1808ZIH22081",
-        "depart_date": "2026-08-18"
       },
       {
         "destination": "MIA",
