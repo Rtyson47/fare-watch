@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-19T09:22:33.629287+00:00",
+  "generated_at": "2026-08-19T18:36:53.862923+00:00",
   "base": "MEX",
   "corridors": [
     {
@@ -408,53 +408,33 @@
         {
           "date": "2026-08-18",
           "min_price": 748.0
+        },
+        {
+          "date": "2026-08-19",
+          "min_price": 698.0
         }
       ],
       "current_cheapest": {
-        "price": 748.0,
+        "price": 698.0,
         "carrier": null,
-        "deep_link": "https://www.aviasales.com/search/YVR2409LON30091",
+        "deep_link": "https://www.aviasales.com/search/YVR2209LON29091",
         "origin": "YVR",
-        "depart_date": "2026-09-24",
-        "return_date": "2026-09-30"
+        "depart_date": "2026-09-22",
+        "return_date": "2026-09-29"
       },
       "options": [
         {
-          "price": 748.0,
+          "price": 698.0,
           "carrier": null,
-          "deep_link": "https://www.aviasales.com/search/YVR2409LON30091",
+          "deep_link": "https://www.aviasales.com/search/YVR2209LON29091",
           "origin": "YVR",
-          "depart_date": "2026-09-24",
-          "return_date": "2026-09-30"
-        },
-        {
-          "price": 748.0,
-          "carrier": null,
-          "deep_link": "https://www.aviasales.com/search/YVR2409LON01101",
-          "origin": "YVR",
-          "depart_date": "2026-09-24",
-          "return_date": "2026-10-01"
-        },
-        {
-          "price": 765.0,
-          "carrier": null,
-          "deep_link": "https://www.aviasales.com/search/YVR0809LON15091",
-          "origin": "YVR",
-          "depart_date": "2026-09-08",
-          "return_date": "2026-09-15"
-        },
-        {
-          "price": 765.0,
-          "carrier": null,
-          "deep_link": "https://www.aviasales.com/search/YVR2409LON29091",
-          "origin": "YVR",
-          "depart_date": "2026-09-24",
+          "depart_date": "2026-09-22",
           "return_date": "2026-09-29"
         }
       ],
       "best_seen": {
-        "date": "2026-08-17",
-        "min_price": 737.0
+        "date": "2026-08-19",
+        "min_price": 698.0
       }
     }
   ],
