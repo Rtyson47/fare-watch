@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-24T18:41:10.508505+00:00",
+  "generated_at": "2026-08-25T06:50:41.432507+00:00",
   "base": "MEX",
   "corridors": [
     {
@@ -186,6 +186,10 @@
         {
           "date": "2026-08-24",
           "min_price": 244.0
+        },
+        {
+          "date": "2026-08-25",
+          "min_price": 244.0
         }
       ],
       "current_cheapest": {
@@ -326,6 +330,10 @@
         },
         {
           "date": "2026-08-24",
+          "min_price": 330.0
+        },
+        {
+          "date": "2026-08-25",
           "min_price": 330.0
         }
       ],
@@ -468,10 +476,14 @@
         {
           "date": "2026-08-24",
           "min_price": 706.0
+        },
+        {
+          "date": "2026-08-25",
+          "min_price": 715.0
         }
       ],
       "current_cheapest": {
-        "price": 706.0,
+        "price": 715.0,
         "carrier": null,
         "deep_link": "https://www.aviasales.com/search/YVR2209LON29091",
         "origin": "YVR",
@@ -480,7 +492,7 @@
       },
       "options": [
         {
-          "price": 706.0,
+          "price": 715.0,
           "carrier": null,
           "deep_link": "https://www.aviasales.com/search/YVR2209LON29091",
           "origin": "YVR",
