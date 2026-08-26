@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-26T06:51:38.263828+00:00",
+  "generated_at": "2026-08-26T09:30:00.182525+00:00",
   "base": "MEX",
   "corridors": [
     {
@@ -605,28 +605,28 @@
   "inspiration": {
     "domestic": [
       {
-        "destination": "MEX",
-        "origin": "PVR",
-        "price": 72.0,
-        "deep_link": "https://www.aviasales.com/search/PVR0210MEX03101",
-        "depart_date": "2026-10-02"
-      },
-      {
         "destination": "TIJ",
         "origin": "PVR",
         "price": 93.0,
         "deep_link": "https://www.aviasales.com/search/PVR0110TIJ05101",
         "depart_date": "2026-10-01"
+      },
+      {
+        "destination": "MEX",
+        "origin": "PVR",
+        "price": 145.0,
+        "deep_link": "https://www.aviasales.com/search/PVR3108MEX04091",
+        "depart_date": "2026-08-31"
+      },
+      {
+        "destination": "CUN",
+        "origin": "PVR",
+        "price": 285.0,
+        "deep_link": "https://www.aviasales.com/search/PVR0509CUN06091",
+        "depart_date": "2026-09-05"
       }
     ],
     "international": [
-      {
-        "destination": "CUU",
-        "origin": "MEX",
-        "price": 148.0,
-        "deep_link": "https://www.aviasales.com/search/MEX2608CUU01091",
-        "depart_date": "2026-08-26"
-      },
       {
         "destination": "PXM",
         "origin": "MEX",
@@ -640,6 +640,13 @@
         "price": 154.0,
         "deep_link": "https://www.aviasales.com/search/MEX1409CTM24091",
         "depart_date": "2026-09-14"
+      },
+      {
+        "destination": "CUU",
+        "origin": "MEX",
+        "price": 186.0,
+        "deep_link": "https://www.aviasales.com/search/MEX2708CUU03091",
+        "depart_date": "2026-08-27"
       },
       {
         "destination": "NYC",
