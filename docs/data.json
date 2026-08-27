@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-27T17:24:58.775094+00:00",
+  "generated_at": "2026-08-27T19:19:11.525426+00:00",
   "base": "MEX",
   "corridors": [
     {
@@ -573,18 +573,18 @@
   "inspiration": {
     "domestic": [
       {
+        "destination": "MEX",
+        "origin": "PVR",
+        "price": 70.0,
+        "deep_link": "https://www.aviasales.com/search/PVR1010MEX13101",
+        "depart_date": "2026-10-10"
+      },
+      {
         "destination": "TIJ",
         "origin": "PVR",
         "price": 93.0,
         "deep_link": "https://www.aviasales.com/search/PVR0110TIJ05101",
         "depart_date": "2026-10-01"
-      },
-      {
-        "destination": "MEX",
-        "origin": "PVR",
-        "price": 145.0,
-        "deep_link": "https://www.aviasales.com/search/PVR3108MEX04091",
-        "depart_date": "2026-08-31"
       },
       {
         "destination": "CUN",
@@ -596,18 +596,18 @@
     ],
     "international": [
       {
-        "destination": "PXM",
-        "origin": "MEX",
-        "price": 149.0,
-        "deep_link": "https://www.aviasales.com/search/MEX0309PXM13091",
-        "depart_date": "2026-09-03"
-      },
-      {
         "destination": "CTM",
         "origin": "MEX",
         "price": 154.0,
         "deep_link": "https://www.aviasales.com/search/MEX1409CTM24091",
         "depart_date": "2026-09-14"
+      },
+      {
+        "destination": "HUX",
+        "origin": "MEX",
+        "price": 175.0,
+        "deep_link": "https://www.aviasales.com/search/MEX0909HUX13091",
+        "depart_date": "2026-09-09"
       },
       {
         "destination": "CUU",
@@ -622,13 +622,6 @@
         "price": 258.0,
         "deep_link": "https://www.aviasales.com/search/MEX2808NYC04101",
         "depart_date": "2026-08-28"
-      },
-      {
-        "destination": "ACA",
-        "origin": "MEX",
-        "price": 259.0,
-        "deep_link": "https://www.aviasales.com/search/MEX0309ACA06091",
-        "depart_date": "2026-09-03"
       },
       {
         "destination": "HOU",
@@ -657,6 +650,13 @@
         "price": 294.0,
         "deep_link": "https://www.aviasales.com/search/MEX1709CHI01101",
         "depart_date": "2026-09-17"
+      },
+      {
+        "destination": "GUA",
+        "origin": "MEX",
+        "price": 304.0,
+        "deep_link": "https://www.aviasales.com/search/MEX3108GUA03091",
+        "depart_date": "2026-08-31"
       },
       {
         "destination": "MDE",
