@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-28T18:18:14.424754+00:00",
+  "generated_at": "2026-08-28T20:28:40.285833+00:00",
   "base": "MEX",
   "corridors": [
     {
@@ -600,11 +600,11 @@
     ],
     "international": [
       {
-        "destination": "CTM",
+        "destination": "CUU",
         "origin": "MEX",
-        "price": 154.0,
-        "deep_link": "https://www.aviasales.com/search/MEX1409CTM24091",
-        "depart_date": "2026-09-14"
+        "price": 133.0,
+        "deep_link": "https://www.aviasales.com/search/MEX2010CUU20101",
+        "depart_date": "2026-10-20"
       },
       {
         "destination": "HUX",
@@ -612,13 +612,6 @@
         "price": 175.0,
         "deep_link": "https://www.aviasales.com/search/MEX0909HUX13091",
         "depart_date": "2026-09-09"
-      },
-      {
-        "destination": "CUU",
-        "origin": "MEX",
-        "price": 186.0,
-        "deep_link": "https://www.aviasales.com/search/MEX2708CUU03091",
-        "depart_date": "2026-08-27"
       },
       {
         "destination": "NYC",
@@ -633,6 +626,13 @@
         "price": 259.0,
         "deep_link": "https://www.aviasales.com/search/MEX0409HOU06091",
         "depart_date": "2026-09-04"
+      },
+      {
+        "destination": "GUA",
+        "origin": "MEX",
+        "price": 261.0,
+        "deep_link": "https://www.aviasales.com/search/MEX1109GUA20091",
+        "depart_date": "2026-09-11"
       },
       {
         "destination": "LAX",
@@ -656,11 +656,11 @@
         "depart_date": "2026-09-17"
       },
       {
-        "destination": "GUA",
+        "destination": "CTG",
         "origin": "MEX",
-        "price": 304.0,
-        "deep_link": "https://www.aviasales.com/search/MEX3108GUA03091",
-        "depart_date": "2026-08-31"
+        "price": 344.0,
+        "deep_link": "https://www.aviasales.com/search/MEX0809CTG13091",
+        "depart_date": "2026-09-08"
       },
       {
         "destination": "MDE",
