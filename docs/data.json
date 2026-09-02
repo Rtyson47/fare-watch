@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-02T10:49:58.046678+00:00",
+  "generated_at": "2026-09-02T13:03:38.693642+00:00",
   "base": "MEX",
   "corridors": [
     {
@@ -621,13 +621,6 @@
         "price": 278.0,
         "deep_link": "https://www.aviasales.com/search/PVR0609MZT09091",
         "depart_date": "2026-09-06"
-      },
-      {
-        "destination": "CUN",
-        "origin": "PVR",
-        "price": 285.0,
-        "deep_link": "https://www.aviasales.com/search/PVR0509CUN06091",
-        "depart_date": "2026-09-05"
       }
     ],
     "international": [
@@ -635,8 +628,8 @@
         "destination": "PXM",
         "origin": "MEX",
         "price": 91.0,
-        "deep_link": "https://www.aviasales.com/search/MEX0109PXM07091",
-        "depart_date": "2026-09-01"
+        "deep_link": "https://www.aviasales.com/search/MEX1409PXM19091",
+        "depart_date": "2026-09-14"
       },
       {
         "destination": "ACA",
@@ -644,13 +637,6 @@
         "price": 103.0,
         "deep_link": "https://www.aviasales.com/search/MEX1809ACA21091",
         "depart_date": "2026-09-18"
-      },
-      {
-        "destination": "CUU",
-        "origin": "MEX",
-        "price": 133.0,
-        "deep_link": "https://www.aviasales.com/search/MEX2010CUU20101",
-        "depart_date": "2026-10-20"
       },
       {
         "destination": "HUX",
@@ -667,6 +653,13 @@
         "depart_date": "2026-09-11"
       },
       {
+        "destination": "LAS",
+        "origin": "MEX",
+        "price": 267.0,
+        "deep_link": "https://www.aviasales.com/search/MEX2109LAS24091",
+        "depart_date": "2026-09-21"
+      },
+      {
         "destination": "CHI",
         "origin": "MEX",
         "price": 292.0,
@@ -681,9 +674,16 @@
         "depart_date": "2026-10-14"
       },
       {
+        "destination": "CTG",
+        "origin": "MEX",
+        "price": 310.0,
+        "deep_link": "https://www.aviasales.com/search/MEX2810CTG03111",
+        "depart_date": "2026-10-28"
+      },
+      {
         "destination": "NYC",
         "origin": "MEX",
-        "price": 363.0,
+        "price": 347.0,
         "deep_link": "https://www.aviasales.com/search/MEX2809NYC04101",
         "depart_date": "2026-09-28"
       }
