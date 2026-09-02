@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-02T13:03:38.693642+00:00",
+  "generated_at": "2026-09-02T20:39:33.693211+00:00",
   "base": "MEX",
   "corridors": [
     {
@@ -411,7 +411,7 @@
           "return_date": null
         },
         {
-          "price": 334.0,
+          "price": 330.0,
           "carrier": null,
           "deep_link": "https://www.aviasales.com/search/YVR1509LON1",
           "origin": "YVR",
