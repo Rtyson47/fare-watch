@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-04T10:48:59.023434+00:00",
+  "generated_at": "2026-09-04T12:59:56.963282+00:00",
   "base": "MEX",
   "corridors": [
     {
@@ -627,9 +627,9 @@
       {
         "destination": "MEX",
         "origin": "PVR",
-        "price": 70.0,
-        "deep_link": "https://www.aviasales.com/search/PVR1010MEX13101",
-        "depart_date": "2026-10-10"
+        "price": 84.0,
+        "deep_link": "https://www.aviasales.com/search/PVR2210MEX31101",
+        "depart_date": "2026-10-22"
       },
       {
         "destination": "MZT",
@@ -650,16 +650,16 @@
       {
         "destination": "HUX",
         "origin": "MEX",
-        "price": 175.0,
-        "deep_link": "https://www.aviasales.com/search/MEX0909HUX13091",
+        "price": 112.0,
+        "deep_link": "https://www.aviasales.com/search/MEX0909HUX15091",
         "depart_date": "2026-09-09"
       },
       {
         "destination": "GUA",
         "origin": "MEX",
-        "price": 261.0,
-        "deep_link": "https://www.aviasales.com/search/MEX1109GUA20091",
-        "depart_date": "2026-09-11"
+        "price": 253.0,
+        "deep_link": "https://www.aviasales.com/search/MEX2609GUA01101",
+        "depart_date": "2026-09-26"
       },
       {
         "destination": "LAX",
