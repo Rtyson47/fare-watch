@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-06T10:27:49.426494+00:00",
+  "generated_at": "2026-09-06T12:26:59.516551+00:00",
   "base": "MEX",
   "corridors": [
     {
@@ -677,18 +677,25 @@
         "depart_date": "2026-10-28"
       },
       {
-        "destination": "ACA",
-        "origin": "MEX",
-        "price": 329.0,
-        "deep_link": "https://www.aviasales.com/search/MEX0509ACA06091",
-        "depart_date": "2026-09-05"
-      },
-      {
         "destination": "MIA",
         "origin": "MEX",
         "price": 337.0,
         "deep_link": "https://www.aviasales.com/search/MEX1709MIA30091",
         "depart_date": "2026-09-17"
+      },
+      {
+        "destination": "LAX",
+        "origin": "MEX",
+        "price": 345.0,
+        "deep_link": "https://www.aviasales.com/search/MEX1209LAX26091",
+        "depart_date": "2026-09-12"
+      },
+      {
+        "destination": "BOG",
+        "origin": "MEX",
+        "price": 354.0,
+        "deep_link": "https://www.aviasales.com/search/MEX0111BOG30111",
+        "depart_date": "2026-11-01"
       },
       {
         "destination": "CHI",
