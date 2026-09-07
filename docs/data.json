@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-07T11:50:03.785887+00:00",
+  "generated_at": "2026-09-07T14:34:22.995796+00:00",
   "base": "MEX",
   "corridors": [
     {
@@ -649,13 +649,6 @@
         "price": 126.0,
         "deep_link": "https://www.aviasales.com/search/PVR0709GDL08091",
         "depart_date": "2026-09-07"
-      },
-      {
-        "destination": "MZT",
-        "origin": "PVR",
-        "price": 278.0,
-        "deep_link": "https://www.aviasales.com/search/PVR0609MZT09091",
-        "depart_date": "2026-09-06"
       }
     ],
     "international": [
@@ -672,6 +665,13 @@
         "price": 112.0,
         "deep_link": "https://www.aviasales.com/search/MEX0909HUX15091",
         "depart_date": "2026-09-09"
+      },
+      {
+        "destination": "ACA",
+        "origin": "MEX",
+        "price": 159.0,
+        "deep_link": "https://www.aviasales.com/search/MEX0809ACA09091",
+        "depart_date": "2026-09-08"
       },
       {
         "destination": "CTG",
@@ -700,6 +700,13 @@
         "price": 354.0,
         "deep_link": "https://www.aviasales.com/search/MEX0111BOG30111",
         "depart_date": "2026-11-01"
+      },
+      {
+        "destination": "NYC",
+        "origin": "MEX",
+        "price": 355.0,
+        "deep_link": "https://www.aviasales.com/search/MEX0610NYC21101",
+        "depart_date": "2026-10-06"
       },
       {
         "destination": "CHI",
