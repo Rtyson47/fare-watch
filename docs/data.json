@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-09T10:54:11.904007+00:00",
+  "generated_at": "2026-09-09T13:14:31.396781+00:00",
   "base": "MEX",
   "corridors": [
     {
@@ -571,11 +571,11 @@
         },
         {
           "date": "2026-09-09",
-          "min_price": 699.0
+          "min_price": 697.0
         }
       ],
       "current_cheapest": {
-        "price": 699.0,
+        "price": 697.0,
         "carrier": null,
         "deep_link": "https://www.aviasales.com/search/YVR0210LON04101",
         "origin": "YVR",
@@ -584,7 +584,7 @@
       },
       "options": [
         {
-          "price": 699.0,
+          "price": 697.0,
           "carrier": null,
           "deep_link": "https://www.aviasales.com/search/YVR0210LON04101",
           "origin": "YVR",
@@ -647,18 +647,18 @@
       {
         "destination": "MEX",
         "origin": "PVR",
-        "price": 84.0,
-        "deep_link": "https://www.aviasales.com/search/PVR2210MEX31101",
-        "depart_date": "2026-10-22"
+        "price": 63.0,
+        "deep_link": "https://www.aviasales.com/search/PVR0310MEX10101",
+        "depart_date": "2026-10-03"
       }
     ],
     "international": [
       {
         "destination": "PXM",
         "origin": "MEX",
-        "price": 91.0,
-        "deep_link": "https://www.aviasales.com/search/MEX1409PXM19091",
-        "depart_date": "2026-09-14"
+        "price": 125.0,
+        "deep_link": "https://www.aviasales.com/search/MEX0909PXM14091",
+        "depart_date": "2026-09-09"
       },
       {
         "destination": "ACA",
@@ -668,18 +668,18 @@
         "depart_date": "2026-09-11"
       },
       {
-        "destination": "GUA",
-        "origin": "MEX",
-        "price": 336.0,
-        "deep_link": "https://www.aviasales.com/search/MEX1009GUA17091",
-        "depart_date": "2026-09-10"
-      },
-      {
         "destination": "MIA",
         "origin": "MEX",
-        "price": 337.0,
-        "deep_link": "https://www.aviasales.com/search/MEX1709MIA30091",
+        "price": 291.0,
+        "deep_link": "https://www.aviasales.com/search/MEX1709MIA20101",
         "depart_date": "2026-09-17"
+      },
+      {
+        "destination": "GUA",
+        "origin": "MEX",
+        "price": 318.0,
+        "deep_link": "https://www.aviasales.com/search/MEX2909GUA15101",
+        "depart_date": "2026-09-29"
       },
       {
         "destination": "LAX",
