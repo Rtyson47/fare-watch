@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-10T13:12:09.034029+00:00",
+  "generated_at": "2026-09-10T20:31:26.469830+00:00",
   "base": "MEX",
   "corridors": [
     {
@@ -579,11 +579,11 @@
         },
         {
           "date": "2026-09-10",
-          "min_price": 600.0
+          "min_price": 598.0
         }
       ],
       "current_cheapest": {
-        "price": 600.0,
+        "price": 598.0,
         "carrier": null,
         "deep_link": "https://www.aviasales.com/search/YVR1410LON19101",
         "origin": "YVR",
@@ -592,7 +592,7 @@
       },
       "options": [
         {
-          "price": 600.0,
+          "price": 598.0,
           "carrier": null,
           "deep_link": "https://www.aviasales.com/search/YVR1410LON19101",
           "origin": "YVR",
@@ -608,7 +608,7 @@
           "return_date": "2026-10-04"
         },
         {
-          "price": 766.0,
+          "price": 763.0,
           "carrier": null,
           "deep_link": "https://www.aviasales.com/search/YVR1510LON19101",
           "origin": "YVR",
@@ -616,7 +616,7 @@
           "return_date": "2026-10-19"
         },
         {
-          "price": 823.0,
+          "price": 820.0,
           "carrier": null,
           "deep_link": "https://www.aviasales.com/search/YVR3009LON04101",
           "origin": "YVR",
@@ -626,7 +626,7 @@
       ],
       "best_seen": {
         "date": "2026-09-10",
-        "min_price": 600.0
+        "min_price": 598.0
       }
     },
     {
@@ -645,11 +645,11 @@
       "history": [
         {
           "date": "2026-09-10",
-          "min_price": 1345.0
+          "min_price": 1340.0
         }
       ],
       "current_cheapest": {
-        "price": 1345.0,
+        "price": 1340.0,
         "carrier": null,
         "deep_link": "https://www.aviasales.com/search/LON0501PER26011",
         "origin": "LON",
@@ -658,7 +658,7 @@
       },
       "options": [
         {
-          "price": 1345.0,
+          "price": 1340.0,
           "carrier": null,
           "deep_link": "https://www.aviasales.com/search/LON0501PER26011",
           "origin": "LON",
@@ -668,7 +668,7 @@
       ],
       "best_seen": {
         "date": "2026-09-10",
-        "min_price": 1345.0
+        "min_price": 1340.0
       }
     }
   ],
