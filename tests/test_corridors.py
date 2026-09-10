@@ -20,6 +20,31 @@ def test_parse_explicit_range_is_oneway_anchors():
     assert pairs == [("2026-09-10", None), ("2026-09-11", None), ("2026-09-12", None)]
 
 
+def test_parse_range_plus_fixed_stay():
+    # Multi-week trip the weekly "any Dow-Dow" grammar can't express.
+    pairs = corridors.parse_date_window("2026-09-10:2026-09-12 +21", TODAY)
+    assert pairs == [
+        ("2026-09-10", "2026-10-01"),
+        ("2026-09-11", "2026-10-02"),
+        ("2026-09-12", "2026-10-03"),
+    ]
+    assert all(r is not None for _, r in pairs)
+
+
+def test_expand_corridor_range_plus_has_no_extra_flex():
+    # Like a plain explicit range, "+N" already enumerates every day, so
+    # flex_days shouldn't multiply it out further.
+    corridor = {
+        "origin": "LON", "destination": "PER",
+        "date_windows": ["2026-09-10:2026-09-11 +21"], "trip_type": "return",
+        "cabin": "economy", "max_price": 1400, "alert_threshold": 1100,
+        "flex_days": 3,
+    }
+    specs = corridors.expand_corridor(corridor, TODAY)
+    pairs = {(s.depart_date, s.return_date) for s in specs}
+    assert pairs == {("2026-09-10", "2026-10-01"), ("2026-09-11", "2026-10-02")}
+
+
 def test_flex_dates_cartesian_includes_anchor():
     combos = corridors.flex_dates("2026-09-11", "2026-09-14", flex=3)
     assert len(combos) == 49                       # 7 x 7

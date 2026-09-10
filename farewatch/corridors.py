@@ -1,9 +1,14 @@
 """Expand corridor + deadline config into concrete search specs.
 
-Handles the two date-window grammars from the spec:
-  * explicit ranges ``"YYYY-MM-DD:YYYY-MM-DD"`` (per-day one-way anchors), and
+Handles the three date-window grammars from the spec:
+  * explicit ranges ``"YYYY-MM-DD:YYYY-MM-DD"`` (per-day one-way anchors),
   * ``"any <Dow>-<Dow> in YYYY-MM"`` (e.g. weekend trips: depart on the first
-    weekday, return on the next occurrence of the second).
+    weekday, return on the next occurrence of the second — capped at a
+    within-week gap, so max ~7 days), and
+  * ``"YYYY-MM-DD:YYYY-MM-DD +N"`` (fixed-stay-length return anchors: for
+    every day in the range, pair it with a return N days later — for
+    multi-week trips the weekly grammar can't express, e.g. a 3-week
+    long-haul stay).
 Plus ±N-day flex around anchors and per-corridor ``origin_variants``.
 """
 import calendar
@@ -13,6 +18,7 @@ from datetime import date, timedelta
 
 _DOW = {"mon": 0, "tue": 1, "wed": 2, "thu": 3, "fri": 4, "sat": 5, "sun": 6}
 _ANY_RE = re.compile(r"^\s*any\s+(\w{3})\w*-(\w{3})\w*\s+in\s+(\d{4})-(\d{2})\s*$", re.I)
+_RANGE_PLUS_RE = re.compile(r"^\s*(\d{4}-\d{2}-\d{2}):(\d{4}-\d{2}-\d{2})\s*\+\s*(\d+)\s*$")
 _RANGE_RE = re.compile(r"^\s*(\d{4}-\d{2}-\d{2}):(\d{4}-\d{2}-\d{2})\s*$")
 _SINGLE_RE = re.compile(r"^\s*(\d{4}-\d{2}-\d{2})\s*$")
 
@@ -50,6 +56,18 @@ def parse_date_window(entry, today):
                 pairs.append((_iso(d), _iso(d + timedelta(days=delta))))
         return pairs
 
+    m = _RANGE_PLUS_RE.match(entry)
+    if m:
+        start = max(date.fromisoformat(m.group(1)), today)
+        end = date.fromisoformat(m.group(2))
+        stay = int(m.group(3))
+        out = []
+        d = start
+        while d <= end:
+            out.append((_iso(d), _iso(d + timedelta(days=stay))))
+            d += timedelta(days=1)
+        return out
+
     m = _RANGE_RE.match(entry)
     if m:
         start = max(date.fromisoformat(m.group(1)), today)
@@ -86,9 +104,10 @@ def expand_corridor(corridor, today):
     today_iso = _iso(today)
     specs = []
     for window in corridor.get("date_windows", []) or []:
-        # Explicit ranges already enumerate every day, so flex would only add
-        # days *outside* the window (e.g. "Sep onwards" searching late Aug).
-        window_flex = 0 if _RANGE_RE.match(window) else flex
+        # Explicit ranges (plain or fixed-stay "+N") already enumerate every
+        # day, so flex would only add days *outside* the window (e.g. "Sep
+        # onwards" searching late Aug).
+        window_flex = 0 if (_RANGE_RE.match(window) or _RANGE_PLUS_RE.match(window)) else flex
         for dep, ret in parse_date_window(window, today):
             for d, r in flex_dates(dep, ret if not force_oneway else None, window_flex):
                 if d < today_iso:
