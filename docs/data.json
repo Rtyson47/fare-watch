@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-10T10:50:36.004807+00:00",
+  "generated_at": "2026-09-10T13:12:09.034029+00:00",
   "base": "MEX",
   "corridors": [
     {
@@ -579,11 +579,11 @@
         },
         {
           "date": "2026-09-10",
-          "min_price": 601.0
+          "min_price": 600.0
         }
       ],
       "current_cheapest": {
-        "price": 601.0,
+        "price": 600.0,
         "carrier": null,
         "deep_link": "https://www.aviasales.com/search/YVR1410LON19101",
         "origin": "YVR",
@@ -592,7 +592,7 @@
       },
       "options": [
         {
-          "price": 601.0,
+          "price": 600.0,
           "carrier": null,
           "deep_link": "https://www.aviasales.com/search/YVR1410LON19101",
           "origin": "YVR",
@@ -608,7 +608,7 @@
           "return_date": "2026-10-04"
         },
         {
-          "price": 767.0,
+          "price": 766.0,
           "carrier": null,
           "deep_link": "https://www.aviasales.com/search/YVR1510LON19101",
           "origin": "YVR",
@@ -616,7 +616,7 @@
           "return_date": "2026-10-19"
         },
         {
-          "price": 824.0,
+          "price": 823.0,
           "carrier": null,
           "deep_link": "https://www.aviasales.com/search/YVR3009LON04101",
           "origin": "YVR",
@@ -626,7 +626,7 @@
       ],
       "best_seen": {
         "date": "2026-09-10",
-        "min_price": 601.0
+        "min_price": 600.0
       }
     },
     {
@@ -645,11 +645,11 @@
       "history": [
         {
           "date": "2026-09-10",
-          "min_price": 1347.0
+          "min_price": 1345.0
         }
       ],
       "current_cheapest": {
-        "price": 1347.0,
+        "price": 1345.0,
         "carrier": null,
         "deep_link": "https://www.aviasales.com/search/LON0501PER26011",
         "origin": "LON",
@@ -658,7 +658,7 @@
       },
       "options": [
         {
-          "price": 1347.0,
+          "price": 1345.0,
           "carrier": null,
           "deep_link": "https://www.aviasales.com/search/LON0501PER26011",
           "origin": "LON",
@@ -668,7 +668,7 @@
       ],
       "best_seen": {
         "date": "2026-09-10",
-        "min_price": 1347.0
+        "min_price": 1345.0
       }
     }
   ],
@@ -739,9 +739,9 @@
       {
         "destination": "PXM",
         "origin": "MEX",
-        "price": 125.0,
-        "deep_link": "https://www.aviasales.com/search/MEX0909PXM14091",
-        "depart_date": "2026-09-09"
+        "price": 144.0,
+        "deep_link": "https://www.aviasales.com/search/MEX1009PXM15091",
+        "depart_date": "2026-09-10"
       },
       {
         "destination": "ACA",
@@ -753,9 +753,16 @@
       {
         "destination": "MIA",
         "origin": "MEX",
-        "price": 291.0,
-        "deep_link": "https://www.aviasales.com/search/MEX1709MIA20101",
-        "depart_date": "2026-09-17"
+        "price": 262.0,
+        "deep_link": "https://www.aviasales.com/search/MEX2609MIA03101",
+        "depart_date": "2026-09-26"
+      },
+      {
+        "destination": "CZM",
+        "origin": "MEX",
+        "price": 275.0,
+        "deep_link": "https://www.aviasales.com/search/MEX0411CZM11111",
+        "depart_date": "2026-11-04"
       },
       {
         "destination": "GUA",
@@ -763,6 +770,13 @@
         "price": 318.0,
         "deep_link": "https://www.aviasales.com/search/MEX2909GUA15101",
         "depart_date": "2026-09-29"
+      },
+      {
+        "destination": "CHI",
+        "origin": "MEX",
+        "price": 320.0,
+        "deep_link": "https://www.aviasales.com/search/MEX2510CHI05121",
+        "depart_date": "2026-10-25"
       },
       {
         "destination": "LAX",
@@ -777,27 +791,6 @@
         "price": 354.0,
         "deep_link": "https://www.aviasales.com/search/MEX0111BOG30111",
         "depart_date": "2026-11-01"
-      },
-      {
-        "destination": "NYC",
-        "origin": "MEX",
-        "price": 355.0,
-        "deep_link": "https://www.aviasales.com/search/MEX0610NYC21101",
-        "depart_date": "2026-10-06"
-      },
-      {
-        "destination": "CHI",
-        "origin": "MEX",
-        "price": 370.0,
-        "deep_link": "https://www.aviasales.com/search/MEX1610CHI30101",
-        "depart_date": "2026-10-16"
-      },
-      {
-        "destination": "YVR",
-        "origin": "MEX",
-        "price": 418.0,
-        "deep_link": "https://www.aviasales.com/search/MEX1110YVR16101",
-        "depart_date": "2026-10-11"
       }
     ]
   },
