@@ -66,13 +66,86 @@ corridors:
     alert_threshold: 550
     flex_days: 3
 
-  - label: "LON-PER return (~21d stay)"
+  - label: "LON-PER return (~180d, furthest-out return)"
     origin: LON
     destination: PER
     # Fixed-stay "+N" grammar (added 2026-09-10) — the weekly "any Dow-Dow"
     # form only spans up to 7 days, too short for a long-haul AUS trip.
-    # 21 days is a placeholder assumption; not a real constraint on dates.
-    date_windows: ["2026-10-10:2027-01-15 +21"]
+    # 180 days (updated 2026-09-12, was 21d) per Rich: book the furthest-out
+    # return date and check whether it's close in price to one-way — not a
+    # real constraint on actual return dates.
+    date_windows: ["2026-10-10:2027-01-15 +180"]
+    trip_type: return
+    cabin: economy
+    max_price: 1400
+    currency: usd
+    alert_threshold: 1100
+    flex_days: 3
+
+  # --- East-coast AUS destinations (added 2026-09-12) ---
+  # Same Tier 1 caveats as Perth above: price/date only, no stopover detail.
+  # Baseline one-way floors observed 2026-09-12 (USD, off-peak, 1-stop via
+  # China Eastern/China Southern/Air China): SYD ~546-620, MEL ~500-620,
+  # BNE ~548-670. Thresholds below are estimates from that.
+  - label: "LON-SYD one-way"
+    origin: LON
+    destination: SYD
+    date_windows: ["2026-10-10:2027-01-15"]
+    trip_type: one_way
+    cabin: economy
+    max_price: 720
+    currency: usd
+    alert_threshold: 520
+    flex_days: 3
+
+  - label: "LON-SYD return (~180d, furthest-out return)"
+    origin: LON
+    destination: SYD
+    date_windows: ["2026-10-10:2027-01-15 +180"]
+    trip_type: return
+    cabin: economy
+    max_price: 1400
+    currency: usd
+    alert_threshold: 1100
+    flex_days: 3
+
+  - label: "LON-MEL one-way"
+    origin: LON
+    destination: MEL
+    date_windows: ["2026-10-10:2027-01-15"]
+    trip_type: one_way
+    cabin: economy
+    max_price: 700
+    currency: usd
+    alert_threshold: 500
+    flex_days: 3
+
+  - label: "LON-MEL return (~180d, furthest-out return)"
+    origin: LON
+    destination: MEL
+    date_windows: ["2026-10-10:2027-01-15 +180"]
+    trip_type: return
+    cabin: economy
+    max_price: 1400
+    currency: usd
+    alert_threshold: 1100
+    flex_days: 3
+
+  - label: "LON-BNE one-way"
+    origin: LON
+    destination: BNE
+    date_windows: ["2026-10-10:2027-01-15"]
+    trip_type: one_way
+    cabin: economy
+    max_price: 720
+    currency: usd
+    alert_threshold: 520
+    flex_days: 3
+
+  - label: "LON-BNE return (~180d, furthest-out return)"
+    origin: LON
+    destination: BNE
+    date_windows: ["2026-10-10:2027-01-15 +180"]
     trip_type: return
     cabin: economy
     max_price: 1400
@@ -87,6 +160,26 @@ deadline_watches:
     earliest_depart: "2026-12-20"
     must_arrive_by: "2026-12-31"
     max_price: 850                     # USD — below the ~$1,100-1,220 Doha peak fare observed
+    currency: usd
+
+  # Strawberry Fields Festival 2026: 20-22 Nov, The Wildlands, Tocumwal NSW
+  # (Murray River, NSW/VIC border) — no airport there; nearest gateways are
+  # Melbourne (~260km/~3h drive) and Sydney (~580km/~6h drive). Watching both,
+  # arrive by the 19th to allow travel time. https://www.strawberry-fields.com.au/
+  - label: "LON-MEL for Strawberry Fields"
+    destination: MEL
+    origin: LON
+    earliest_depart: "2026-11-10"
+    must_arrive_by: "2026-11-19"
+    max_price: 600
+    currency: usd
+
+  - label: "LON-SYD for Strawberry Fields"
+    destination: SYD
+    origin: LON
+    earliest_depart: "2026-11-10"
+    must_arrive_by: "2026-11-19"
+    max_price: 620
     currency: usd
 
   # Paused 2026-09-12 — see corridors comment above; same alerts_enabled: false.

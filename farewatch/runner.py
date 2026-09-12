@@ -203,7 +203,7 @@ def run(cfg, conn, today, *, tp_client, tier1_only=False, dry_run=False,
                         all_kept.append(fare)
         for fare in all_kept:
             store(1, fare)
-        route = route_label(by_origin.keys(), dest)
+        route = w.get("label") or route_label(by_origin.keys(), dest)
         if all_kept:
             cheapest = min(all_kept, key=lambda x: x.price)
             watch_alerts_enabled = w.get("alerts_enabled", True)

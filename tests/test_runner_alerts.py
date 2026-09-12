@@ -12,9 +12,8 @@ TODAY = date(2026, 7, 9)
 
 
 def _cfg(muted_alerts_enabled):
-    # deadline_watches route names come from route_label(origins, dest), not a
-    # "label" field (that's corridor-only) — so the routes below are named
-    # "AAA-ZZZ" (muted) and "BBB-YYY" (active).
+    # No "label" set on either watch below -> route names fall back to
+    # route_label(origins, dest): "AAA-ZZZ" (muted) and "BBB-YYY" (active).
     return {
         "current_base": "AAA",
         "deadline_watches": [
@@ -53,3 +52,23 @@ def test_alerts_enabled_defaults_true_when_absent(conn, tmp_path):
                          tp_client=FixtureTP(), export_path=str(tmp_path / "d.json"),
                          include_inspiration=False)
     assert summary["alerts"] == 2
+
+
+def test_deadline_watch_label_overrides_auto_route_name(conn, tmp_path):
+    # deadline_watches now honour "label" the same way corridors do (was
+    # corridor-only; fixed 2026-09-12 so named watches like "X for
+    # <festival>" don't silently collapse to "LON-MEL").
+    cfg = {
+        "current_base": "AAA",
+        "deadline_watches": [
+            {"label": "LON-MEL for Strawberry Fields", "origin": "AAA",
+             "destination": "ZZZ", "must_arrive_by": "2026-09-12", "max_price": 650},
+        ],
+        "alerting": {"telegram": {"enabled": False}, "smtp": {"enabled": False}},
+    }
+    summary = runner.run(cfg, conn, TODAY, tier1_only=True, dry_run=True,
+                         tp_client=FixtureTP(), export_path=str(tmp_path / "d.json"),
+                         include_inspiration=False)
+    assert summary["alerts"] == 1
+    alerted_routes = {r["route"] for r in conn.execute("SELECT route FROM alerts")}
+    assert alerted_routes == {"LON-MEL for Strawberry Fields"}
