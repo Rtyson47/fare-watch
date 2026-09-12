@@ -51,18 +51,24 @@ python monitor.py backfill --route MEX-LHR [--months N]  # Tier 1 seed for one r
 with `{BASE}` resolves to it. Highlights (see `config.example.yaml` for the full,
 commented file):
 
-- **corridors** — `origin`/`destination`, `date_windows` (explicit `A:B` ranges or
-  `"any Fri-Mon in 2026-09"`), `trip_type`, `cabin`, `max_price`, `alert_threshold`,
-  `flex_days` (±N around anchors), and `origin_variants` (e.g. UK legs also check DUB, AMS).
+- **corridors** — `origin`/`destination`, `date_windows` (explicit `A:B` ranges,
+  `"A:B +N"` fixed-stay-length return anchors for multi-week trips — the weekly
+  grammar below caps at ~7 days — or `"any Fri-Mon in 2026-09"`), `trip_type`,
+  `cabin`, `max_price`, `alert_threshold`, `flex_days` (±N around anchors), and
+  `origin_variants` (e.g. UK legs also check DUB, AMS).
   Multi-origin corridors are combined into one dashboard row/alert series (e.g.
   `MEX+2-LHR`); set `label` to override the auto-generated name, e.g. to keep a
-  one-way and a return corridor on the same route from colliding.
+  one-way and a return corridor on the same route from colliding. Optional
+  `alerts_enabled: false` pauses alerts for a corridor while leaving data
+  collection running (e.g. a route you're not flying right now).
 - **deadline_watches** — `destination`, `must_arrive_by`, `max_price` ("get me home by X
   under Y"); optional `earliest_depart` floors the search window (e.g. "the 24th to the
-  27th", not "any day up to the 27th"), and `origin_variants` checks fares from multiple
-  origin airports (e.g. MEX + GDL/CUN/MTY), combined into one row.
+  27th", not "any day up to the 27th"), `origin_variants` checks fares from multiple
+  origin airports (e.g. MEX + GDL/CUN/MTY), combined into one row, and optional
+  `alerts_enabled: false` pauses alerts the same way as for corridors.
 - **inspiration** — `origins: ["{BASE}"]`, `horizon_weeks`, `price_ceiling`,
-  optional `region_whitelist` (country codes like `US`/`GB` or explicit IATA), `top_n_to_verify`.
+  optional `region_whitelist` (country codes like `US`/`GB` or explicit IATA),
+  `top_n_to_verify`, and optional `alerts_enabled: false` (same pause behaviour).
 - **cost_guardrails** — `max_duffel_searches_per_day` (default 100) with hard stop +
   logged warning; spend tracked at `$0.005/search`.
 - **alerting** — Telegram on/off, digest mode, median lookback/ratio, dedupe window/band.

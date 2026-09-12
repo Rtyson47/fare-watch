@@ -21,6 +21,11 @@ corridors:
                                         # "{origin}-{destination}" or
                                         # "{origin}+N-{destination}" for
                                         # multi-origin corridors
+    # alerts_enabled: false            # optional, default true: pause alerts
+                                        # for this corridor without stopping
+                                        # data collection (fares/daily_min/
+                                        # dashboard keep updating) — e.g. "not
+                                        # flying this route right now"
 
 deadline_watches:
   - destination: MAN                   # "get me home to Manchester by X, under Y"
@@ -32,6 +37,7 @@ deadline_watches:
                                         # travel aren't searched
     max_price: 650
     currency: usd
+    # alerts_enabled: false            # optional, default true — see corridors above
 
 inspiration:
   origins: ["{BASE}"]
@@ -41,6 +47,7 @@ inspiration:
   market: us
   region_whitelist: []                 # [] = anywhere; else [US, MX, GB] or explicit [BKK, MAD]
   top_n_to_verify: 10
+  # alerts_enabled: false              # optional, default true — see corridors above
 
 cost_guardrails:
   max_duffel_searches_per_day: 100

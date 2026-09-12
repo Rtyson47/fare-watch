@@ -109,9 +109,11 @@ def run(cfg, conn, today, *, tp_client, tier1_only=False, dry_run=False,
                           ctx="inspiration")
     else:
         shortlist = []
+    insp_alerts_enabled = insp.get("alerts_enabled", True)
     for fare in shortlist:
         store(1, fare)
-        handle(fare, None)                 # discovery: median rule only (no ceiling spam)
+        if insp_alerts_enabled:
+            handle(fare, None)              # discovery: median rule only (no ceiling spam)
         db.upsert_daily_min(conn, route_key(fare.origin, fare.destination),
                             today.isoformat(), fare.price)
     candidates = inspiration.top_candidates(shortlist, insp.get("top_n_to_verify", 10))
@@ -120,6 +122,7 @@ def run(cfg, conn, today, *, tp_client, tier1_only=False, dry_run=False,
             "route": route_key(fare.origin, fare.destination), "threshold": None,
             "cabin": "economy", "origin": fare.origin, "dest": fare.destination,
             "depart_date": fare.depart_date, "return_date": fare.return_date,
+            "alerts_enabled": insp_alerts_enabled,
         })
 
     # -- Tier 1: corridor pricing (date-window aware) ------------------------
@@ -161,12 +164,15 @@ def run(cfg, conn, today, *, tp_client, tier1_only=False, dry_run=False,
         if all_kept:
             cheapest = min(all_kept, key=lambda x: x.price)
             threshold = c.get("alert_threshold") or c.get("max_price")
-            handle(cheapest, threshold, route=route)
+            alerts_enabled = c.get("alerts_enabled", True)
+            if alerts_enabled:
+                handle(cheapest, threshold, route=route)
             db.upsert_daily_min(conn, route, today.isoformat(), cheapest.price)
             verify_queue.append({
                 "route": route, "threshold": threshold, "cabin": c.get("cabin", "economy"),
                 "origin": cheapest.origin, "dest": cheapest.destination,
                 "depart_date": cheapest.depart_date, "return_date": cheapest.return_date,
+                "alerts_enabled": alerts_enabled,
             })
         else:
             log.warning("corridor %s: no fares matched today's window -> no daily_min "
@@ -200,12 +206,15 @@ def run(cfg, conn, today, *, tp_client, tier1_only=False, dry_run=False,
         route = route_label(by_origin.keys(), dest)
         if all_kept:
             cheapest = min(all_kept, key=lambda x: x.price)
-            handle(cheapest, w.get("max_price"), route=route)
+            watch_alerts_enabled = w.get("alerts_enabled", True)
+            if watch_alerts_enabled:
+                handle(cheapest, w.get("max_price"), route=route)
             db.upsert_daily_min(conn, route, today.isoformat(), cheapest.price)
             verify_queue.append({
                 "route": route, "threshold": w.get("max_price"), "cabin": w.get("cabin", "economy"),
                 "origin": cheapest.origin, "dest": cheapest.destination,
                 "depart_date": cheapest.depart_date, "return_date": cheapest.return_date,
+                "alerts_enabled": watch_alerts_enabled,
             })
         else:
             log.warning("deadline watch %s: no fares matched today's window -> no daily_min "
@@ -264,7 +273,8 @@ def run(cfg, conn, today, *, tp_client, tier1_only=False, dry_run=False,
             verified_cheapest = min(verified, key=lambda x: x.price)
 
             if duffel_mode == "live":
-                handle(verified_cheapest, item["threshold"], route=item["route"])
+                if item.get("alerts_enabled", True):
+                    handle(verified_cheapest, item["threshold"], route=item["route"])
             else:
                 log.info("[duffel-test] %s verified at %s %s", item["route"],
                          verified_cheapest.price, verified_cheapest.currency)
