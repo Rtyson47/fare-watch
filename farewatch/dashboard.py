@@ -151,7 +151,7 @@ def build_data(conn, cfg, today):
     for w in cfg.get("deadline_watches", []) or []:
         origins = [w.get("origin") or base] + list(w.get("origin_variants", []) or [])
         dest = w["destination"]
-        route = route_label(origins, dest)
+        route = w.get("label") or route_label(origins, dest)
         # scope to the watch's actual window so stale scans of a wider (or
         # already-departed) window never surface as "current cheapest"
         depart_min = max(today_iso, w.get("earliest_depart") or today_iso)

@@ -40,6 +40,27 @@ def test_build_data_shape(conn, sample_config):
     assert "options" in dw and "best_seen" in dw
 
 
+def test_deadline_watch_label_used_for_history_and_best_seen(conn):
+    # A labeled deadline watch's daily_min/best_seen must be looked up under
+    # that label, not the auto-generated origin-dest name — otherwise (as
+    # happened before this fix) the watch's own history silently comes back
+    # empty even though data was recorded under the label runner.py used.
+    cfg = {
+        "current_base": "LON",
+        "deadline_watches": [
+            {"label": "LON-MEL for Strawberry Fields", "origin": "LON",
+             "destination": "MEL", "must_arrive_by": "2026-11-19", "max_price": 600},
+        ],
+    }
+    db.upsert_daily_min(conn, "LON-MEL for Strawberry Fields", "2026-07-09", 479.0)
+    db.upsert_daily_min(conn, "LON-MEL", "2026-07-09", 999.0)   # the wrong (unlabeled) key
+    data = dashboard.build_data(conn, cfg, TODAY)
+    dw = data["deadline_watches"][0]
+    assert dw["route"] == "LON-MEL for Strawberry Fields"
+    assert {"date": "2026-07-09", "min_price": 479.0} in dw["history"]
+    assert dw["best_seen"] == {"date": "2026-07-09", "min_price": 479.0}
+
+
 def test_top_options_one_row_per_distinct_date_pair(conn):
     sid1 = db.record_search(conn, 1, "MEX", "LHR", "2026-09-11", "2026-09-14", "tp:prices_latest",
                             ts="2026-07-09T00:00:00+00:00")
