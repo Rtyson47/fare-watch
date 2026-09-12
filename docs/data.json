@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-12T14:44:23.291701+00:00",
+  "generated_at": "2026-09-12T14:58:47.555771+00:00",
   "base": "MEX",
   "corridors": [
     {
@@ -920,7 +920,7 @@
   ],
   "deadline_watches": [
     {
-      "route": "LON-PER",
+      "route": "LON-PER for NYE",
       "must_arrive_by": "2026-12-31",
       "max_price": 850,
       "history": [],
@@ -929,7 +929,7 @@
       "best_seen": null
     },
     {
-      "route": "LON-MEL",
+      "route": "LON-MEL for Strawberry Fields",
       "must_arrive_by": "2026-11-19",
       "max_price": 600,
       "history": [],
@@ -938,10 +938,15 @@
       "best_seen": null
     },
     {
-      "route": "LON-SYD",
+      "route": "LON-SYD for Strawberry Fields",
       "must_arrive_by": "2026-11-19",
       "max_price": 620,
-      "history": [],
+      "history": [
+        {
+          "date": "2026-09-12",
+          "min_price": 501.0
+        }
+      ],
       "current_cheapest": {
         "price": 501.0,
         "carrier": null,
@@ -1016,7 +1021,10 @@
           "return_date": null
         }
       ],
-      "best_seen": null
+      "best_seen": {
+        "date": "2026-09-12",
+        "min_price": 501.0
+      }
     },
     {
       "route": "MEX+3-LON",
