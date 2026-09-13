@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-12T20:17:42.989502+00:00",
+  "generated_at": "2026-09-13T11:16:04.304561+00:00",
   "base": "MEX",
   "corridors": [
     {
@@ -399,6 +399,10 @@
         {
           "date": "2026-09-12",
           "min_price": 259.0
+        },
+        {
+          "date": "2026-09-13",
+          "min_price": 259.0
         }
       ],
       "current_cheapest": {
@@ -596,10 +600,14 @@
         {
           "date": "2026-09-12",
           "min_price": 613.0
+        },
+        {
+          "date": "2026-09-13",
+          "min_price": 612.0
         }
       ],
       "current_cheapest": {
-        "price": 613.0,
+        "price": 612.0,
         "carrier": null,
         "deep_link": "https://www.aviasales.com/search/YVR1410LON19101",
         "origin": "YVR",
@@ -608,7 +616,7 @@
       },
       "options": [
         {
-          "price": 613.0,
+          "price": 612.0,
           "carrier": null,
           "deep_link": "https://www.aviasales.com/search/YVR1410LON19101",
           "origin": "YVR",
@@ -616,7 +624,7 @@
           "return_date": "2026-10-19"
         },
         {
-          "price": 755.0,
+          "price": 754.0,
           "carrier": null,
           "deep_link": "https://www.aviasales.com/search/YVR0210LON04101",
           "origin": "YVR",
@@ -624,7 +632,7 @@
           "return_date": "2026-10-04"
         },
         {
-          "price": 782.0,
+          "price": 781.0,
           "carrier": null,
           "deep_link": "https://www.aviasales.com/search/YVR1510LON19101",
           "origin": "YVR",
@@ -632,12 +640,20 @@
           "return_date": "2026-10-19"
         },
         {
-          "price": 840.0,
+          "price": 839.0,
           "carrier": null,
           "deep_link": "https://www.aviasales.com/search/YVR3009LON04101",
           "origin": "YVR",
           "depart_date": "2026-09-30",
           "return_date": "2026-10-04"
+        },
+        {
+          "price": 953.0,
+          "carrier": null,
+          "deep_link": "https://www.aviasales.com/search/YVR2012LON24121",
+          "origin": "YVR",
+          "depart_date": "2026-12-20",
+          "return_date": "2026-12-24"
         }
       ],
       "best_seen": {
@@ -687,6 +703,10 @@
         {
           "date": "2026-09-12",
           "min_price": 494.0
+        },
+        {
+          "date": "2026-09-13",
+          "min_price": 494.0
         }
       ],
       "current_cheapest": {
@@ -712,14 +732,6 @@
           "deep_link": "https://www.aviasales.com/search/LON1911SYD1",
           "origin": "LON",
           "depart_date": "2026-11-19",
-          "return_date": null
-        },
-        {
-          "price": 504.0,
-          "carrier": null,
-          "deep_link": "https://www.aviasales.com/search/LON0112SYD1",
-          "origin": "LON",
-          "depart_date": "2026-12-01",
           "return_date": null
         },
         {
@@ -761,6 +773,14 @@
           "origin": "LON",
           "depart_date": "2026-11-10",
           "return_date": null
+        },
+        {
+          "price": 510.0,
+          "carrier": null,
+          "deep_link": "https://www.aviasales.com/search/LON1111SYD1",
+          "origin": "LON",
+          "depart_date": "2026-11-11",
+          "return_date": null
         }
       ],
       "best_seen": {
@@ -784,6 +804,10 @@
       "history": [
         {
           "date": "2026-09-12",
+          "min_price": 479.0
+        },
+        {
+          "date": "2026-09-13",
           "min_price": 479.0
         }
       ],
@@ -821,31 +845,23 @@
           "return_date": null
         },
         {
-          "price": 566.0,
+          "price": 553.0,
           "carrier": null,
-          "deep_link": "https://www.aviasales.com/search/LON2410MEL1",
+          "deep_link": "https://www.aviasales.com/search/LON2810MEL1",
           "origin": "LON",
-          "depart_date": "2026-10-24",
+          "depart_date": "2026-10-28",
           "return_date": null
         },
         {
-          "price": 566.0,
+          "price": 597.0,
           "carrier": null,
-          "deep_link": "https://www.aviasales.com/search/LON2510MEL1",
+          "deep_link": "https://www.aviasales.com/search/LON0812MEL1",
           "origin": "LON",
-          "depart_date": "2026-10-25",
+          "depart_date": "2026-12-08",
           "return_date": null
         },
         {
-          "price": 566.0,
-          "carrier": null,
-          "deep_link": "https://www.aviasales.com/search/LON2610MEL1",
-          "origin": "LON",
-          "depart_date": "2026-10-26",
-          "return_date": null
-        },
-        {
-          "price": 566.0,
+          "price": 626.0,
           "carrier": null,
           "deep_link": "https://www.aviasales.com/search/LON2710MEL1",
           "origin": "LON",
@@ -853,11 +869,19 @@
           "return_date": null
         },
         {
-          "price": 566.0,
+          "price": 638.0,
           "carrier": null,
-          "deep_link": "https://www.aviasales.com/search/LON2810MEL1",
+          "deep_link": "https://www.aviasales.com/search/LON2410MEL1",
           "origin": "LON",
-          "depart_date": "2026-10-28",
+          "depart_date": "2026-10-24",
+          "return_date": null
+        },
+        {
+          "price": 638.0,
+          "carrier": null,
+          "deep_link": "https://www.aviasales.com/search/LON2510MEL1",
+          "origin": "LON",
+          "depart_date": "2026-10-25",
           "return_date": null
         }
       ],
@@ -882,6 +906,10 @@
       "history": [
         {
           "date": "2026-09-12",
+          "min_price": 648.0
+        },
+        {
+          "date": "2026-09-13",
           "min_price": 648.0
         }
       ],
@@ -944,6 +972,10 @@
       "history": [
         {
           "date": "2026-09-12",
+          "min_price": 494.0
+        },
+        {
+          "date": "2026-09-13",
           "min_price": 494.0
         }
       ],
