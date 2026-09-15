@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-15T11:17:59.284585+00:00",
+  "generated_at": "2026-09-15T13:57:54.946380+00:00",
   "base": "MEX",
   "corridors": [
     {
@@ -823,6 +823,14 @@
           "return_date": null
         },
         {
+          "price": 527.0,
+          "carrier": null,
+          "deep_link": "https://www.aviasales.com/search/LON0212SYD1",
+          "origin": "LON",
+          "depart_date": "2026-12-02",
+          "return_date": null
+        },
+        {
           "price": 532.0,
           "carrier": null,
           "deep_link": "https://www.aviasales.com/search/LON1211SYD1",
@@ -852,14 +860,6 @@
           "deep_link": "https://www.aviasales.com/search/LON1511SYD1",
           "origin": "LON",
           "depart_date": "2026-11-15",
-          "return_date": null
-        },
-        {
-          "price": 532.0,
-          "carrier": null,
-          "deep_link": "https://www.aviasales.com/search/LON1611SYD1",
-          "origin": "LON",
-          "depart_date": "2026-11-16",
           "return_date": null
         }
       ],
@@ -1219,16 +1219,9 @@
       {
         "destination": "ACA",
         "origin": "MEX",
-        "price": 109.0,
+        "price": 116.0,
         "deep_link": "https://www.aviasales.com/search/MEX1510ACA19101",
         "depart_date": "2026-10-15"
-      },
-      {
-        "destination": "CTM",
-        "origin": "MEX",
-        "price": 199.0,
-        "deep_link": "https://www.aviasales.com/search/MEX1509CTM16091",
-        "depart_date": "2026-09-15"
       },
       {
         "destination": "MIA",
@@ -1259,11 +1252,25 @@
         "depart_date": "2026-10-25"
       },
       {
+        "destination": "CTM",
+        "origin": "MEX",
+        "price": 372.0,
+        "deep_link": "https://www.aviasales.com/search/MEX1509CTM16091",
+        "depart_date": "2026-09-15"
+      },
+      {
         "destination": "MDE",
         "origin": "MEX",
         "price": 397.0,
         "deep_link": "https://www.aviasales.com/search/MEX1910MDE22101",
         "depart_date": "2026-10-19"
+      },
+      {
+        "destination": "YVR",
+        "origin": "MEX",
+        "price": 423.0,
+        "deep_link": "https://www.aviasales.com/search/MEX2409YVR10101",
+        "depart_date": "2026-09-24"
       }
     ]
   },
