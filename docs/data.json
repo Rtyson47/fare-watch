@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-19T10:28:19.615040+00:00",
+  "generated_at": "2026-09-19T12:45:35.174619+00:00",
   "base": "MEX",
   "corridors": [
     {
@@ -1294,6 +1294,13 @@
         "price": 116.0,
         "deep_link": "https://www.aviasales.com/search/MEX1510ACA19101",
         "depart_date": "2026-10-15"
+      },
+      {
+        "destination": "DEN",
+        "origin": "MEX",
+        "price": 168.0,
+        "deep_link": "https://www.aviasales.com/search/MEX0410DEN05101",
+        "depart_date": "2026-10-04"
       },
       {
         "destination": "CZM",
