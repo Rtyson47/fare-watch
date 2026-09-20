@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-20T10:49:57.307198+00:00",
+  "generated_at": "2026-09-20T13:17:43.943448+00:00",
   "base": "MEX",
   "corridors": [
     {
@@ -1324,6 +1324,13 @@
         "depart_date": "2026-10-15"
       },
       {
+        "destination": "TAP",
+        "origin": "MEX",
+        "price": 161.0,
+        "deep_link": "https://www.aviasales.com/search/MEX2109TAP22091",
+        "depart_date": "2026-09-21"
+      },
+      {
         "destination": "DEN",
         "origin": "MEX",
         "price": 168.0,
@@ -1336,20 +1343,6 @@
         "price": 192.0,
         "deep_link": "https://www.aviasales.com/search/MEX0710CZM11101",
         "depart_date": "2026-10-07"
-      },
-      {
-        "destination": "NYC",
-        "origin": "MEX",
-        "price": 322.0,
-        "deep_link": "https://www.aviasales.com/search/MEX0610NYC21101",
-        "depart_date": "2026-10-06"
-      },
-      {
-        "destination": "MDE",
-        "origin": "MEX",
-        "price": 397.0,
-        "deep_link": "https://www.aviasales.com/search/MEX1910MDE22101",
-        "depart_date": "2026-10-19"
       },
       {
         "destination": "YVR",
