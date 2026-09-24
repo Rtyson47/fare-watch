@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-24T13:53:36.446799+00:00",
+  "generated_at": "2026-09-24T21:15:27.892571+00:00",
   "base": "MEX",
   "corridors": [
     {
@@ -691,11 +691,11 @@
         },
         {
           "date": "2026-09-24",
-          "min_price": 632.0
+          "min_price": 631.0
         }
       ],
       "current_cheapest": {
-        "price": 632.0,
+        "price": 631.0,
         "carrier": null,
         "deep_link": "https://www.aviasales.com/search/YVR1011LON16111",
         "origin": "YVR",
@@ -704,7 +704,7 @@
       },
       "options": [
         {
-          "price": 632.0,
+          "price": 631.0,
           "carrier": null,
           "deep_link": "https://www.aviasales.com/search/YVR1011LON16111",
           "origin": "YVR",
@@ -959,23 +959,15 @@
           "return_date": null
         },
         {
-          "price": 527.0,
+          "price": 521.0,
           "carrier": null,
-          "deep_link": "https://www.aviasales.com/search/LON1811SYD1",
+          "deep_link": "https://www.aviasales.com/search/LON2011SYD1",
           "origin": "LON",
-          "depart_date": "2026-11-18",
+          "depart_date": "2026-11-20",
           "return_date": null
         },
         {
-          "price": 528.0,
-          "carrier": null,
-          "deep_link": "https://www.aviasales.com/search/LON3011SYD1",
-          "origin": "LON",
-          "depart_date": "2026-11-30",
-          "return_date": null
-        },
-        {
-          "price": 529.0,
+          "price": 525.0,
           "carrier": null,
           "deep_link": "https://www.aviasales.com/search/LON2111SYD1",
           "origin": "LON",
@@ -983,7 +975,7 @@
           "return_date": null
         },
         {
-          "price": 529.0,
+          "price": 525.0,
           "carrier": null,
           "deep_link": "https://www.aviasales.com/search/LON2211SYD1",
           "origin": "LON",
@@ -991,7 +983,7 @@
           "return_date": null
         },
         {
-          "price": 529.0,
+          "price": 525.0,
           "carrier": null,
           "deep_link": "https://www.aviasales.com/search/LON2311SYD1",
           "origin": "LON",
@@ -999,7 +991,7 @@
           "return_date": null
         },
         {
-          "price": 529.0,
+          "price": 525.0,
           "carrier": null,
           "deep_link": "https://www.aviasales.com/search/LON2411SYD1",
           "origin": "LON",
@@ -1007,11 +999,19 @@
           "return_date": null
         },
         {
-          "price": 529.0,
+          "price": 525.0,
           "carrier": null,
           "deep_link": "https://www.aviasales.com/search/LON2511SYD1",
           "origin": "LON",
           "depart_date": "2026-11-25",
+          "return_date": null
+        },
+        {
+          "price": 525.0,
+          "carrier": null,
+          "deep_link": "https://www.aviasales.com/search/LON2611SYD1",
+          "origin": "LON",
+          "depart_date": "2026-11-26",
           "return_date": null
         }
       ],
@@ -1365,15 +1365,7 @@
           "return_date": null
         },
         {
-          "price": 598.0,
-          "carrier": null,
-          "deep_link": "https://www.aviasales.com/search/LON1711SYD1",
-          "origin": "LON",
-          "depart_date": "2026-11-17",
-          "return_date": null
-        },
-        {
-          "price": 607.0,
+          "price": 587.0,
           "carrier": null,
           "deep_link": "https://www.aviasales.com/search/LON1111SYD1",
           "origin": "LON",
@@ -1381,11 +1373,19 @@
           "return_date": null
         },
         {
-          "price": 610.0,
+          "price": 587.0,
           "carrier": null,
           "deep_link": "https://www.aviasales.com/search/LON1211SYD1",
           "origin": "LON",
           "depart_date": "2026-11-12",
+          "return_date": null
+        },
+        {
+          "price": 598.0,
+          "carrier": null,
+          "deep_link": "https://www.aviasales.com/search/LON1711SYD1",
+          "origin": "LON",
+          "depart_date": "2026-11-17",
           "return_date": null
         },
         {
