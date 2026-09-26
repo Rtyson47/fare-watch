@@ -106,7 +106,7 @@ const fmtDate = s => {
   return m ? `${m[3]}-${m[2]}-${m[1].slice(2)}` : s;
 };
 
-fetch("data.json").then(r => r.json()).then(d => {
+fetch("data.json", {cache: "no-cache"}).then(r => r.json()).then(d => {
   document.getElementById("base").textContent = d.base || "";
   document.getElementById("generated").textContent = "Generated " + (d.generated_at || "");
 
