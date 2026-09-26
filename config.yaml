@@ -1,4 +1,7 @@
-current_base: MEX
+# Base moved MEX -> LON on 2026-09-26 (Rich back in the UK). The Mexico routes
+# below that used "{BASE}" now say MEX explicitly so they keep their history
+# and labels instead of silently becoming LON routes.
+current_base: LON
 
 defaults:
   market: us
@@ -8,8 +11,9 @@ corridors:
   # Paused 2026-09-12 (not flying this way soon) — alerts_enabled: false keeps
   # pricing/data collection running (so the history isn't lost) but suppresses
   # all alerts for these three. Flip back to true (or delete the line) to
-  # resume notifications.
-  - origin: "{BASE}"
+  # resume notifications. minimised: true (2026-09-26) moves them into the
+  # collapsed "Minimised routes" card at the bottom of the dashboard.
+  - origin: MEX
     destination: YYZ
     date_windows: ["2026-07-10:2026-08-31"]   # any day through end of Aug, one-way
     trip_type: one_way
@@ -19,6 +23,7 @@ corridors:
     alert_threshold: 250
     flex_days: 3
     alerts_enabled: false
+    minimised: true
 
   - label: "YVR-LON one-way"
     origin: YVR
@@ -31,6 +36,7 @@ corridors:
     alert_threshold: 550
     flex_days: 3
     alerts_enabled: false
+    minimised: true
 
   - label: "YVR-LON return"
     origin: YVR
@@ -44,6 +50,7 @@ corridors:
     alert_threshold: 950
     flex_days: 3
     alerts_enabled: false
+    minimised: true
 
   # --- UK -> Perth exploration (added 2026-09-10) ---
   # Any routing/layover — Tier 1 (Travelpayouts) has no stopover-airport
@@ -153,6 +160,84 @@ corridors:
     alert_threshold: 1100
     flex_days: 3
 
+  # --- London -> Japan, then Japan -> AUS (added 2026-09-26) ---
+  # One-way legs: the plan is LON -> Japan, stay a month or more, then on to
+  # AUS. The corridors are priced independently; the "combos" section below
+  # pairs them with the 30+ day gap and shows the total next to the direct
+  # LON-AUS one-way. TYO and SPK are city codes (TYO = NRT/HND, SPK = CTS).
+  # Baseline one-way floors observed 2026-09-26 on Kiwi (USD): LON-TYO ~389
+  # (Ryanair+China Eastern self-transfer via ARN) / ~493 on one ticket;
+  # LON-SPK ~504 (China Eastern via PVG); TYO-PER ~292, TYO-SYD ~317,
+  # TYO-BNE ~317 (Jetstar direct), TYO-MEL ~351. Thresholds sit a little
+  # under those floors, like the AUS ones above. Tier 1 cache prices can differ.
+  - label: "LON-TYO one-way"
+    origin: LON
+    destination: TYO
+    date_windows: ["2026-10-10:2027-01-15"]
+    trip_type: one_way
+    cabin: economy
+    max_price: 600
+    currency: usd
+    alert_threshold: 400
+    flex_days: 3
+
+  - label: "LON-SPK one-way"
+    origin: LON
+    destination: SPK
+    date_windows: ["2026-10-10:2027-01-15"]
+    trip_type: one_way
+    cabin: economy
+    max_price: 650
+    currency: usd
+    alert_threshold: 460
+    flex_days: 3
+
+  # AUS window = Japan window shifted a month later (a Japan arrival on
+  # 2026-10-10 can't fly on before ~2026-11-10; 2027-01-15 -> ~2027-02-15).
+  - label: "TYO-PER one-way"
+    origin: TYO
+    destination: PER
+    date_windows: ["2026-11-10:2027-02-15"]
+    trip_type: one_way
+    cabin: economy
+    max_price: 420
+    currency: usd
+    alert_threshold: 270
+    flex_days: 3
+
+  - label: "TYO-SYD one-way"
+    origin: TYO
+    destination: SYD
+    date_windows: ["2026-11-10:2027-02-15"]
+    trip_type: one_way
+    cabin: economy
+    max_price: 450
+    currency: usd
+    alert_threshold: 290
+    flex_days: 3
+
+  - label: "TYO-MEL one-way"
+    origin: TYO
+    destination: MEL
+    date_windows: ["2026-11-10:2027-02-15"]
+    trip_type: one_way
+    cabin: economy
+    max_price: 480
+    currency: usd
+    alert_threshold: 320
+    flex_days: 3
+
+  - label: "TYO-BNE one-way"
+    origin: TYO
+    destination: BNE
+    date_windows: ["2026-11-10:2027-02-15"]
+    trip_type: one_way
+    cabin: economy
+    max_price: 450
+    currency: usd
+    alert_threshold: 290
+    flex_days: 3
+
 deadline_watches:
   - label: "LON-PER for NYE"
     destination: PER
@@ -183,35 +268,70 @@ deadline_watches:
     currency: usd
 
   # Paused 2026-09-12 — see corridors comment above; same alerts_enabled: false.
+  # Minimised 2026-09-26, same as the corridors.
   - destination: LON                   # one-way, back in London on or before the date
-    origin: "{BASE}"                   # optional; defaults to current_base
+    origin: MEX                        # was "{BASE}" — pinned when the base moved to LON
     origin_variants: [GDL, CUN, MTY]    # also check Guadalajara, Cancún, Monterrey
     earliest_depart: "2026-07-24"       # don't search/alert on departures before this
     must_arrive_by: "2026-07-27"
     max_price: 650
     currency: usd
     alerts_enabled: false
+    minimised: true
 
   - destination: MAN                   # "get me home to Manchester by X, under Y"
-    origin: "{BASE}"                   # optional; defaults to current_base
+    origin: MEX                        # was "{BASE}" — pinned when the base moved to LON
     must_arrive_by: "2026-12-24"
     max_price: 650
     currency: usd
     alerts_enabled: false
+    minimised: true
 
-# Paused 2026-09-12, same reason — MEX/PVR discovery isn't AUS, so it's muted
-# too even though it's not one of the named "MEX/Canada routes". Data (the
-# shortlist) still gets fetched and dashboarded; only the median-based
-# discovery alerts are suppressed.
+# Two one-way corridors joined by a minimum stay (dashboard only — no alerts).
+# first_legs / second_leg / compare_to are corridor labels from above.
+# min_gap_days counts from the London departure, so 31 = about 30 nights in
+# Japan after the overnight flight.
+combos:
+  - label: "LON → Japan → PER"
+    first_legs: ["LON-TYO one-way", "LON-SPK one-way"]
+    second_leg: "TYO-PER one-way"
+    min_gap_days: 31
+    compare_to: "LON-PER one-way"
+  - label: "LON → Japan → SYD"
+    first_legs: ["LON-TYO one-way", "LON-SPK one-way"]
+    second_leg: "TYO-SYD one-way"
+    min_gap_days: 31
+    compare_to: "LON-SYD one-way"
+  - label: "LON → Japan → MEL"
+    first_legs: ["LON-TYO one-way", "LON-SPK one-way"]
+    second_leg: "TYO-MEL one-way"
+    min_gap_days: 31
+    compare_to: "LON-MEL one-way"
+  - label: "LON → Japan → BNE"
+    first_legs: ["LON-TYO one-way", "LON-SPK one-way"]
+    second_leg: "TYO-BNE one-way"
+    min_gap_days: 31
+    compare_to: "LON-BNE one-way"
+
+# Rewritten 2026-09-26: return trips from London to anywhere in Europe,
+# departing in the next month. Replaces the MEX/PVR scan, which was stale.
+# sources: prices_latest adds the per-month "everything from LON" cache on top
+# of city_directions (one fare per city, often outside a 31-day window).
+# GB is left out of the whitelist on purpose (no domestic hops). TR is in.
+# Alerts stay off: this is a browse list, not a watch.
 inspiration:
-  origins: ["{BASE}", "PVR"]
-  domestic_origin: PVR                 # domestic shortlist departs PVR; international stays {BASE}
-  horizon_weeks: 8
+  title: "Inspiration — Europe returns from London, next 31 days"
+  origins: ["LON"]
+  sources: [city_directions, prices_latest]
+  trip_type: return
+  horizon_days: 31
   price_ceiling: 450
   currency: usd
   market: us
-  region_whitelist: []                 # [] = anywhere; else [US, MX, GB] or explicit [BKK, MAD]
-  top_n_to_verify: 10
+  region_whitelist: [AD, AL, AT, BA, BE, BG, CH, CY, CZ, DE, DK, EE, ES, FI, FO,
+                     FR, GI, GR, HR, HU, IE, IS, IT, LI, LT, LU, LV, MC, MD, ME,
+                     MK, MT, NL, NO, PL, PT, RO, RS, SE, SI, SK, SM, TR, XK]
+  top_n_to_verify: 15
   alerts_enabled: false
 
 cost_guardrails:

@@ -66,9 +66,21 @@ commented file):
   27th", not "any day up to the 27th"), `origin_variants` checks fares from multiple
   origin airports (e.g. MEX + GDL/CUN/MTY), combined into one row, and optional
   `alerts_enabled: false` pauses alerts the same way as for corridors.
-- **inspiration** — `origins: ["{BASE}"]`, `horizon_weeks`, `price_ceiling`,
-  optional `region_whitelist` (country codes like `US`/`GB` or explicit IATA),
-  `top_n_to_verify`, and optional `alerts_enabled: false` (same pause behaviour).
+- **inspiration** — `origins: ["{BASE}"]`, `horizon_weeks` (or `horizon_days`),
+  `price_ceiling`, optional `region_whitelist` (country codes like `US`/`GB` or
+  explicit IATA), optional `trip_type: return|one_way`, optional
+  `sources: [city_directions, prices_latest]` (the second adds the per-month
+  "everything from this origin" cache, for short horizons), optional `title`
+  (dashboard heading), `top_n_to_verify`, and optional `alerts_enabled: false`
+  (same pause behaviour).
+- **minimised: true** on any corridor or deadline watch moves it out of the main
+  tables and charts into a collapsed "Minimised routes" card at the bottom of
+  the dashboard. Pricing carries on; pair it with `alerts_enabled: false` for
+  routes you're not flying.
+- **combos** — dashboard-only pairing of two one-way corridors with a minimum
+  stay between them: `first_legs` (labels, merged), `second_leg`, `min_gap_days`
+  (counted between departure dates) and `compare_to` (a direct corridor shown
+  alongside). No alerts; the legs alert on their own thresholds.
 - **cost_guardrails** — `max_duffel_searches_per_day` (default 100) with hard stop +
   logged warning; spend tracked at `$0.005/search`.
 - **alerting** — Telegram on/off, digest mode, median lookback/ratio, dedupe window/band.

@@ -282,3 +282,70 @@ def test_departed_and_out_of_window_fares_never_surface(conn, sample_config):
     # Jul 6/8 have departed; Dec 30 is after must_arrive_by (2026-12-24)
     assert w["current_cheapest"] is None
     assert w["options"] == []
+
+
+def _record(conn, origin, dest, price, depart, ret=None, source="tp:month_matrix", ts=None):
+    sid = db.record_search(conn, 1, origin, dest, depart, ret, source, ts=ts)
+    db.record_fare(conn, sid, FareRecord(origin, dest, price, "usd", depart_date=depart,
+                   return_date=ret, deep_link=f"http://{dest}", source=source))
+
+
+def test_minimised_flag_passes_through(conn):
+    cfg = {
+        "current_base": "LON",
+        "corridors": [
+            {"origin": "MEX", "destination": "YYZ", "trip_type": "one_way", "minimised": True},
+            {"origin": "LON", "destination": "PER", "trip_type": "one_way"},
+        ],
+        "deadline_watches": [
+            {"origin": "MEX", "destination": "MAN", "must_arrive_by": "2026-12-24",
+             "minimised": True},
+        ],
+    }
+    data = dashboard.build_data(conn, cfg, TODAY)
+    assert [c["minimised"] for c in data["corridors"]] == [True, False]
+    assert data["deadline_watches"][0]["minimised"] is True
+
+
+def test_combos_respect_min_gap_and_pick_cheapest_pairing(conn):
+    cfg = {
+        "current_base": "LON",
+        "corridors": [
+            {"label": "LON-TYO one-way", "origin": "LON", "destination": "TYO", "trip_type": "one_way"},
+            {"label": "LON-SPK one-way", "origin": "LON", "destination": "SPK", "trip_type": "one_way"},
+            {"label": "TYO-PER one-way", "origin": "TYO", "destination": "PER", "trip_type": "one_way"},
+            {"label": "LON-PER one-way", "origin": "LON", "destination": "PER", "trip_type": "one_way"},
+        ],
+        "combos": [{"label": "LON → Japan → PER",
+                    "first_legs": ["LON-TYO one-way", "LON-SPK one-way"],
+                    "second_leg": "TYO-PER one-way", "min_gap_days": 31,
+                    "compare_to": "LON-PER one-way"}],
+    }
+    _record(conn, "LON", "TYO", 500, "2026-10-10")
+    _record(conn, "LON", "TYO", 300, "2026-11-01")     # cheapest, but too late for the Nov 20 leg
+    _record(conn, "LON", "SPK", 450, "2026-10-12")
+    _record(conn, "TYO", "PER", 250, "2026-11-20")     # 41 days after Oct 10, 39 after Oct 12
+    _record(conn, "TYO", "PER", 400, "2026-11-25")     # only 24 days after Nov 1: not allowed with it
+    _record(conn, "TYO", "PER", 200, "2026-12-05")     # 34 days after Nov 1
+    _record(conn, "LON", "PER", 650, "2026-11-15")
+    combo = dashboard.build_combos(conn, cfg, TODAY)[0]
+    best = combo["best"]
+    assert best["total"] == 500                        # 300 (Nov 1) + 200 (Dec 5)
+    assert (best["first"]["destination"], best["first"]["depart_date"]) == ("TYO", "2026-11-01")
+    assert best["gap_days"] == 34
+    by_second = {o["second"]["depart_date"]: o for o in combo["options"]}
+    assert by_second["2026-11-20"]["first"]["destination"] == "SPK"    # 450 beats 500, both >= 31d
+    assert by_second["2026-11-20"]["total"] == 700
+    assert combo["direct"]["price"] == 650
+
+
+def test_inspiration_rows_drop_unconfigured_origins_and_departed(conn):
+    _record(conn, "MEX", "CUN", 99, "2026-07-20", "2026-07-25", source="tp:city_directions")
+    _record(conn, "LON", "BCN", 80, "2026-07-20", "2026-07-24", source="tp:inspiration_latest")
+    _record(conn, "LON", "LIS", 40, "2026-07-01", "2026-07-05", source="tp:city_directions")
+    cfg = {"current_base": "LON",
+           "inspiration": {"origins": ["LON"], "title": "Europe returns"}}
+    insp = dashboard.build_data(conn, cfg, TODAY)["inspiration"]
+    assert [r["destination"] for r in insp["international"]] == ["BCN"]
+    assert insp["international"][0]["return_date"] == "2026-07-24"
+    assert insp["domestic"] == [] and insp["title"] == "Europe returns"
