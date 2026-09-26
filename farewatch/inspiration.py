@@ -8,9 +8,16 @@ from datetime import date, timedelta
 from pathlib import Path
 
 _AIRPORTS_PATH = Path(__file__).parent / "data" / "airports.json"
+_CITY_NAMES_PATH = Path(__file__).parent / "data" / "city_names.json"
 
 
 def load_airports(path=_AIRPORTS_PATH):
+    with open(path) as f:
+        return json.load(f)
+
+
+def load_city_names(path=_CITY_NAMES_PATH):
+    """IATA city/airport code -> "City, Country" (from Travelpayouts' public data)."""
     with open(path) as f:
         return json.load(f)
 

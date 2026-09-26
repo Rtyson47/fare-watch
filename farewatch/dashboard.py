@@ -2,7 +2,7 @@
 import json
 from datetime import date, timedelta
 
-from . import db, inspiration, spend
+from . import corridors as corridor_specs, db, inspiration, spend
 from .models import route_label
 
 
@@ -248,18 +248,20 @@ def build_data(conn, cfg, today):
         # scope to the watch's actual window so stale scans of a wider (or
         # already-departed) window never surface as "current cheapest"
         depart_min = max(today_iso, w.get("earliest_depart") or today_iso)
+        last_depart = corridor_specs.last_departure(w)
         deadline_watches.append({
             "route": route,
             "minimised": bool(w.get("minimised")),
             "must_arrive_by": w.get("must_arrive_by"),
+            "last_departure": last_depart,
             "max_price": w.get("max_price"),
             "history": history_for_route(conn, route),
             "current_cheapest": cheapest_for_route(conn, origins, dest, one_way=True,
                                                    depart_min=depart_min,
-                                                   depart_max=w.get("must_arrive_by")),
+                                                   depart_max=last_depart),
             "options": top_options(conn, origins, dest, one_way=True,
                                    depart_min=depart_min,
-                                   depart_max=w.get("must_arrive_by")),
+                                   depart_max=last_depart),
             "best_seen": best_seen(conn, route),
         })
     insp_cfg = cfg.get("inspiration", {}) or {}
@@ -269,6 +271,9 @@ def build_data(conn, cfg, today):
     insp = inspiration_by_scope(conn, base, domestic_origin, airports, top_n,
                                 origins=insp_cfg.get("origins"), depart_min=today_iso)
     insp["title"] = insp_cfg.get("title")
+    names = inspiration.load_city_names()
+    for row in insp["domestic"] + insp["international"]:
+        row["destination_name"] = names.get(row["destination"])
     return {
         "generated_at": db.now_iso(),
         "base": base,

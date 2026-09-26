@@ -65,7 +65,9 @@ commented file):
   under Y"); optional `earliest_depart` floors the search window (e.g. "the 24th to the
   27th", not "any day up to the 27th"), `origin_variants` checks fares from multiple
   origin airports (e.g. MEX + GDL/CUN/MTY), combined into one row, and optional
-  `alerts_enabled: false` pauses alerts the same way as for corridors.
+  `alerts_enabled: false` pauses alerts the same way as for corridors. Optional `travel_days`
+  (default 0) pulls the last departure back from `must_arrive_by`, so a
+  next-day long-haul arrival still lands by the date.
 - **inspiration** — `origins: ["{BASE}"]`, `horizon_weeks` (or `horizon_days`),
   `price_ceiling`, optional `region_whitelist` (country codes like `US`/`GB` or
   explicit IATA), optional `trip_type: return|one_way`, optional

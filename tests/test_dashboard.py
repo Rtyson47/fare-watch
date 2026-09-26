@@ -349,3 +349,18 @@ def test_inspiration_rows_drop_unconfigured_origins_and_departed(conn):
     assert [r["destination"] for r in insp["international"]] == ["BCN"]
     assert insp["international"][0]["return_date"] == "2026-07-24"
     assert insp["domestic"] == [] and insp["title"] == "Europe returns"
+
+
+def test_inspiration_rows_carry_city_names_and_watch_respects_travel_days(conn):
+    _record(conn, "LON", "KSC", 39, "2026-07-20", "2026-07-24", source="tp:inspiration_latest")
+    _record(conn, "LON", "SPK", 480, "2026-11-26")      # lands the 27th: in
+    _record(conn, "LON", "SPK", 450, "2026-11-27")      # lands the 28th: out
+    cfg = {"current_base": "LON", "inspiration": {"origins": ["LON"]},
+           "deadline_watches": [{"label": "Niseko", "origin": "LON", "destination": "SPK",
+                                 "earliest_depart": "2026-11-19",
+                                 "must_arrive_by": "2026-11-27", "travel_days": 1}]}
+    data = dashboard.build_data(conn, cfg, TODAY)
+    assert data["inspiration"]["international"][0]["destination_name"] == "Kosice, Slovakia"
+    dw = data["deadline_watches"][0]
+    assert dw["last_departure"] == "2026-11-26"
+    assert dw["current_cheapest"]["price"] == 480

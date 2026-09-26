@@ -228,7 +228,7 @@ fetch("data.json").then(r => r.json()).then(d => {
     (list || []).forEach(i => {
       const link = i.deep_link ? `<a href="${esc(i.deep_link)}" target="_blank" rel="noopener">book ↗</a>` : "";
       tbody.insertAdjacentHTML("beforeend",
-        `<tr><td>${esc(i.origin)}-${esc(i.destination)}</td><td>${fmt(i.price)}</td>
+        `<tr><td>${esc(i.origin)}-${esc(i.destination)}${i.destination_name ? ` <span class="legs">${esc(i.destination_name)}</span>` : ""}</td><td>${fmt(i.price)}</td>
          <td>${fmtDate(i.depart_date)||"—"}</td><td>${fmtDate(i.return_date)||"—"}</td><td>${link}</td></tr>`);
     });
     if (!(list || []).length)

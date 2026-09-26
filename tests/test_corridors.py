@@ -139,3 +139,13 @@ def test_expand_corridor_expired_window_yields_nothing():
         "flex_days": 3,
     }
     assert corridors.expand_corridor(corridor, TODAY) == []
+
+
+def test_deadline_travel_days_pulls_last_departure_back():
+    from farewatch.corridors import expand_deadline, last_departure
+    w = {"destination": "SPK", "origin": "LON", "earliest_depart": "2026-11-19",
+         "must_arrive_by": "2026-11-27", "travel_days": 1}
+    assert last_departure(w) == "2026-11-26"
+    specs = expand_deadline(w, "LON", date(2026, 9, 26))
+    assert specs[0].depart_date == "2026-11-19" and specs[-1].depart_date == "2026-11-26"
+    assert last_departure({"must_arrive_by": "2026-11-27"}) == "2026-11-27"   # default 0

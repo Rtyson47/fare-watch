@@ -125,14 +125,26 @@ def expand_corridor(corridor, today):
     return specs
 
 
+def last_departure(watch):
+    """Latest departure date for a deadline watch, as an ISO string.
+
+    ``must_arrive_by`` minus the optional ``travel_days`` (default 0). Long-haul
+    east from London lands the next day, so ``travel_days: 1`` makes "arrive by"
+    mean arrival rather than departure.
+    """
+    d = date.fromisoformat(watch["must_arrive_by"]) - timedelta(days=watch.get("travel_days", 0) or 0)
+    return _iso(d)
+
+
 def expand_deadline(watch, base, today, horizon_days=120):
-    """One-way ``base(+variants) -> destination`` for each day up to ``must_arrive_by``.
+    """One-way ``base(+variants) -> destination`` for each day up to the last departure.
 
     ``earliest_depart``, if set, floors the window so departures before it
     (e.g. dates you don't actually want to travel) aren't searched.
     ``origin_variants`` (like corridors) also checks fares from those origins.
+    ``travel_days`` pulls the last departure back from ``must_arrive_by``.
     """
-    arrive_by = date.fromisoformat(watch["must_arrive_by"])
+    arrive_by = date.fromisoformat(last_departure(watch))
     origins = [watch.get("origin") or base] + list(watch.get("origin_variants", []) or [])
     floor = today
     if watch.get("earliest_depart"):

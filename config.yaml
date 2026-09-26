@@ -267,6 +267,32 @@ deadline_watches:
     max_price: 620
     currency: usd
 
+  # Niseko 2026-27 ski season: 28 Nov 2026 to 5 May 2027 (snow permitting).
+  # Goal: land just before opening. Niseko is ~2-2.5h by bus/car from Sapporo
+  # New Chitose (CTS, city code SPK). travel_days pulls the last departure back
+  # so "must_arrive_by" is a real arrival date (London flights land next day).
+  # Baselines seen 2026-09-26 on Kiwi (USD): LON-SPK 508-553 in this window
+  # (China Eastern via PVG, 1 stop); LON-TYO 467-540, plus a ~$43 Jetstar/Peach
+  # NRT-CTS hop (so via Tokyo only wins if Tokyo is ~$40+ cheaper). max_price
+  # sits under those floors so alerts mean a genuine deal.
+  - label: "LON-SPK for Niseko opening"
+    origin: LON
+    destination: SPK
+    earliest_depart: "2026-11-19"        # lands ~20th; a week's margin before opening
+    must_arrive_by: "2026-11-27"
+    travel_days: 1                       # last departure 26 Nov
+    max_price: 500
+    currency: usd
+
+  - label: "LON-TYO for Niseko opening (+~$45 hop to CTS)"
+    origin: LON
+    destination: TYO
+    earliest_depart: "2026-11-19"
+    must_arrive_by: "2026-11-27"         # into Sapporo; Tokyo arrival + the domestic hop
+    travel_days: 2                       # last departure 25 Nov
+    max_price: 450
+    currency: usd
+
   # Paused 2026-09-12 — see corridors comment above; same alerts_enabled: false.
   # Minimised 2026-09-26, same as the corridors.
   - destination: LON                   # one-way, back in London on or before the date
