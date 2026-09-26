@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-26T11:41:22.429450+00:00",
+  "generated_at": "2026-09-26T11:47:38.134943+00:00",
   "base": "LON",
   "corridors": [
     {
@@ -1738,7 +1738,7 @@
       "route": "LON-PER for NYE",
       "minimised": false,
       "must_arrive_by": "2026-12-31",
-      "last_departure": "2026-12-31",
+      "last_departure": "2026-12-29",
       "max_price": 850,
       "history": [
         {
@@ -1781,7 +1781,7 @@
       "route": "LON-MEL for Strawberry Fields",
       "minimised": false,
       "must_arrive_by": "2026-11-19",
-      "last_departure": "2026-11-19",
+      "last_departure": "2026-11-17",
       "max_price": 600,
       "history": [],
       "current_cheapest": null,
@@ -1792,7 +1792,7 @@
       "route": "LON-SYD for Strawberry Fields",
       "minimised": false,
       "must_arrive_by": "2026-11-19",
-      "last_departure": "2026-11-19",
+      "last_departure": "2026-11-17",
       "max_price": 620,
       "history": [
         {
@@ -1874,22 +1874,6 @@
           "return_date": null
         },
         {
-          "price": 524.0,
-          "carrier": null,
-          "deep_link": "https://www.aviasales.com/search/LON1911SYD1",
-          "origin": "LON",
-          "depart_date": "2026-11-19",
-          "return_date": null
-        },
-        {
-          "price": 527.0,
-          "carrier": null,
-          "deep_link": "https://www.aviasales.com/search/LON1811SYD1",
-          "origin": "LON",
-          "depart_date": "2026-11-18",
-          "return_date": null
-        },
-        {
           "price": 550.0,
           "carrier": null,
           "deep_link": "https://www.aviasales.com/search/LON1411SYD1",
@@ -1927,6 +1911,22 @@
           "deep_link": "https://www.aviasales.com/search/LON1111SYD1",
           "origin": "LON",
           "depart_date": "2026-11-11",
+          "return_date": null
+        },
+        {
+          "price": 587.0,
+          "carrier": null,
+          "deep_link": "https://www.aviasales.com/search/LON1211SYD1",
+          "origin": "LON",
+          "depart_date": "2026-11-12",
+          "return_date": null
+        },
+        {
+          "price": 612.0,
+          "carrier": null,
+          "deep_link": "https://www.aviasales.com/search/LON1311SYD1",
+          "origin": "LON",
+          "depart_date": "2026-11-13",
           "return_date": null
         }
       ],
