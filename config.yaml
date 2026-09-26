@@ -244,6 +244,7 @@ deadline_watches:
     origin: LON                        # explicit — don't inherit current_base (MEX)
     earliest_depart: "2026-12-20"
     must_arrive_by: "2026-12-31"
+    travel_days: 2                     # added 2026-09-26: last departure 29 Dec (lands 30th/31st)
     max_price: 850                     # USD — below the ~$1,100-1,220 Doha peak fare observed
     currency: usd
 
@@ -256,6 +257,7 @@ deadline_watches:
     origin: LON
     earliest_depart: "2026-11-10"
     must_arrive_by: "2026-11-19"
+    travel_days: 2                     # added 2026-09-26: last departure 17 Nov (lands ~19th)
     max_price: 600
     currency: usd
 
@@ -264,6 +266,7 @@ deadline_watches:
     origin: LON
     earliest_depart: "2026-11-10"
     must_arrive_by: "2026-11-19"
+    travel_days: 2                     # added 2026-09-26: last departure 17 Nov (lands ~19th)
     max_price: 620
     currency: usd
 
