@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-02T12:02:30.298347+00:00",
+  "generated_at": "2026-10-02T15:10:18.160400+00:00",
   "base": "LON",
   "corridors": [
     {
@@ -2894,15 +2894,6 @@
         "destination_name": "Dublin, Ireland"
       },
       {
-        "destination": "KSC",
-        "origin": "LON",
-        "price": 39.0,
-        "deep_link": "https://www.aviasales.com/search/LON0810KSC14101",
-        "depart_date": "2026-10-08",
-        "return_date": "2026-10-14",
-        "destination_name": "Kosice, Slovakia"
-      },
-      {
         "destination": "BCN",
         "origin": "LON",
         "price": 40.0,
@@ -2950,10 +2941,10 @@
       {
         "destination": "MAD",
         "origin": "LON",
-        "price": 44.0,
-        "deep_link": "https://www.aviasales.com/search/LON2910MAD07111",
-        "depart_date": "2026-10-29",
-        "return_date": "2026-11-07",
+        "price": 45.0,
+        "deep_link": "https://www.aviasales.com/search/LON3010MAD04111",
+        "depart_date": "2026-10-30",
+        "return_date": "2026-11-04",
         "destination_name": "Madrid, Spain"
       },
       {
@@ -3009,6 +3000,15 @@
         "depart_date": "2026-10-03",
         "return_date": "2026-10-10",
         "destination_name": "Alicante, Spain"
+      },
+      {
+        "destination": "BLQ",
+        "origin": "LON",
+        "price": 50.0,
+        "deep_link": "https://www.aviasales.com/search/LON0310BLQ09101",
+        "depart_date": "2026-10-03",
+        "return_date": "2026-10-09",
+        "destination_name": "Bologna, Italy"
       }
     ],
     "title": "Inspiration \u2014 Europe returns from London, next 31 days"
