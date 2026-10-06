@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-06T12:56:06.856689+00:00",
+  "generated_at": "2026-10-06T15:32:31.109941+00:00",
   "base": "LON",
   "corridors": [
     {
@@ -1125,7 +1125,7 @@
           "return_date": null
         },
         {
-          "price": 506.0,
+          "price": 497.0,
           "carrier": null,
           "deep_link": "https://www.aviasales.com/search/LON2011SYD1",
           "origin": "LON",
@@ -1133,7 +1133,7 @@
           "return_date": null
         },
         {
-          "price": 506.0,
+          "price": 497.0,
           "carrier": null,
           "deep_link": "https://www.aviasales.com/search/LON2111SYD1",
           "origin": "LON",
@@ -1141,7 +1141,7 @@
           "return_date": null
         },
         {
-          "price": 506.0,
+          "price": 504.0,
           "carrier": null,
           "deep_link": "https://www.aviasales.com/search/LON2211SYD1",
           "origin": "LON",
@@ -1714,18 +1714,26 @@
         },
         {
           "date": "2026-10-06",
-          "min_price": 727.0
+          "min_price": 509.0
         }
       ],
       "current_cheapest": {
-        "price": 727.0,
+        "price": 509.0,
         "carrier": null,
-        "deep_link": "https://www.aviasales.com/search/LON0101SPK1",
+        "deep_link": "https://www.aviasales.com/search/LON0112SPK1",
         "origin": "LON",
-        "depart_date": "2027-01-01",
+        "depart_date": "2026-12-01",
         "return_date": null
       },
       "options": [
+        {
+          "price": 509.0,
+          "carrier": null,
+          "deep_link": "https://www.aviasales.com/search/LON0112SPK1",
+          "origin": "LON",
+          "depart_date": "2026-12-01",
+          "return_date": null
+        },
         {
           "price": 727.0,
           "carrier": null,
@@ -1736,8 +1744,8 @@
         }
       ],
       "best_seen": {
-        "date": "2026-10-01",
-        "min_price": 727.0
+        "date": "2026-10-06",
+        "min_price": 509.0
       }
     },
     {
@@ -1992,28 +2000,20 @@
         },
         {
           "date": "2026-10-06",
-          "min_price": 365.0
+          "min_price": 330.0
         }
       ],
       "current_cheapest": {
-        "price": 365.0,
+        "price": 330.0,
         "carrier": null,
-        "deep_link": "https://www.aviasales.com/search/TYO1711MEL1",
+        "deep_link": "https://www.aviasales.com/search/TYO1811MEL1",
         "origin": "TYO",
-        "depart_date": "2026-11-17",
+        "depart_date": "2026-11-18",
         "return_date": null
       },
       "options": [
         {
-          "price": 365.0,
-          "carrier": null,
-          "deep_link": "https://www.aviasales.com/search/TYO1711MEL1",
-          "origin": "TYO",
-          "depart_date": "2026-11-17",
-          "return_date": null
-        },
-        {
-          "price": 366.0,
+          "price": 330.0,
           "carrier": null,
           "deep_link": "https://www.aviasales.com/search/TYO1811MEL1",
           "origin": "TYO",
@@ -2021,7 +2021,7 @@
           "return_date": null
         },
         {
-          "price": 366.0,
+          "price": 348.0,
           "carrier": null,
           "deep_link": "https://www.aviasales.com/search/TYO1911MEL1",
           "origin": "TYO",
@@ -2029,7 +2029,7 @@
           "return_date": null
         },
         {
-          "price": 366.0,
+          "price": 348.0,
           "carrier": null,
           "deep_link": "https://www.aviasales.com/search/TYO2011MEL1",
           "origin": "TYO",
@@ -2037,7 +2037,7 @@
           "return_date": null
         },
         {
-          "price": 366.0,
+          "price": 348.0,
           "carrier": null,
           "deep_link": "https://www.aviasales.com/search/TYO2111MEL1",
           "origin": "TYO",
@@ -2045,7 +2045,7 @@
           "return_date": null
         },
         {
-          "price": 366.0,
+          "price": 348.0,
           "carrier": null,
           "deep_link": "https://www.aviasales.com/search/TYO2211MEL1",
           "origin": "TYO",
@@ -2053,7 +2053,7 @@
           "return_date": null
         },
         {
-          "price": 366.0,
+          "price": 348.0,
           "carrier": null,
           "deep_link": "https://www.aviasales.com/search/TYO2311MEL1",
           "origin": "TYO",
@@ -2061,17 +2061,25 @@
           "return_date": null
         },
         {
-          "price": 366.0,
+          "price": 348.0,
           "carrier": null,
           "deep_link": "https://www.aviasales.com/search/TYO2411MEL1",
           "origin": "TYO",
           "depart_date": "2026-11-24",
           "return_date": null
+        },
+        {
+          "price": 348.0,
+          "carrier": null,
+          "deep_link": "https://www.aviasales.com/search/TYO2511MEL1",
+          "origin": "TYO",
+          "depart_date": "2026-11-25",
+          "return_date": null
         }
       ],
       "best_seen": {
-        "date": "2026-09-29",
-        "min_price": 362.0
+        "date": "2026-10-06",
+        "min_price": 330.0
       }
     },
     {
@@ -2771,7 +2779,7 @@
       "label": "LON \u2192 Japan \u2192 MEL",
       "min_gap_days": 31,
       "best": {
-        "total": 798.0,
+        "total": 763.0,
         "first": {
           "price": 433.0,
           "carrier": null,
@@ -2782,19 +2790,19 @@
           "destination": "TYO"
         },
         "second": {
-          "price": 365.0,
+          "price": 330.0,
           "carrier": null,
-          "deep_link": "https://www.aviasales.com/search/TYO1711MEL1",
+          "deep_link": "https://www.aviasales.com/search/TYO1811MEL1",
           "origin": "TYO",
-          "depart_date": "2026-11-17",
+          "depart_date": "2026-11-18",
           "return_date": null,
           "destination": "MEL"
         },
-        "gap_days": 33
+        "gap_days": 34
       },
       "options": [
         {
-          "total": 798.0,
+          "total": 763.0,
           "first": {
             "price": 433.0,
             "carrier": null,
@@ -2805,29 +2813,7 @@
             "destination": "TYO"
           },
           "second": {
-            "price": 365.0,
-            "carrier": null,
-            "deep_link": "https://www.aviasales.com/search/TYO1711MEL1",
-            "origin": "TYO",
-            "depart_date": "2026-11-17",
-            "return_date": null,
-            "destination": "MEL"
-          },
-          "gap_days": 33
-        },
-        {
-          "total": 799.0,
-          "first": {
-            "price": 433.0,
-            "carrier": null,
-            "deep_link": "https://www.aviasales.com/search/LON1510TYO1",
-            "origin": "LON",
-            "depart_date": "2026-10-15",
-            "return_date": null,
-            "destination": "TYO"
-          },
-          "second": {
-            "price": 366.0,
+            "price": 330.0,
             "carrier": null,
             "deep_link": "https://www.aviasales.com/search/TYO1811MEL1",
             "origin": "TYO",
@@ -2838,7 +2824,7 @@
           "gap_days": 34
         },
         {
-          "total": 799.0,
+          "total": 781.0,
           "first": {
             "price": 433.0,
             "carrier": null,
@@ -2849,7 +2835,7 @@
             "destination": "TYO"
           },
           "second": {
-            "price": 366.0,
+            "price": 348.0,
             "carrier": null,
             "deep_link": "https://www.aviasales.com/search/TYO1911MEL1",
             "origin": "TYO",
@@ -2860,7 +2846,7 @@
           "gap_days": 35
         },
         {
-          "total": 799.0,
+          "total": 781.0,
           "first": {
             "price": 433.0,
             "carrier": null,
@@ -2871,7 +2857,7 @@
             "destination": "TYO"
           },
           "second": {
-            "price": 366.0,
+            "price": 348.0,
             "carrier": null,
             "deep_link": "https://www.aviasales.com/search/TYO2011MEL1",
             "origin": "TYO",
@@ -2882,7 +2868,7 @@
           "gap_days": 36
         },
         {
-          "total": 799.0,
+          "total": 781.0,
           "first": {
             "price": 433.0,
             "carrier": null,
@@ -2893,7 +2879,7 @@
             "destination": "TYO"
           },
           "second": {
-            "price": 366.0,
+            "price": 348.0,
             "carrier": null,
             "deep_link": "https://www.aviasales.com/search/TYO2111MEL1",
             "origin": "TYO",
@@ -2902,6 +2888,28 @@
             "destination": "MEL"
           },
           "gap_days": 37
+        },
+        {
+          "total": 781.0,
+          "first": {
+            "price": 433.0,
+            "carrier": null,
+            "deep_link": "https://www.aviasales.com/search/LON1510TYO1",
+            "origin": "LON",
+            "depart_date": "2026-10-15",
+            "return_date": null,
+            "destination": "TYO"
+          },
+          "second": {
+            "price": 348.0,
+            "carrier": null,
+            "deep_link": "https://www.aviasales.com/search/TYO2211MEL1",
+            "origin": "TYO",
+            "depart_date": "2026-11-22",
+            "return_date": null,
+            "destination": "MEL"
+          },
+          "gap_days": 38
         }
       ],
       "direct": {
@@ -3022,9 +3030,18 @@
     "domestic": [],
     "international": [
       {
+        "destination": "AOI",
+        "origin": "LON",
+        "price": 39.0,
+        "deep_link": "https://www.aviasales.com/search/LON0611AOI07111",
+        "depart_date": "2026-11-06",
+        "return_date": "2026-11-07",
+        "destination_name": "Ancona, Italy"
+      },
+      {
         "destination": "MIL",
         "origin": "LON",
-        "price": 38.0,
+        "price": 39.0,
         "deep_link": "https://www.aviasales.com/search/LON0111MIL08111",
         "depart_date": "2026-11-01",
         "return_date": "2026-11-08",
@@ -3033,29 +3050,20 @@
       {
         "destination": "BCN",
         "origin": "LON",
-        "price": 40.0,
+        "price": 42.0,
         "deep_link": "https://www.aviasales.com/search/LON1010BCN17101",
         "depart_date": "2026-10-10",
         "return_date": "2026-10-17",
         "destination_name": "Barcelona, Spain"
       },
       {
-        "destination": "DUB",
+        "destination": "GDN",
         "origin": "LON",
-        "price": 43.0,
-        "deep_link": "https://www.aviasales.com/search/LON0910DUB10101",
-        "depart_date": "2026-10-09",
-        "return_date": "2026-10-10",
-        "destination_name": "Dublin, Ireland"
-      },
-      {
-        "destination": "LUZ",
-        "origin": "LON",
-        "price": 43.0,
-        "deep_link": "https://www.aviasales.com/search/LON1310LUZ17101",
-        "depart_date": "2026-10-13",
-        "return_date": "2026-10-17",
-        "destination_name": "Lublin, Poland"
+        "price": 42.0,
+        "deep_link": "https://www.aviasales.com/search/LON0611GDN13111",
+        "depart_date": "2026-11-06",
+        "return_date": "2026-11-13",
+        "destination_name": "Gdansk, Poland"
       },
       {
         "destination": "PMI",
@@ -3067,9 +3075,27 @@
         "destination_name": "Palma, Spain"
       },
       {
+        "destination": "DUB",
+        "origin": "LON",
+        "price": 44.0,
+        "deep_link": "https://www.aviasales.com/search/LON0910DUB10101",
+        "depart_date": "2026-10-09",
+        "return_date": "2026-10-10",
+        "destination_name": "Dublin, Ireland"
+      },
+      {
+        "destination": "LUZ",
+        "origin": "LON",
+        "price": 44.0,
+        "deep_link": "https://www.aviasales.com/search/LON1310LUZ17101",
+        "depart_date": "2026-10-13",
+        "return_date": "2026-10-17",
+        "destination_name": "Lublin, Poland"
+      },
+      {
         "destination": "VLC",
         "origin": "LON",
-        "price": 43.0,
+        "price": 44.0,
         "deep_link": "https://www.aviasales.com/search/LON0411VLC11111",
         "depart_date": "2026-11-04",
         "return_date": "2026-11-11",
@@ -3078,7 +3104,7 @@
       {
         "destination": "CPH",
         "origin": "LON",
-        "price": 46.0,
+        "price": 45.0,
         "deep_link": "https://www.aviasales.com/search/LON0411CPH11111",
         "depart_date": "2026-11-04",
         "return_date": "2026-11-11",
@@ -3087,29 +3113,20 @@
       {
         "destination": "MAD",
         "origin": "LON",
-        "price": 46.0,
+        "price": 47.0,
         "deep_link": "https://www.aviasales.com/search/LON3010MAD04111",
         "depart_date": "2026-10-30",
         "return_date": "2026-11-04",
         "destination_name": "Madrid, Spain"
       },
       {
-        "destination": "IBZ",
-        "origin": "LON",
-        "price": 47.0,
-        "deep_link": "https://www.aviasales.com/search/LON1410IBZ17101",
-        "depart_date": "2026-10-14",
-        "return_date": "2026-10-17",
-        "destination_name": "Ibiza, Spain"
-      },
-      {
-        "destination": "ROM",
+        "destination": "STO",
         "origin": "LON",
         "price": 48.0,
-        "deep_link": "https://www.aviasales.com/search/LON0610ROM13101",
-        "depart_date": "2026-10-06",
-        "return_date": "2026-10-13",
-        "destination_name": "Rome, Italy"
+        "deep_link": "https://www.aviasales.com/search/LON0611STO07111",
+        "depart_date": "2026-11-06",
+        "return_date": "2026-11-07",
+        "destination_name": "Stockholm, Sweden"
       },
       {
         "destination": "WAW",
@@ -3121,40 +3138,31 @@
         "destination_name": "Warsaw, Poland"
       },
       {
-        "destination": "BLQ",
+        "destination": "WRO",
         "origin": "LON",
         "price": 50.0,
+        "deep_link": "https://www.aviasales.com/search/LON3010WRO08111",
+        "depart_date": "2026-10-30",
+        "return_date": "2026-11-08",
+        "destination_name": "Wroclaw, Poland"
+      },
+      {
+        "destination": "BLQ",
+        "origin": "LON",
+        "price": 51.0,
         "deep_link": "https://www.aviasales.com/search/LON0411BLQ07111",
         "depart_date": "2026-11-04",
         "return_date": "2026-11-07",
         "destination_name": "Bologna, Italy"
       },
       {
-        "destination": "GDN",
-        "origin": "LON",
-        "price": 51.0,
-        "deep_link": "https://www.aviasales.com/search/LON1410GDN14101",
-        "depart_date": "2026-10-14",
-        "return_date": "2026-10-14",
-        "destination_name": "Gdansk, Poland"
-      },
-      {
-        "destination": "BRI",
+        "destination": "PMF",
         "origin": "LON",
         "price": 52.0,
-        "deep_link": "https://www.aviasales.com/search/LON1010BRI17101",
-        "depart_date": "2026-10-10",
-        "return_date": "2026-10-17",
-        "destination_name": "Bari, Italy"
-      },
-      {
-        "destination": "OLB",
-        "origin": "LON",
-        "price": 53.0,
-        "deep_link": "https://www.aviasales.com/search/LON1610OLB19101",
-        "depart_date": "2026-10-16",
-        "return_date": "2026-10-19",
-        "destination_name": "Olbia, Italy"
+        "deep_link": "https://www.aviasales.com/search/LON1110PMF18101",
+        "depart_date": "2026-10-11",
+        "return_date": "2026-10-18",
+        "destination_name": "Parma, Italy"
       }
     ],
     "title": "Inspiration \u2014 Europe returns from London, next 31 days"
