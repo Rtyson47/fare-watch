@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-11T12:16:55.675649+00:00",
+  "generated_at": "2026-10-11T15:11:05.845615+00:00",
   "base": "LON",
   "corridors": [
     {
@@ -3372,15 +3372,6 @@
     "domestic": [],
     "international": [
       {
-        "destination": "BCN",
-        "origin": "LON",
-        "price": 33.0,
-        "deep_link": "https://www.aviasales.com/search/LON0711BCN14111",
-        "depart_date": "2026-11-07",
-        "return_date": "2026-11-14",
-        "destination_name": "Barcelona, Spain"
-      },
-      {
         "destination": "SNN",
         "origin": "LON",
         "price": 36.0,
@@ -3397,6 +3388,15 @@
         "depart_date": "2026-11-01",
         "return_date": "2026-11-08",
         "destination_name": "Milan, Italy"
+      },
+      {
+        "destination": "BCN",
+        "origin": "LON",
+        "price": 40.0,
+        "deep_link": "https://www.aviasales.com/search/LON3110BCN07111",
+        "depart_date": "2026-10-31",
+        "return_date": "2026-11-07",
+        "destination_name": "Barcelona, Spain"
       },
       {
         "destination": "DUB",
