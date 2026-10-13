@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-13T13:45:33.038944+00:00",
+  "generated_at": "2026-10-13T16:34:41.464490+00:00",
   "base": "LON",
   "corridors": [
     {
@@ -3504,11 +3504,20 @@
       {
         "destination": "DUB",
         "origin": "LON",
-        "price": 40.0,
+        "price": 39.0,
         "deep_link": "https://www.aviasales.com/search/LON0311DUB05111",
         "depart_date": "2026-11-03",
         "return_date": "2026-11-05",
         "destination_name": "Dublin, Ireland"
+      },
+      {
+        "destination": "LUX",
+        "origin": "LON",
+        "price": 39.0,
+        "deep_link": "https://www.aviasales.com/search/LON1311LUX18111",
+        "depart_date": "2026-11-13",
+        "return_date": "2026-11-18",
+        "destination_name": "Luxembourg, Luxembourg"
       },
       {
         "destination": "GDN",
@@ -3547,6 +3556,15 @@
         "destination_name": "Ancona, Italy"
       },
       {
+        "destination": "BCN",
+        "origin": "LON",
+        "price": 43.0,
+        "deep_link": "https://www.aviasales.com/search/LON3110BCN05111",
+        "depart_date": "2026-10-31",
+        "return_date": "2026-11-05",
+        "destination_name": "Barcelona, Spain"
+      },
+      {
         "destination": "TCI",
         "origin": "LON",
         "price": 43.0,
@@ -3554,15 +3572,6 @@
         "depart_date": "2026-11-05",
         "return_date": "2026-11-12",
         "destination_name": "Tenerife, Spain"
-      },
-      {
-        "destination": "BCN",
-        "origin": "LON",
-        "price": 44.0,
-        "deep_link": "https://www.aviasales.com/search/LON3110BCN07111",
-        "depart_date": "2026-10-31",
-        "return_date": "2026-11-07",
-        "destination_name": "Barcelona, Spain"
       },
       {
         "destination": "BLQ",
@@ -3583,6 +3592,15 @@
         "destination_name": "Tirana, Albania"
       },
       {
+        "destination": "VCE",
+        "origin": "LON",
+        "price": 46.0,
+        "deep_link": "https://www.aviasales.com/search/LON2910VCE17121",
+        "depart_date": "2026-10-29",
+        "return_date": "2026-12-17",
+        "destination_name": "Venice, Italy"
+      },
+      {
         "destination": "WAW",
         "origin": "LON",
         "price": 46.0,
@@ -3599,24 +3617,6 @@
         "depart_date": "2026-11-10",
         "return_date": "2026-11-12",
         "destination_name": "Bilbao, Spain"
-      },
-      {
-        "destination": "BTS",
-        "origin": "LON",
-        "price": 50.0,
-        "deep_link": "https://www.aviasales.com/search/LON0411BTS09111",
-        "depart_date": "2026-11-04",
-        "return_date": "2026-11-09",
-        "destination_name": "Bratislava, Slovakia"
-      },
-      {
-        "destination": "MAD",
-        "origin": "LON",
-        "price": 50.0,
-        "deep_link": "https://www.aviasales.com/search/LON0811MAD11111",
-        "depart_date": "2026-11-08",
-        "return_date": "2026-11-11",
-        "destination_name": "Madrid, Spain"
       }
     ],
     "title": "Inspiration \u2014 Europe returns from London, next 31 days"
