@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-19T12:26:26.018646+00:00",
+  "generated_at": "2026-10-19T15:59:49.715453+00:00",
   "base": "LON",
   "corridors": [
     {
@@ -3774,9 +3774,18 @@
         "destination_name": "Milan, Italy"
       },
       {
+        "destination": "BCN",
+        "origin": "LON",
+        "price": 39.0,
+        "deep_link": "https://www.aviasales.com/search/LON0511BCN11111",
+        "depart_date": "2026-11-05",
+        "return_date": "2026-11-11",
+        "destination_name": "Barcelona, Spain"
+      },
+      {
         "destination": "DUB",
         "origin": "LON",
-        "price": 40.0,
+        "price": 39.0,
         "deep_link": "https://www.aviasales.com/search/LON0411DUB11111",
         "depart_date": "2026-11-04",
         "return_date": "2026-11-11",
@@ -3785,7 +3794,7 @@
       {
         "destination": "KIR",
         "origin": "LON",
-        "price": 40.0,
+        "price": 39.0,
         "deep_link": "https://www.aviasales.com/search/LON0711KIR09111",
         "depart_date": "2026-11-07",
         "return_date": "2026-11-09",
@@ -3794,7 +3803,7 @@
       {
         "destination": "LUX",
         "origin": "LON",
-        "price": 40.0,
+        "price": 39.0,
         "deep_link": "https://www.aviasales.com/search/LON1311LUX18111",
         "depart_date": "2026-11-13",
         "return_date": "2026-11-18",
@@ -3803,7 +3812,7 @@
       {
         "destination": "PMF",
         "origin": "LON",
-        "price": 41.0,
+        "price": 40.0,
         "deep_link": "https://www.aviasales.com/search/LON0811PMF10111",
         "depart_date": "2026-11-08",
         "return_date": "2026-11-10",
@@ -3812,7 +3821,7 @@
       {
         "destination": "BRE",
         "origin": "LON",
-        "price": 42.0,
+        "price": 41.0,
         "deep_link": "https://www.aviasales.com/search/LON0711BRE08111",
         "depart_date": "2026-11-07",
         "return_date": "2026-11-08",
@@ -3821,7 +3830,7 @@
       {
         "destination": "GDN",
         "origin": "LON",
-        "price": 42.0,
+        "price": 41.0,
         "deep_link": "https://www.aviasales.com/search/LON0611GDN13111",
         "depart_date": "2026-11-06",
         "return_date": "2026-11-13",
@@ -3830,7 +3839,7 @@
       {
         "destination": "GOA",
         "origin": "LON",
-        "price": 42.0,
+        "price": 41.0,
         "deep_link": "https://www.aviasales.com/search/LON1511GOA22111",
         "depart_date": "2026-11-15",
         "return_date": "2026-11-22",
@@ -3839,7 +3848,7 @@
       {
         "destination": "BLQ",
         "origin": "LON",
-        "price": 46.0,
+        "price": 45.0,
         "deep_link": "https://www.aviasales.com/search/LON0411BLQ07111",
         "depart_date": "2026-11-04",
         "return_date": "2026-11-07",
@@ -3848,25 +3857,16 @@
       {
         "destination": "FMM",
         "origin": "LON",
-        "price": 46.0,
+        "price": 45.0,
         "deep_link": "https://www.aviasales.com/search/LON0411FMM08111",
         "depart_date": "2026-11-04",
         "return_date": "2026-11-08",
         "destination_name": "Memmingen, Germany"
       },
       {
-        "destination": "BCN",
-        "origin": "LON",
-        "price": 47.0,
-        "deep_link": "https://www.aviasales.com/search/LON1211BCN14111",
-        "depart_date": "2026-11-12",
-        "return_date": "2026-11-14",
-        "destination_name": "Barcelona, Spain"
-      },
-      {
         "destination": "VCE",
         "origin": "LON",
-        "price": 47.0,
+        "price": 46.0,
         "deep_link": "https://www.aviasales.com/search/LON2910VCE17121",
         "depart_date": "2026-10-29",
         "return_date": "2026-12-17",
@@ -3882,13 +3882,13 @@
         "destination_name": "Wroclaw, Poland"
       },
       {
-        "destination": "BIO",
+        "destination": "NUE",
         "origin": "LON",
         "price": 49.0,
-        "deep_link": "https://www.aviasales.com/search/LON1011BIO12111",
-        "depart_date": "2026-11-10",
-        "return_date": "2026-11-12",
-        "destination_name": "Bilbao, Spain"
+        "deep_link": "https://www.aviasales.com/search/LON1311NUE16111",
+        "depart_date": "2026-11-13",
+        "return_date": "2026-11-16",
+        "destination_name": "Nuremberg, Germany"
       }
     ],
     "title": "Inspiration \u2014 Europe returns from London, next 31 days"
