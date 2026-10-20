@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-20T13:57:18.797553+00:00",
+  "generated_at": "2026-10-20T21:20:57.264039+00:00",
   "base": "LON",
   "corridors": [
     {
@@ -834,11 +834,11 @@
         },
         {
           "date": "2026-10-20",
-          "min_price": 938.0
+          "min_price": 937.0
         }
       ],
       "current_cheapest": {
-        "price": 938.0,
+        "price": 937.0,
         "carrier": null,
         "deep_link": "https://www.aviasales.com/search/YVR2312LON31121",
         "origin": "YVR",
@@ -847,7 +847,7 @@
       },
       "options": [
         {
-          "price": 938.0,
+          "price": 937.0,
           "carrier": null,
           "deep_link": "https://www.aviasales.com/search/YVR2312LON31121",
           "origin": "YVR",
@@ -1045,7 +1045,7 @@
           "return_date": null
         },
         {
-          "price": 572.0,
+          "price": 552.0,
           "carrier": null,
           "deep_link": "https://www.aviasales.com/search/LON1011PER1",
           "origin": "LON",
@@ -1053,7 +1053,7 @@
           "return_date": null
         },
         {
-          "price": 572.0,
+          "price": 552.0,
           "carrier": null,
           "deep_link": "https://www.aviasales.com/search/LON1111PER1",
           "origin": "LON",
@@ -1061,7 +1061,7 @@
           "return_date": null
         },
         {
-          "price": 572.0,
+          "price": 552.0,
           "carrier": null,
           "deep_link": "https://www.aviasales.com/search/LON1211PER1",
           "origin": "LON",
@@ -1069,7 +1069,7 @@
           "return_date": null
         },
         {
-          "price": 572.0,
+          "price": 552.0,
           "carrier": null,
           "deep_link": "https://www.aviasales.com/search/LON1311PER1",
           "origin": "LON",
@@ -1077,7 +1077,7 @@
           "return_date": null
         },
         {
-          "price": 572.0,
+          "price": 552.0,
           "carrier": null,
           "deep_link": "https://www.aviasales.com/search/LON1411PER1",
           "origin": "LON",
@@ -1085,7 +1085,7 @@
           "return_date": null
         },
         {
-          "price": 572.0,
+          "price": 552.0,
           "carrier": null,
           "deep_link": "https://www.aviasales.com/search/LON1511PER1",
           "origin": "LON",
