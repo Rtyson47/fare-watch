@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-27T11:44:48.189541+00:00",
+  "generated_at": "2026-10-27T15:00:42.898981+00:00",
   "base": "LON",
   "corridors": [
     {
@@ -2687,11 +2687,11 @@
           "return_date": null
         },
         {
-          "price": 342.0,
+          "price": 339.0,
           "carrier": null,
-          "deep_link": "https://www.aviasales.com/search/TYO0612SYD1",
+          "deep_link": "https://www.aviasales.com/search/TYO1311SYD1",
           "origin": "TYO",
-          "depart_date": "2026-12-06",
+          "depart_date": "2026-11-13",
           "return_date": null
         }
       ],
@@ -4324,33 +4324,6 @@
         "destination_name": "Shannon, Ireland"
       },
       {
-        "destination": "KIR",
-        "origin": "LON",
-        "price": 39.0,
-        "deep_link": "https://www.aviasales.com/search/LON0711KIR09111",
-        "depart_date": "2026-11-07",
-        "return_date": "2026-11-09",
-        "destination_name": "Kerry County, Ireland"
-      },
-      {
-        "destination": "LUX",
-        "origin": "LON",
-        "price": 39.0,
-        "deep_link": "https://www.aviasales.com/search/LON1211LUX14111",
-        "depart_date": "2026-11-12",
-        "return_date": "2026-11-14",
-        "destination_name": "Luxembourg, Luxembourg"
-      },
-      {
-        "destination": "BCN",
-        "origin": "LON",
-        "price": 40.0,
-        "deep_link": "https://www.aviasales.com/search/LON0311BCN07111",
-        "depart_date": "2026-11-03",
-        "return_date": "2026-11-07",
-        "destination_name": "Barcelona, Spain"
-      },
-      {
         "destination": "MIL",
         "origin": "LON",
         "price": 40.0,
@@ -4378,13 +4351,22 @@
         "destination_name": "Gdansk, Poland"
       },
       {
-        "destination": "PMF",
+        "destination": "LUX",
+        "origin": "LON",
+        "price": 42.0,
+        "deep_link": "https://www.aviasales.com/search/LON1311LUX18111",
+        "depart_date": "2026-11-13",
+        "return_date": "2026-11-18",
+        "destination_name": "Luxembourg, Luxembourg"
+      },
+      {
+        "destination": "BCN",
         "origin": "LON",
         "price": 43.0,
-        "deep_link": "https://www.aviasales.com/search/LON0811PMF10111",
-        "depart_date": "2026-11-08",
-        "return_date": "2026-11-10",
-        "destination_name": "Parma, Italy"
+        "deep_link": "https://www.aviasales.com/search/LON0711BCN08111",
+        "depart_date": "2026-11-07",
+        "return_date": "2026-11-08",
+        "destination_name": "Barcelona, Spain"
       },
       {
         "destination": "MAD",
@@ -4403,6 +4385,33 @@
         "depart_date": "2026-11-14",
         "return_date": "2026-11-22",
         "destination_name": "Frankfurt, Germany"
+      },
+      {
+        "destination": "PMF",
+        "origin": "LON",
+        "price": 45.0,
+        "deep_link": "https://www.aviasales.com/search/LON0811PMF10111",
+        "depart_date": "2026-11-08",
+        "return_date": "2026-11-10",
+        "destination_name": "Parma, Italy"
+      },
+      {
+        "destination": "BLQ",
+        "origin": "LON",
+        "price": 47.0,
+        "deep_link": "https://www.aviasales.com/search/LON1211BLQ15111",
+        "depart_date": "2026-11-12",
+        "return_date": "2026-11-15",
+        "destination_name": "Bologna, Italy"
+      },
+      {
+        "destination": "GOT",
+        "origin": "LON",
+        "price": 48.0,
+        "deep_link": "https://www.aviasales.com/search/LON0511GOT08111",
+        "depart_date": "2026-11-05",
+        "return_date": "2026-11-08",
+        "destination_name": "Gothenburg, Sweden"
       },
       {
         "destination": "TCI",
@@ -4430,15 +4439,6 @@
         "depart_date": "2026-11-14",
         "return_date": "2026-11-21",
         "destination_name": "Alicante, Spain"
-      },
-      {
-        "destination": "KRK",
-        "origin": "LON",
-        "price": 51.0,
-        "deep_link": "https://www.aviasales.com/search/LON0211KRK20111",
-        "depart_date": "2026-11-02",
-        "return_date": "2026-11-20",
-        "destination_name": "Krakow, Poland"
       }
     ],
     "title": "Inspiration \u2014 Europe returns from London, next 31 days"
