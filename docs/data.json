@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-08T12:54:31.115538+00:00",
+  "generated_at": "2026-11-08T15:39:25.807683+00:00",
   "base": "LON",
   "corridors": [
     {
@@ -5020,6 +5020,15 @@
     "domestic": [],
     "international": [
       {
+        "destination": "BCN",
+        "origin": "LON",
+        "price": 33.0,
+        "deep_link": "https://www.aviasales.com/search/LON0312BCN10121",
+        "depart_date": "2026-12-03",
+        "return_date": "2026-12-10",
+        "destination_name": "Barcelona, Spain"
+      },
+      {
         "destination": "MIL",
         "origin": "LON",
         "price": 40.0,
@@ -5038,18 +5047,9 @@
         "destination_name": "Knock, Ireland"
       },
       {
-        "destination": "PMO",
-        "origin": "LON",
-        "price": 40.0,
-        "deep_link": "https://www.aviasales.com/search/LON2811PMO12121",
-        "depart_date": "2026-11-28",
-        "return_date": "2026-12-12",
-        "destination_name": "Palermo, Italy"
-      },
-      {
         "destination": "TIA",
         "origin": "LON",
-        "price": 41.0,
+        "price": 40.0,
         "deep_link": "https://www.aviasales.com/search/LON0512TIA09121",
         "depart_date": "2026-12-05",
         "return_date": "2026-12-09",
@@ -5058,34 +5058,16 @@
       {
         "destination": "VCE",
         "origin": "LON",
-        "price": 41.0,
+        "price": 40.0,
         "deep_link": "https://www.aviasales.com/search/LON0612VCE10121",
         "depart_date": "2026-12-06",
         "return_date": "2026-12-10",
         "destination_name": "Venice, Italy"
       },
       {
-        "destination": "DUB",
-        "origin": "LON",
-        "price": 42.0,
-        "deep_link": "https://www.aviasales.com/search/LON1111DUB14111",
-        "depart_date": "2026-11-11",
-        "return_date": "2026-11-14",
-        "destination_name": "Dublin, Ireland"
-      },
-      {
-        "destination": "BCN",
-        "origin": "LON",
-        "price": 43.0,
-        "deep_link": "https://www.aviasales.com/search/LON0412BCN08121",
-        "depart_date": "2026-12-04",
-        "return_date": "2026-12-08",
-        "destination_name": "Barcelona, Spain"
-      },
-      {
         "destination": "SNN",
         "origin": "LON",
-        "price": 43.0,
+        "price": 41.0,
         "deep_link": "https://www.aviasales.com/search/LON0512SNN12121",
         "depart_date": "2026-12-05",
         "return_date": "2026-12-12",
@@ -5101,12 +5083,39 @@
         "destination_name": "Tenerife, Spain"
       },
       {
-        "destination": "PMF",
+        "destination": "DUB",
         "origin": "LON",
         "price": 44.0,
-        "deep_link": "https://www.aviasales.com/search/LON0811PMF15111",
-        "depart_date": "2026-11-08",
-        "return_date": "2026-11-15",
+        "deep_link": "https://www.aviasales.com/search/LON2811DUB30111",
+        "depart_date": "2026-11-28",
+        "return_date": "2026-11-30",
+        "destination_name": "Dublin, Ireland"
+      },
+      {
+        "destination": "PMO",
+        "origin": "LON",
+        "price": 44.0,
+        "deep_link": "https://www.aviasales.com/search/LON2811PMO12121",
+        "depart_date": "2026-11-28",
+        "return_date": "2026-12-12",
+        "destination_name": "Palermo, Italy"
+      },
+      {
+        "destination": "CDT",
+        "origin": "LON",
+        "price": 45.0,
+        "deep_link": "https://www.aviasales.com/search/LON2211CDT06121",
+        "depart_date": "2026-11-22",
+        "return_date": "2026-12-06",
+        "destination_name": "Castellon de la Plana, Spain"
+      },
+      {
+        "destination": "PMF",
+        "origin": "LON",
+        "price": 46.0,
+        "deep_link": "https://www.aviasales.com/search/LON1911PMF22111",
+        "depart_date": "2026-11-19",
+        "return_date": "2026-11-22",
         "destination_name": "Parma, Italy"
       },
       {
@@ -5119,6 +5128,15 @@
         "destination_name": "Geneva, Switzerland"
       },
       {
+        "destination": "NTE",
+        "origin": "LON",
+        "price": 48.0,
+        "deep_link": "https://www.aviasales.com/search/LON2011NTE23111",
+        "depart_date": "2026-11-20",
+        "return_date": "2026-11-23",
+        "destination_name": "Nantes, France"
+      },
+      {
         "destination": "ORK",
         "origin": "LON",
         "price": 48.0,
@@ -5128,31 +5146,13 @@
         "destination_name": "Cork, Ireland"
       },
       {
-        "destination": "FMM",
+        "destination": "SZY",
         "origin": "LON",
-        "price": 49.0,
-        "deep_link": "https://www.aviasales.com/search/LON1911FMM23111",
-        "depart_date": "2026-11-19",
-        "return_date": "2026-11-23",
-        "destination_name": "Memmingen, Germany"
-      },
-      {
-        "destination": "LUX",
-        "origin": "LON",
-        "price": 49.0,
-        "deep_link": "https://www.aviasales.com/search/LON1311LUX18111",
+        "price": 48.0,
+        "deep_link": "https://www.aviasales.com/search/LON1311SZY15111",
         "depart_date": "2026-11-13",
-        "return_date": "2026-11-18",
-        "destination_name": "Luxembourg, Luxembourg"
-      },
-      {
-        "destination": "NTE",
-        "origin": "LON",
-        "price": 49.0,
-        "deep_link": "https://www.aviasales.com/search/LON2011NTE23111",
-        "depart_date": "2026-11-20",
-        "return_date": "2026-11-23",
-        "destination_name": "Nantes, France"
+        "return_date": "2026-11-15",
+        "destination_name": "Szymany, Poland"
       }
     ],
     "title": "Inspiration \u2014 Europe returns from London, next 31 days"
