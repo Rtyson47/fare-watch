@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-25T16:54:31.060071+00:00",
+  "generated_at": "2026-11-25T18:53:29.884392+00:00",
   "base": "LON",
   "corridors": [
     {
@@ -5886,11 +5886,20 @@
       {
         "destination": "MIL",
         "origin": "LON",
-        "price": 30.0,
+        "price": 29.0,
         "deep_link": "https://www.aviasales.com/search/LON0512MIL08121",
         "depart_date": "2026-12-05",
         "return_date": "2026-12-08",
         "destination_name": "Milan, Italy"
+      },
+      {
+        "destination": "TCI",
+        "origin": "LON",
+        "price": 31.0,
+        "deep_link": "https://www.aviasales.com/search/LON1512TCI20121",
+        "depart_date": "2026-12-15",
+        "return_date": "2026-12-20",
+        "destination_name": "Tenerife, Spain"
       },
       {
         "destination": "SNN",
@@ -5902,13 +5911,22 @@
         "destination_name": "Shannon, Ireland"
       },
       {
-        "destination": "TCI",
+        "destination": "ORK",
         "origin": "LON",
         "price": 37.0,
-        "deep_link": "https://www.aviasales.com/search/LON1512TCI20121",
-        "depart_date": "2026-12-15",
+        "deep_link": "https://www.aviasales.com/search/LON1712ORK20121",
+        "depart_date": "2026-12-17",
         "return_date": "2026-12-20",
-        "destination_name": "Tenerife, Spain"
+        "destination_name": "Cork, Ireland"
+      },
+      {
+        "destination": "TRN",
+        "origin": "LON",
+        "price": 37.0,
+        "deep_link": "https://www.aviasales.com/search/LON0512TRN08121",
+        "depart_date": "2026-12-05",
+        "return_date": "2026-12-08",
+        "destination_name": "Turin, Italy"
       },
       {
         "destination": "DUB",
@@ -5945,24 +5963,6 @@
         "depart_date": "2026-12-13",
         "return_date": "2026-12-20",
         "destination_name": "Parma, Italy"
-      },
-      {
-        "destination": "REK",
-        "origin": "LON",
-        "price": 43.0,
-        "deep_link": "https://www.aviasales.com/search/LON2312REK26121",
-        "depart_date": "2026-12-23",
-        "return_date": "2026-12-26",
-        "destination_name": "Reykjavik, Iceland"
-      },
-      {
-        "destination": "TRN",
-        "origin": "LON",
-        "price": 43.0,
-        "deep_link": "https://www.aviasales.com/search/LON0512TRN08121",
-        "depart_date": "2026-12-05",
-        "return_date": "2026-12-08",
-        "destination_name": "Turin, Italy"
       },
       {
         "destination": "VCE",
